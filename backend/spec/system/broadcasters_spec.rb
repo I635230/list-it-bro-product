@@ -9,7 +9,7 @@ RSpec.describe "Broadcasters", type: :system do
 
     it "broadcaster_idからBroadcasterを作成できる" do
       expect {
-        post broadcasters_path, params: { broadcaster_id: 12345 }
+        post broadcasters_path, params: { broadcaster_id: 807966915 }
       }.to change(Broadcaster, :count).by(1)
     end
 
