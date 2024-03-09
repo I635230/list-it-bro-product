@@ -92,6 +92,7 @@ GEM
       xpath (~> 3.2)
     case_transform (0.2)
       activesupport
+    childprocess (5.0.0)
     concurrent-ruby (1.2.3)
     crass (1.0.6)
     date (3.3.4)
@@ -132,6 +133,7 @@ GEM
     http-form_data (2.3.0)
     i18n (1.14.4)
       concurrent-ruby (~> 1.0)
+    iniparse (1.5.0)
     io-console (0.7.2)
     irb (1.12.0)
       rdoc
@@ -174,6 +176,10 @@ GEM
     nio4r (2.7.0)
     nokogiri (1.16.2-x86_64-linux)
       racc (~> 1.4)
+    overcommit (0.63.0)
+      childprocess (>= 0.6.3, < 6)
+      iniparse (~> 1.4)
+      rexml (~> 3.2)
     parallel (1.24.0)
     parser (3.3.0.5)
       ast (~> 2.4.1)
@@ -260,9 +266,6 @@ GEM
       parser (>= 3.3.0.4)
     rubocop-md (1.2.2)
       rubocop (>= 1.0)
-    rubocop-minitest (0.34.5)
-      rubocop (>= 1.39, < 2.0)
-      rubocop-ast (>= 1.30.0, < 2.0)
     rubocop-packaging (0.5.2)
       rubocop (>= 1.33, < 2.0)
     rubocop-performance (1.20.2)
@@ -321,13 +324,13 @@ DEPENDENCIES
   friendly_id
   http
   mysql2 (~> 0.5)
+  overcommit
   puma (~> 5.0)
   rack-cors
   rails (~> 7.0.8)
   rspec-rails
   rubocop
   rubocop-md
-  rubocop-minitest
   rubocop-packaging
   rubocop-performance
   rubocop-rails
