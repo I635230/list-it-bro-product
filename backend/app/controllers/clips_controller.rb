@@ -44,7 +44,6 @@ class ClipsController < ApplicationController
       res = request_get(header, uri)
       after = res["pagination"]["cursor"]
       res["data"].each do |data|
-
         # game_idが空のときは、Undefinedに設定
         data["game_id"] = 0 if data["game_id"] == ""
 
@@ -99,24 +98,24 @@ class ClipsController < ApplicationController
         clips = Clip.none
         clips = clips.or(Clip.joins(:broadcaster).where(broadcasters: { display_name: params[:all] }))
         clips = clips.or(Clip.joins(:game).where(games: { name: params[:all] }))
-        clips = clips.or(and_search(params[:all]))
+        clips.or(and_search(params[:all]))
       end
 
       # broadcasterのdispaly_nameでソート
       if !params[:broadcaster].nil?
-        clips = Clip.joins(:broadcaster).where(broadcasters: { display_name: params[:broadcaster] })
+        Clip.joins(:broadcaster).where(broadcasters: { display_name: params[:broadcaster] })
 
       # gameタイトルでソート
       elsif !params[:game].nil?
-        clips = Clip.joins(:game).where(games: { name: params[:game] })
+        Clip.joins(:game).where(games: { name: params[:game] })
 
       # タイトルでソート
       elsif !params[:title].nil?
-        clips = and_search(params[:title])
+        and_search(params[:title])
 
       # 指定なし(すべてのクリップ)
       else
-        clips = Clip.all
+        Clip.all
       end
     end
 
