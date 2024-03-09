@@ -34,7 +34,6 @@ class BroadcastersController < ApplicationController
   end
 
   private
-
     def get_broadcaster_id(clip_id)
       # 準備
       header = { "Authorization" => ENV["APP_ACCESS_TOKEN"],  "Client-id" => ENV["CLIENT_ID"] }
@@ -48,6 +47,6 @@ class BroadcastersController < ApplicationController
       return false if data["language"] != "ja"
 
       # 出力
-      return data["broadcaster_id"]
+      data["broadcaster_id"]
     end
 end
