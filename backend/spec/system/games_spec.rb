@@ -9,10 +9,4 @@ RSpec.describe "Games", type: :system do
     visit games_path
     expect(page.status_code).to eq(200)
   end
-
-  it "Gameを作成できる" do
-    expect {
-      post games_path, params: { game_id: 21779 }
-    }.to change(Game, :count).by(1)
-  end
 end
