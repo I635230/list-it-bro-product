@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Games", type: :system do
   before do
@@ -11,7 +11,7 @@ RSpec.describe "Games", type: :system do
   end
 
   it "Gameを作成できる" do
-    expect{
+    expect {
       post games_path, params: { game_id: 21779 }
     }.to change(Game, :count).by(1)
   end
