@@ -1,6 +1,6 @@
 class PlaylistsController < ApplicationController
   include Search
-  before_action :certificated, except: %i[index show]
+  before_action :certificated
   before_action :authorized, except: %i[index show]
   before_action :input_playlist, except: %i[index create]
 
@@ -8,11 +8,11 @@ class PlaylistsController < ApplicationController
     playlists = fileter_playlists
     playlists = apply_term(playlists)
     apply_order(playlists)
-    render status: :ok, json: @playlists, each_serializer: PlaylistSerializer, meta: { elementsCount: @playlists_all_page.size, limit: 20 }, adapter: :json
+    render status: :ok, json: @playlists, each_serializer: PlaylistSerializer, meta: { elementsCount: @playlists_all_page.size, limit: 20 }, adapter: :json, current_user: @current_user
   end
 
   def show
-    render status: :ok, json: @playlist
+    render status: :ok, json: @playlist, current_user: @current_user
   end
 
   def create
@@ -54,6 +54,16 @@ class PlaylistsController < ApplicationController
   end
 
   def order_clips
+  end
+
+  def favorite
+    @current_user.favorite(@playlist)
+    render status: :created
+  end
+
+  def unfavorite
+    @current_user.unfavorite(@playlist)
+    render status: :no_content
   end
 
   private

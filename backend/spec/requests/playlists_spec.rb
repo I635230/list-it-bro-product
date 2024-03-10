@@ -37,20 +37,30 @@ RSpec.describe "Playlists", type: :request do
   end
 
   describe "GET /playlists/:id" do
-    it "自分のプレイリストを表示できる" do
+    before do
       @my_playlist = FactoryBot.create(:playlist, :my_playlist)
+      @other_playlist = FactoryBot.create(:playlist, :other_playlist)
+    end
+
+    it "自分のプレイリストを表示できる" do
       get playlist_path(@my_playlist.slug)
       data = JSON.parse(response.body)
-      expect(response.status).to eq(200)
       expect(data["creator_name"]).to eq(@current_user.display_name)
+      expect(response.status).to eq(200)
     end
 
     it "他人のプレイリストを表示できる" do
-      @other_playlist = FactoryBot.create(:playlist, :other_playlist)
       get playlist_path(@other_playlist.slug)
       data = JSON.parse(response.body)
-      expect(response.status).to eq(200)
       expect(data["creator_name"]).to eq(@other_user.display_name)
+      expect(response.status).to eq(200)
+    end
+
+    it "favoriteしたらちゃんと反映される" do
+      @current_user.favorite(@other_playlist)
+      get playlist_path(@other_playlist.slug), headers: { "userAccessDigest": @current_user.convert_digest, "userId": @current_user.id }
+      data = JSON.parse(response.body)
+      expect(data["favorited"]).to eq(true)
     end
   end
 
@@ -148,6 +158,29 @@ RSpec.describe "Playlists", type: :request do
                headers: { "userAccessDigest": @current_user.convert_digest, "userId": @current_user.id }
       }.not_to change { @other_playlist.clips.count }
       expect(response.status).to eq(403)
+    end
+  end
+
+  describe "POST /playlists/:id/favorite" do
+    it "favoriteできる" do
+      @other_playlist = FactoryBot.create(:playlist, :other_playlist)
+      expect {
+        post favorite_playlist_path(@other_playlist.slug),
+        headers: { "userAccessDigest": @current_user.convert_digest, "userId": @current_user.id }
+      }.to change{@current_user.fav_playlists.count}.by(1)
+      expect(response.status).to eq(201)
+    end
+  end
+
+  describe "DELETE /playlists/:id/favorite" do
+    it "unfavoriteできる" do
+      @other_playlist = FactoryBot.create(:playlist, :other_playlist)
+      @current_user.favorite(@other_playlist)
+      expect {
+        delete favorite_playlist_path(@other_playlist.slug),
+        headers: { "userAccessDigest": @current_user.convert_digest, "userId": @current_user.id }
+      }.to change {@current_user.fav_playlists.count}.by(-1)
+      expect(response.status).to eq(204)
     end
   end
 end

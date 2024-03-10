@@ -1,5 +1,10 @@
 class PlaylistSerializer < ActiveModel::Serializer
-  attributes %i[slug title creator_name first_clip_thumbnail_url clips_count favorites_count created_at search_keywords]
+  attributes %i[slug title creator_name first_clip_thumbnail_url clips_count favorited favorites_count created_at search_keywords]
+
+  def initialize(object, options = {})
+    super(object, options)
+    @current_user = options[:current_user]
+  end
 
   def creator_name
     object.user.display_name
@@ -15,6 +20,10 @@ class PlaylistSerializer < ActiveModel::Serializer
 
   def clips_count
     object.clips.count
+  end
+
+  def favorited
+    object.favorited?(@current_user)
   end
 
   def favorites_count
