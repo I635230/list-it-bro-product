@@ -4,6 +4,6 @@ Rails.application.routes.draw do
     resources :games, only: %i[index]
     resources :clips, only: %i[index show]
     post "/clips", to: "clips#create_many"
-    resources :authentications, only: %i[create]
+    resources :authentications, only: %i[create destroy]
   end
 end

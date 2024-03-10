@@ -1,4 +1,7 @@
 class AuthenticationsController < ApplicationController
+  before_action :certificated, only: %i[destroy]
+
+  # ログイン
   def create
     # フロントから認可コードを取得
     code = params[:code]
@@ -44,4 +47,16 @@ class AuthenticationsController < ApplicationController
     user_access_digest = @user.convert_digest
     render status: :created, json: { user_id: @user.id, user_access_digest: user_access_digest }
   end
+
+  # ログアウト
+  def destroy
+    delete_tokens
+    redner status: :no_content
+  end
+
+  private
+    def delete_tokens(user)
+      user.user_access_digest = ""
+      user.refresh_token = ""
+    end
 end
