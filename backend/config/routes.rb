@@ -7,6 +7,8 @@ Rails.application.routes.draw do
         post "/cilips/:clip_id", to: "playlists#add_clip", as: "clip"
         delete "/cilips/:clip_id", to: "playlists#remove_clip"
         put "/cilips", to: "playlists#order_clips", as: "clips"
+        post :favorite, to: "playlists#favorite"
+        delete :favorite, to: "playlists#unfavorite"
       end
     end
     resources :clips, only: %i[index show]
