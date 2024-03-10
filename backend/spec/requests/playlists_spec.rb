@@ -36,6 +36,23 @@ RSpec.describe "Playlists", type: :request do
     end
   end
 
+  describe "GET /playlists/favorited" do
+    before do
+      @other_playlist = FactoryBot.create(:playlist, :other_playlist)
+      @current_user.favorite(@other_playlist)
+    end
+
+    it "お気に入りしたプレイリスト一覧を取得できる" do
+      get favorited_playlists_path, headers: { "userAccessDigest": @current_user.convert_digest, "userId": @current_user.id }
+      data = JSON.parse(response.body)
+      expect(data["meta"]["elementsCount"]).to be >= 1
+      data["playlists"].each do |playlist|
+        expect(playlist["favorited"]).to eq(true)
+      end
+      expect(response.status).to eq(200)
+    end
+  end
+
   describe "GET /playlists/:id" do
     before do
       @my_playlist = FactoryBot.create(:playlist, :my_playlist)
@@ -167,7 +184,7 @@ RSpec.describe "Playlists", type: :request do
       expect {
         post favorite_playlist_path(@other_playlist.slug),
         headers: { "userAccessDigest": @current_user.convert_digest, "userId": @current_user.id }
-      }.to change{@current_user.fav_playlists.count}.by(1)
+      }.to change { @current_user.fav_playlists.count }.by(1)
       expect(response.status).to eq(201)
     end
   end
@@ -179,7 +196,7 @@ RSpec.describe "Playlists", type: :request do
       expect {
         delete favorite_playlist_path(@other_playlist.slug),
         headers: { "userAccessDigest": @current_user.convert_digest, "userId": @current_user.id }
-      }.to change {@current_user.fav_playlists.count}.by(-1)
+      }.to change { @current_user.fav_playlists.count }.by(-1)
       expect(response.status).to eq(204)
     end
   end
