@@ -1,5 +1,5 @@
 class ClipSerializer < ActiveModel::Serializer
-  attributes %i[slug broadcaster_name creator_name game_name game_image language title view_count clip_created_at thumbnail_url duration]
+  attributes %i[slug broadcaster_name creator_name game_name game_image language title view_count clip_created_at thumbnail_url duration search_keywords]
 end
 
 def game_name

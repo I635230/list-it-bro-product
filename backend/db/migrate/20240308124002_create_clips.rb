@@ -13,6 +13,7 @@ class CreateClips < ActiveRecord::Migration[7.0]
       t.string :thumbnail_url
       t.float :duration
       t.integer :view_count
+      t.string :search_keywords
       t.integer :order, null: false, default: 1
 
       t.timestamps

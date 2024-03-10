@@ -5,8 +5,10 @@ RSpec.describe "Games", type: :system do
     driven_by(:rack_test)
   end
 
-  it "Gameの一覧を取得できる" do
-    visit games_path
-    expect(page.status_code).to eq(200)
+  describe "#index" do
+    it "Gameの一覧を取得できる" do
+      visit games_path
+      expect(page.status_code).to eq(200)
+    end
   end
 end
