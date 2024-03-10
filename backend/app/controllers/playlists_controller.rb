@@ -2,12 +2,18 @@ class PlaylistsController < ApplicationController
   include Search
   before_action :certificated
   before_action :authorized, except: %i[index show]
-  before_action :input_playlist, except: %i[index create]
+  before_action :input_playlist, except: %i[index index_favorited create]
 
   def index
     playlists = fileter_playlists
     playlists = apply_term(playlists)
     apply_order(playlists)
+    render status: :ok, json: @playlists, each_serializer: PlaylistSerializer, meta: { elementsCount: @playlists_all_page.size, limit: 20 }, adapter: :json, current_user: @current_user
+  end
+
+  # お気に入りプレイリスト一覧
+  def index_favorited
+    apply_order(@current_user.fav_playlists)
     render status: :ok, json: @playlists, each_serializer: PlaylistSerializer, meta: { elementsCount: @playlists_all_page.size, limit: 20 }, adapter: :json, current_user: @current_user
   end
 
