@@ -1,4 +1,6 @@
 class ClipsController < ApplicationController
+  include Search
+
   def index
     clips = filter_clips
     clips = apply_term(clips)
@@ -76,33 +78,12 @@ class ClipsController < ApplicationController
 
   private
     def filter_clips
-      def and_search(input)
-        keywords = input.split(/[[:blank:]]+/)
-
-        # 初期値
-        clips = []
-
-        # AND検索
-        keywords.each_with_index do |keyword, i|
-          if i == 0
-            clips = Clip.where("title LIKE ?", "%#{keyword}%")
-          else
-            clips = clips & Clip.where("title LIKE ?", "%#{keyword}%")
-          end
-        end
-        clips
-      end
-
       # すべてを対象にソート
       if !params[:all].nil?
-        clips = Clip.none
-        clips = clips.or(Clip.joins(:broadcaster).where(broadcasters: { display_name: params[:all] }))
-        clips = clips.or(Clip.joins(:game).where(games: { name: params[:all] }))
-        clips.or(and_search(params[:all]))
-      end
+        and_search(params[:all], "search_keywords", Clip)
 
       # broadcasterのdispaly_nameでソート
-      if !params[:broadcaster].nil?
+      elsif !params[:broadcaster].nil?
         Clip.joins(:broadcaster).where(broadcasters: { display_name: params[:broadcaster] })
 
       # gameタイトルでソート
@@ -111,7 +92,7 @@ class ClipsController < ApplicationController
 
       # タイトルでソート
       elsif !params[:title].nil?
-        and_search(params[:title])
+        and_search(params[:title], "title", Clip)
 
       # 指定なし(すべてのクリップ)
       else

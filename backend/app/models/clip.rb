@@ -9,6 +9,9 @@ class Clip < ApplicationRecord
   has_many :playlist_clips, dependent: :destroy
   has_many :playlists, through: :playlist_clips
 
+  # アクション
+  before_save { self.search_keywords = "#{self.title} #{self.broadcaster.display_name} #{self.game.name}" }
+
   # バリデーション
   validates :slug, presence: true, uniqueness: true
 end

@@ -12,6 +12,7 @@ class Playlist < ApplicationRecord
 
   # アクション
   before_create { self.slug = SecureRandom.uuid }
+  before_save { self.search_keywords = "#{self.title} #{self.user.display_name}" }
 
   # バリデーション
 

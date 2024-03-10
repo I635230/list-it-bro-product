@@ -32,6 +32,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_124059) do
     t.string "thumbnail_url"
     t.float "duration"
     t.integer "view_count"
+    t.string "search_keywords"
     t.integer "order", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -70,6 +71,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_124059) do
     t.string "slug"
     t.string "title"
     t.bigint "user_id", null: false
+    t.string "search_keywords"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_playlists_on_user_id"
