@@ -16,7 +16,11 @@ Rails.application.routes.draw do
     end
     resources :clips, only: %i[index show]
     post "/clips", to: "clips#create_many"
-    resources :authentications, only: %i[create destroy]
+    resources :authentications, only: %i[create] do
+      collection do
+        delete :destroy
+      end
+    end
     get "/users/:id/following", to: "users#following"
   end
 end

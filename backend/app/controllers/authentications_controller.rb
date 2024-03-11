@@ -1,5 +1,6 @@
 class AuthenticationsController < ApplicationController
   before_action :certificated, only: %i[destroy]
+  before_action :authorized, only: %i[destroy]
 
   # ログイン
   def create
@@ -26,21 +27,17 @@ class AuthenticationsController < ApplicationController
     res = request_get(header, uri)
     data = res["data"][0]
 
-    # ユーザー仮作成
-    @user = User.new(id: data["id"],
-                     login: data["login"],
-                     display_name: data["display_name"],
-                     profile_image_url: data["profile_image_url"],
-                     user_access_token: user_access_token,
-                     refresh_token: refresh_token)
-
-    if @user.valid?
-      # ユーザーが存在しなければ作成
-      @user.save
-    else
+    if @user = User.find_by(id: data["id"])
       # ユーザーが存在していたらトークンのアップデート
-      @user = User.find(data["id"])
       @user.update(user_access_token: user_access_token, refresh_token: refresh_token)
+    else
+      # ユーザーが存在しなければ、作成
+      User.create(id: data["id"],
+                  login: data["login"],
+                  display_name: data["display_name"],
+                  profile_image_url: data["profile_image_url"],
+                  user_access_token: user_access_token,
+                  refresh_token: refresh_token)
     end
 
     # render
@@ -50,13 +47,13 @@ class AuthenticationsController < ApplicationController
 
   # ログアウト
   def destroy
-    delete_tokens
-    redner status: :no_content
+    delete_tokens(@current_user)
+    render status: :no_content
   end
 
   private
     def delete_tokens(user)
-      user.user_access_digest = ""
-      user.refresh_token = ""
+      user.update(user_access_token: "")
+      user.update(refresh_token: "")
     end
 end

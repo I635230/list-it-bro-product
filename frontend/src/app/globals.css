@@ -3,16 +3,20 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --header-backgroud: #fffffe;
+  --sidebar-background: #efeff1;
+  --content-background: #f7f7f8;
+  --important: #6246ea;
+  --headline: #2b2c34;
+  --paragraph: #2b2c34;
+  --link: #6246ea;
+  --color-border: 43, 44, 52;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    /* ダークモード用の設定 */
+    --header-backgroud: #000;
   }
 }
 
@@ -20,4 +24,52 @@
   .text-balance {
     text-wrap: balance;
   }
+}
+
+/* リセット */
+body {
+  margin: 0;
+}
+
+img,
+i {
+  vertical-align: middle;
+}
+
+/* 共通 */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-y: scroll; /* スクロールバーを常に表示 */
+}
+
+body {
+  color: var(--paragraph);
+}
+
+h1,
+h2,
+h3 {
+  color: var(--headline);
+}
+
+a {
+  text-decoration: none;
+  color: var(--paragraph);
+}
+
+a:hover {
+  color: var(--link);
+}
+
+/* clear */
+.clear-left {
+  clear: left;
+}
+
+.clear-right {
+  clear: right;
 }
