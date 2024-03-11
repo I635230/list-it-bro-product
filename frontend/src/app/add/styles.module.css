@@ -1,0 +1,15 @@
+.h2 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.description {
+}
+
+.input {
+}
+
+.submit {
+  background-color: var(--important);
+  color: white;
+}
