@@ -24,13 +24,13 @@ class BroadcastersController < ApplicationController
     data = res["data"][0]
 
     # Broadcaster作成
-    Broadcaster.create!(id: data["id"],
-                        login: data["login"],
-                        display_name: data["display_name"],
-                        profile_image_url: data["profile_image_url"])
+    @broadcaster = Broadcaster.create!(id: data["id"],
+                                       login: data["login"],
+                                       display_name: data["display_name"],
+                                       profile_image_url: data["profile_image_url"])
 
     # 出力
-    render status: :created
+    render status: :created, json: @broadcaster
   end
 
   private

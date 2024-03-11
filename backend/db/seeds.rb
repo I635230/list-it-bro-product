@@ -10,6 +10,3 @@ end
 
 # GameにUndefinedを設定
 Game.create!(id: 0, name: "Undefined")
-
-# broadcaster作成
-Broadcaster.create!(id: 807966915, login: "tokikaze_ch", display_name: "時風まゆら")

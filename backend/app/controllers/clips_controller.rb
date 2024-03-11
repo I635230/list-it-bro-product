@@ -71,7 +71,7 @@ class ClipsController < ApplicationController
           @clip.update(view_count: data["view_count"])
         end
       end
-      break if after.nil? || afeter.empty?
+      break if after.nil? || after.empty?
     end
     render status: :created
   end
