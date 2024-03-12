@@ -7,8 +7,8 @@ module Search
     elements = []
 
     # AND検索
-    keywords.each_with_index do |keyword, i|
-      if i == 0
+    keywords.each_with_index do |keyword, index|
+      if index == 0
         elements = model.where("#{target} LIKE ?", "%#{keyword}%")
       else
         elements = elements & model.where("#{target} LIKE ?", "%#{keyword}%")

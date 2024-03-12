@@ -1,12 +1,12 @@
 'use server'
 
-export async function fetchResults() {
+export async function fetchResults(query) {
   try {
     // 準備
-    const type = query['type'] || 'playlist'
+    const type = query['type'] || 'clip'
     const term = query['term'] || 'all'
     const order = query['order'] || 'fav_desc'
-    const target = query['target'] || 'title'
+    const target = query['target'] || 'all'
     const page = query['page'] || '1'
     let keywords = query['field'] || ''
 
@@ -30,7 +30,10 @@ export async function fetchResults() {
     url += `&order=${order}`
 
     // target
-    url += `&${target}=${keywords}`
+    url += `&target=${target}`
+
+    // field
+    url += `&field=${keywords}`
 
     // page
     url += `&page=${page}`
@@ -51,5 +54,38 @@ export async function fetchResults() {
     else return data
   } catch (error) {
     throw new Error(error)
+  }
+}
+
+// broadcasterのすべての名前を取得
+export async function fetchBroadcastersName() {
+  try {
+    const response = await fetch(`${process.env.API_BASE_URL}/broadcasters`)
+    const data = await response.json()
+    return data
+  } catch (error) {
+    console.log('broadcasterの名前の取得に失敗しました')
+  }
+}
+
+// userのすべての名前を取得
+export async function fetchUsersName() {
+  try {
+    const response = await fetch(`${process.env.API_BASE_URL}/users`)
+    const data = await response.json()
+    return data
+  } catch (error) {
+    console.log('userの名前の取得に失敗しました')
+  }
+}
+
+// gameのすべての名前を取得
+export async function fetchGamesName() {
+  try {
+    const response = await fetch(`${process.env.API_BASE_URL}/games`)
+    const data = await response.json()
+    return data
+  } catch (error) {
+    console.log('gameの名前の取得に失敗しました')
   }
 }

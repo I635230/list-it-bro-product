@@ -3,18 +3,32 @@
 import { useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import styles from '@/app/ui/header/search-bar.module.css'
-import Link from 'next/link'
 
 export default function SearchBar() {
   const [field, setField] = useState('')
   const router = useRouter()
   const searchParams = useSearchParams()
 
-  // Enterキーを押されたとき
-  function keydownevent(e) {
-    if (e.key === 'Enter' && !(field.length === 0)) {
-      router.push(`/search?field=${field}`)
+  // ページ遷移
+  function movePage() {
+    const params = new URLSearchParams(searchParams)
+    if (field) {
+      params.set('field', field)
+    } else {
+      params.delete('field')
     }
+    router.push(`/search?${params.toString()}`)
+  }
+
+  // Enterキーを押されたとき
+  function handleKeyDown(e) {
+    if (e.key === 'Enter' && !(field.length === 0)) {
+      movePage()
+    }
+  }
+
+  function handleClick() {
+    movePage()
   }
 
   return (
@@ -25,13 +39,13 @@ export default function SearchBar() {
           placeholder="検索"
           defaultValue={searchParams.get('field')}
           onChange={(e) => setField(e.target.value)}
-          onKeyDown={(e) => keydownevent(e)}
+          onKeyDown={(e) => handleKeyDown(e)}
         />
       </div>
       <div className={styles.button}>
-        <Link href={{ pathname: `/search`, query: { field: field } }}>
+        <button onClick={() => handleClick()}>
           <i className="fas fa-search fa-fw"></i>
-        </Link>
+        </button>
       </div>
     </div>
   )
