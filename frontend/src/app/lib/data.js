@@ -8,11 +8,7 @@ export async function fetchResults(query) {
     const order = query['order'] || 'fav_desc'
     const target = query['target'] || 'all'
     const page = query['page'] || '1'
-    let keywords = query['field'] || ''
-
-    if (keywords == null) {
-      keywords = field
-    }
+    const field = query['field'] || ''
 
     let url = process.env.API_BASE_URL
 
@@ -33,7 +29,7 @@ export async function fetchResults(query) {
     url += `&target=${target}`
 
     // field
-    url += `&field=${keywords}`
+    url += `&field=${field}`
 
     // page
     url += `&page=${page}`

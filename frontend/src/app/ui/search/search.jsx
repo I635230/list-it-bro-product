@@ -13,8 +13,8 @@ export default function Search({ broadcastersName, usersName, gamesName }) {
     <>
       <TypeSelect />
       <TermSelect />
-      <OrderSelect type={searchParams.get('type') || 'playlist'} />
-      <TargetSelect type={searchParams.get('type') || 'playlist'} />
+      <OrderSelect type={searchParams.get('type') || 'clip'} />
+      <TargetSelect type={searchParams.get('type') || 'clip'} />
     </>
   )
 }

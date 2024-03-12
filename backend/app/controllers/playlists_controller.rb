@@ -79,15 +79,15 @@ class PlaylistsController < ApplicationController
 
     def fileter_playlists
       # すべてを対象にソート
-      if !params[:target] == "all"
+      if params[:target] == "all"
         and_search(params[:field], "search_keywords", Playlist)
 
       # creatorでソート
-      elsif !params[:target] == "creator"
+      elsif params[:target] == "creator"
         Playlist.joins(:user).where(users: { display_name: params[:field] })
 
       # titleでソート
-      elsif !params[:target] == "title"
+      elsif params[:target] == "title"
         and_search(params[:field], "title", Playlist)
 
       # 指定なし(すべてのプレイリスト)

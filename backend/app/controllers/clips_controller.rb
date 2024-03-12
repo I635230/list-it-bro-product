@@ -87,11 +87,11 @@ class ClipsController < ApplicationController
         Clip.joins(:broadcaster).where(broadcasters: { display_name: params[:field] })
 
       # gameタイトルでソート
-      elsif !params[:target] == "game"
+      elsif params[:target] == "game"
         Clip.joins(:game).where(games: { name: params[:field] })
 
       # タイトルでソート
-      elsif !params[:target] == "title"
+      elsif params[:target] == "title"
         and_search(params[:field], "title", Clip)
 
       # 指定なし(すべてのクリップ)
