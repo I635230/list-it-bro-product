@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--background);
+  background-color: var(--header-background);
   border-bottom: 2px solid rgba(var(--color-border), 0.1);
 
   .left {

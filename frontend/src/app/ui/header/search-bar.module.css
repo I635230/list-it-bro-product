@@ -32,7 +32,7 @@
     background-color: var(--important);
     font-size: 15px;
 
-    a {
+    button {
       color: #fff;
     }
   }

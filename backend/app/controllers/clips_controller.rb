@@ -79,20 +79,20 @@ class ClipsController < ApplicationController
   private
     def filter_clips
       # すべてを対象にソート
-      if !params[:all].nil?
-        and_search(params[:all], "search_keywords", Clip)
+      if params[:target] == "all"
+        and_search(params[:field], "search_keywords", Clip)
 
       # broadcasterのdispaly_nameでソート
-      elsif !params[:broadcaster].nil?
-        Clip.joins(:broadcaster).where(broadcasters: { display_name: params[:broadcaster] })
+      elsif params[:target] == "broadcaster"
+        Clip.joins(:broadcaster).where(broadcasters: { display_name: params[:field] })
 
       # gameタイトルでソート
-      elsif !params[:game].nil?
-        Clip.joins(:game).where(games: { name: params[:game] })
+      elsif params[:target] == "game"
+        Clip.joins(:game).where(games: { name: params[:field] })
 
       # タイトルでソート
-      elsif !params[:title].nil?
-        and_search(params[:title], "title", Clip)
+      elsif params[:target] == "title"
+        and_search(params[:field], "title", Clip)
 
       # 指定なし(すべてのクリップ)
       else
@@ -151,7 +151,9 @@ class ClipsController < ApplicationController
 
       # 指定なし(視聴数が多い順)
       else
-        # pass
+        clips = clips.sort_by { |clip| clip.view_count }.reverse
+        ids = clips.map(&:id)
+        clips = Clip.in_order_of(:id, ids)
       end
 
       @clips_all_page = clips
