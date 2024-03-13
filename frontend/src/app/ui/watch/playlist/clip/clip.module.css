@@ -1,0 +1,46 @@
+.clip {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: nowrap;
+  gap: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  cursor: pointer;
+
+  .left {
+    width: 180px;
+  }
+
+  .right {
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    /* flex-wrap: nowrap; */
+    gap: 10px;
+
+    .title {
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 14px;
+      padding-top: 5px;
+
+      /* 2行までしか表示しない */
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+    }
+    .broadcasterName {
+      font-size: 12px;
+      line-height: 12px;
+    }
+  }
+}
+
+.clip:hover {
+  color: var(--link);
+}
+
+.active {
+  background-color: var(--clip-background);
+}

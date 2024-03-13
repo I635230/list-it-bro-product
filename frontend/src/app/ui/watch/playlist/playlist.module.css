@@ -1,0 +1,34 @@
+.playlist {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 15px;
+  padding-bottom: 10px;
+  background-color: var(--background);
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+
+  .top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    .playlistName {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .favorite {
+    }
+  }
+
+  .bottom {
+    .clips {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+}

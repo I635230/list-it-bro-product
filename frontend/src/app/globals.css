@@ -6,10 +6,15 @@
   --header-background: #fffffe;
   --sidebar-background: #efeff1;
   --content-background: #f7f7f8;
+  --clip-background: lightgrey;
+  --link: #6246ea;
   --important: #6246ea;
+  --important-hover: #5236da;
+  --button2: #e7e7ea;
+  --button2-hover: #d7d7da;
   --headline: #2b2c34;
   --paragraph: #2b2c34;
-  --link: #6246ea;
+  --line: #ddd;
   --color-border: 43, 44, 52;
 }
 

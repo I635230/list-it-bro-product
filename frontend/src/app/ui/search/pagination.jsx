@@ -43,8 +43,10 @@ export default function Pagination({
     <>
       <button onClick={() => handleClick(1)}>1</button>
       <span>...</span>
-      {pageNumbers.map((page) => (
-        <button onClick={() => handleClick(page)}>{page}</button>
+      {pageNumbers.map((page, index) => (
+        <button onClick={() => handleClick(page)} key={index}>
+          {page}
+        </button>
       ))}
       <span>...</span>
       <button onClick={() => handleClick(totalPages)}>{totalPages}</button>

@@ -17,6 +17,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_124059) do
     t.string "profile_image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["display_name"], name: "index_broadcasters_on_display_name"
   end
 
   create_table "clips", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -38,6 +39,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_124059) do
     t.datetime "updated_at", null: false
     t.index ["broadcaster_id"], name: "index_clips_on_broadcaster_id"
     t.index ["game_id"], name: "index_clips_on_game_id"
+    t.index ["slug"], name: "index_clips_on_slug"
   end
 
   create_table "favorites", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -55,6 +57,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_124059) do
     t.string "box_art_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_games_on_name"
   end
 
   create_table "playlist_clips", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -74,6 +77,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_124059) do
     t.string "search_keywords"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["search_keywords"], name: "index_playlists_on_search_keywords"
+    t.index ["slug"], name: "index_playlists_on_slug"
+    t.index ["title"], name: "index_playlists_on_title"
     t.index ["user_id"], name: "index_playlists_on_user_id"
   end
 
@@ -85,6 +91,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_124059) do
     t.string "refresh_token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["display_name"], name: "index_users_on_display_name"
   end
 
   add_foreign_key "clips", "broadcasters"

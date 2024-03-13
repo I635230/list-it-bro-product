@@ -1,5 +1,7 @@
 'use server'
 
+import { cookies } from 'next/headers'
+
 // clipIdからBroadcasterのclipsをDBに追加
 export async function addClipInfo(state, formData) {
   async function createBroadcaster(clipId) {
@@ -82,6 +84,33 @@ export async function addClipInfo(state, formData) {
     return true
   } else {
     console.log('clipsデータの取得に失敗しました')
+    return false
+  }
+}
+
+// clipをplaylistに追加
+export async function addClipToPlaylist({ clipId, listId }) {
+  try {
+    const response = await fetch(
+      `${process.env.API_BASE_URL}/playlists/${listId}/clips/${clipId}`,
+      {
+        method: 'POST',
+        headers: {
+          userId: cookies().get('userId')?.value,
+          userAccessDigest: cookies().get('userAccessDigest')?.value,
+        },
+      },
+    )
+    if (!response.ok) {
+      throw new Error('playlistへのclipの追加に失敗しました')
+    }
+
+    // 出力
+    return true
+  } catch (error) {
+    console.log('playlistへのclipの追加に失敗しました')
+
+    // 出力
     return false
   }
 }
