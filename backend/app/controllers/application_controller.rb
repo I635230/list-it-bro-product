@@ -8,7 +8,7 @@ class ApplicationController < ActionController::API
       user = User.find_by(id: user_id)
 
       # digestの情報が正しいかを確認
-      if user.authenticated?(digest)
+      if user&.authenticated?(digest)
         @current_user = user
       end
     end

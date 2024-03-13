@@ -7,9 +7,9 @@ Rails.application.routes.draw do
         get "/favorited", to: "playlists#index_favorited"
       end
       member do
-        post "/cilips/:clip_id", to: "playlists#add_clip", as: "clip"
-        delete "/cilips/:clip_id", to: "playlists#remove_clip"
-        put "/cilips", to: "playlists#order_clips", as: "clips"
+        post "/clips/:clip_id", to: "playlists#add_clip", as: "clip"
+        delete "/clips/:clip_id", to: "playlists#remove_clip"
+        put "/clips", to: "playlists#order_clips", as: "clips"
         post :favorite, to: "playlists#favorite"
         delete :favorite, to: "playlists#unfavorite"
       end

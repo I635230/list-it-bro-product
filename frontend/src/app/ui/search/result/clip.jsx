@@ -2,8 +2,8 @@ import styles from '@/app/ui/search/result/clip.module.css'
 import Link from 'next/link'
 
 export default function Clip({ result }) {
-  const game_image_url = result.game_image
-    ? result.game_image.replace('{width}', '240').replace('{height}', '480')
+  const game_image_url = result.game_image_url
+    ? result.game_image_url.replace('{width}', '240').replace('{height}', '480')
     : 'https://static-cdn.jtvnw.net/ttv-boxart/32982_IGDB-{width}x{height}.jpg' // 存在しないときは、不明のbox_artを入れてやる
 
   return (
@@ -42,10 +42,6 @@ export default function Clip({ result }) {
             <div className={styles.broadcaster}>{result.broadcaster_name}</div>
           </Link>
           <div className={styles.creator}>作成者: {result.creator_name}</div>
-          {/* <div className={styles.option}>
-            作成日: {result.clip_created_at.slice(0, 10)}
-          </div> */}
-          {/* <div>{result.slug}</div> */}
         </div>
       </div>
     </div>

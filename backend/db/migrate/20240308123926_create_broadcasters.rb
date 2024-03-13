@@ -3,7 +3,7 @@ class CreateBroadcasters < ActiveRecord::Migration[7.0]
     create_table :broadcasters, id: false do |t|
       t.column :id, 'BIGINT PRIMARY KEY'
       t.string :login
-      t.string :display_name
+      t.string :display_name, index: true
       t.string :profile_image_url
 
       t.timestamps

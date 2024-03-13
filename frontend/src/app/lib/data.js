@@ -1,5 +1,8 @@
 'use server'
 
+import { cookies } from 'next/headers'
+
+// queryから検索結果を取得
 export async function fetchResults(query) {
   try {
     // 準備
@@ -45,12 +48,90 @@ export async function fetchResults(query) {
 
     const data = await response.json()
 
+    // TODO
+    console.log(data['clips'][0])
+
     // 出力
     if (data.meta.elementCount == 0) return null
     else return data
   } catch (error) {
     throw new Error(error)
   }
+}
+
+// clipIdからclipDataを取得
+export async function fetchClipData({ clipId }) {
+  try {
+    const response = await fetch(
+      `${process.env.API_BASE_URL}/clips/${clipId}`,
+      {
+        method: 'GET',
+        headers: {
+          userId: cookies().get('userId')?.value,
+          userAccessDigest: cookies().get('userAccessDigest')?.value,
+        },
+      },
+    )
+
+    if (!response.ok) {
+      throw new Error('clipDataの取得に失敗しました')
+    }
+
+    const data = await response.json()
+
+    return data
+  } catch (error) {
+    console.log('clipDataの取得に失敗しました')
+  }
+}
+
+// listIdからlistDataを取得
+export async function fetchListData({ listId }) {
+  try {
+    const response = await fetch(
+      `${process.env.API_BASE_URL}/playlists/${listId}`,
+      {
+        method: 'GET',
+        headers: {
+          userId: cookies().get('userId')?.value,
+          userAccessDigest: cookies().get('userAccessDigest')?.value,
+        },
+      },
+    )
+
+    if (!response.ok) {
+      throw new Error('listDataの取得に失敗しました')
+    }
+
+    const data = await response.json()
+
+    return data
+  } catch (error) {
+    console.log('listDataの取得に失敗しました')
+  }
+}
+
+// myListsDataを取得
+export async function fetchMyListsData() {
+  try {
+    // TODO
+    console.log(
+      `${process.env.API_BASE_URL}/playlists?target=creatorId&field=${cookies().get('userId')?.value}`,
+    )
+
+    const response = await fetch(
+      `${process.env.API_BASE_URL}/playlists?target=creatorId&field=${cookies().get('userId')?.value}`,
+      {
+        method: 'GET',
+      },
+    )
+    const data = await response.json()
+
+    // TODO
+    console.log(data)
+
+    return data
+  } catch (error) {}
 }
 
 // broadcasterのすべての名前を取得

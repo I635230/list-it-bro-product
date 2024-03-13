@@ -86,6 +86,11 @@ class PlaylistsController < ApplicationController
       elsif params[:target] == "creator"
         Playlist.joins(:user).where(users: { display_name: params[:field] })
 
+      # creatorのloginNameでソート
+      elsif params[:target] == "creatorId"
+        Playlist.joins(:user).where(users: { id: params[:field] })
+        # User.find_by(id: params[:field]).playlists # TODO: 一致検索のとき、どっちの方が早いか確かめる
+
       # titleでソート
       elsif params[:target] == "title"
         and_search(params[:field], "title", Playlist)

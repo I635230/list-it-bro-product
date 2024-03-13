@@ -25,6 +25,7 @@ class ClipsController < ApplicationController
     header = { "Authorization" => ENV["APP_ACCESS_TOKEN"],  "Client-id" => ENV["CLIENT_ID"] }
     base_uri = "https://api.twitch.tv/helix/clips?broadcaster_id=#{broadcaster_id}&first=100"
     after = nil
+    view_count = 10000
 
     # 時間設定
     n = 300 # 何時間前からの情報を取得するか
@@ -70,8 +71,9 @@ class ClipsController < ApplicationController
           @clip = Clip.friendly.find(data["id"])
           @clip.update(view_count: data["view_count"])
         end
+        view_count = data["view_count"]
       end
-      break if after.nil? || after.empty?
+      break if after.nil? || after.empty? || view_count < 100
     end
     render status: :created
   end
@@ -151,9 +153,9 @@ class ClipsController < ApplicationController
 
       # 指定なし(視聴数が多い順)
       else
-        clips = clips.sort_by { |clip| clip.view_count }.reverse
-        ids = clips.map(&:id)
-        clips = Clip.in_order_of(:id, ids)
+        # clips = clips.sort_by { |clip| clip.view_count }.reverse
+        # ids = clips.map(&:id)
+        # clips = Clip.in_order_of(:id, ids)
       end
 
       @clips_all_page = clips

@@ -1,0 +1,50 @@
+.clip {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  gap: 10px;
+  padding: 20px;
+
+  .left {
+    width: 100%;
+
+    .play {
+      width: 100%;
+      aspect-ratio: 40 / 19;
+    }
+
+    .info {
+      display: flex;
+      flex-wrap: nowrap;
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 10px;
+      border-bottom: 1px solid var(--line);
+
+      .detail {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .operation {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+      }
+    }
+
+    .broadcaster {
+      display: flex;
+      flex-wrap: nowrap;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+    }
+  }
+
+  .right {
+    width: 550px;
+  }
+}

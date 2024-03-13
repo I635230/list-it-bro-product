@@ -1,0 +1,16 @@
+.moveButton {
+  height: 32px;
+  padding: 0px 30px 0px 30px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  white-space: nowrap;
+  background-color: var(--important);
+  color: white;
+}
+
+.moveButton:hover {
+  background-color: var(--important-hover);
+}
