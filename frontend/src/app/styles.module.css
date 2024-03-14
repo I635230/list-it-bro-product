@@ -20,11 +20,19 @@
       align-items: flex-start;
       width: 280px;
       background-color: var(--sidebar-background);
+
+      /* スクロールバーの設定 */
+      height: calc(100vh - 52px);
+      overflow-y: auto;
     }
 
     .content {
       width: 100%;
       background-color: var(--content-background);
+
+      /* スクロールバーの設定 */
+      height: calc(100vh - 52px);
+      overflow-y: auto;
     }
   }
 }

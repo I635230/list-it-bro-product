@@ -1,7 +1,7 @@
 .header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   background-color: var(--header-background);
   border-bottom: 2px solid rgba(var(--color-border), 0.1);
 
@@ -13,6 +13,12 @@
     }
   }
 
+  .center {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
   .right {
     display: flex;
     align-items: center;
@@ -21,6 +27,7 @@
 
     .element {
       margin-left: 15px;
+      white-space: nowrap;
     }
   }
 }
