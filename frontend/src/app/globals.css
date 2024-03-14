@@ -48,7 +48,7 @@ i {
 }
 
 html {
-  overflow-y: scroll; /* スクロールバーを常に表示 */
+  overflow-y: hidden; /* 全体のスクロールバーは常に非表示 */
 }
 
 body {

@@ -1,6 +1,7 @@
 .search {
   display: flex;
-  width: 400px;
+  width: 70%;
+  max-width: 400px;
   height: 35px;
 
   .bar {
@@ -27,7 +28,7 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-    width: 8%;
+    width: 30px;
     border-radius: 0 8px 8px 0;
     background-color: var(--important);
     font-size: 15px;

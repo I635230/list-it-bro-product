@@ -39,12 +39,9 @@ export default function Watch({ clipData, listData, myListsData }) {
             />
           </div>
           <div className={styles.operation}>
+            <AddClipToPlaylist clipData={clipData} myListsData={myListsData} />
             {listData && (
               <>
-                <AddClipToPlaylist
-                  clipData={clipData}
-                  myListsData={myListsData}
-                />
                 <MovePreviousButton
                   listData={listData}
                   index={index}

@@ -114,11 +114,6 @@ export async function fetchListData({ listId }) {
 // myListsDataを取得
 export async function fetchMyListsData() {
   try {
-    // TODO
-    console.log(
-      `${process.env.API_BASE_URL}/playlists?target=creatorId&field=${cookies().get('userId')?.value}`,
-    )
-
     const response = await fetch(
       `${process.env.API_BASE_URL}/playlists?target=creatorId&field=${cookies().get('userId')?.value}`,
       {
@@ -127,11 +122,30 @@ export async function fetchMyListsData() {
     )
     const data = await response.json()
 
-    // TODO
-    console.log(data)
-
     return data
   } catch (error) {}
+}
+
+// フォロー中の配信者を取得
+export async function fetchFollowingBroadcasters() {
+  try {
+    const response = await fetch(
+      `${process.env.API_BASE_URL}/users/${cookies().get('userId')?.value}/following`,
+      {
+        method: 'GET',
+        headers: {
+          userId: cookies().get('userId')?.value,
+          userAccessDigest: cookies().get('userAccessDigest')?.value,
+        },
+      },
+    )
+    const data = await response.json()
+
+    console.log('フォロー配信者の取得に成功しました')
+    return data
+  } catch (error) {
+    console.log('フォロー配信者の取得に失敗しました')
+  }
 }
 
 // broadcasterのすべての名前を取得
