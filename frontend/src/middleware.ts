@@ -25,6 +25,9 @@ export default async function middleware(request: NextRequest) {
     response.cookies.set('userAccessDigest', data.user_access_digest, {
       maxAge: 60 * 60 * 24 * 7, // One week
     })
+    response.cookies.set('userName', data.user_name, {
+      maxAge: 60 * 60 * 24 * 7, // One week
+    })
 
     // リダイレクト
     return response
@@ -39,6 +42,7 @@ export default async function middleware(request: NextRequest) {
     const response = NextResponse.redirect(new URL('/', request.url))
     response.cookies.delete('userId')
     response.cookies.delete('userAccessDigest')
+    response.cookies.delete('userName')
 
     // リダイレクト
     return response

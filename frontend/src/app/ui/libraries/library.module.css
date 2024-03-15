@@ -1,0 +1,48 @@
+.library {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 30px;
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .title {
+      letter-spacing: 0.05em;
+      font-size: 21px;
+
+      .name {
+        font-size: 46px;
+        line-height: 46px;
+        font-weight: bold;
+        padding-right: 5px;
+      }
+    }
+
+    .tab {
+      display: flex;
+      flex-direction: row;
+      gap: 30px;
+
+      .button {
+        border: none;
+        background-color: #f7f7f8;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      .button:hover {
+        color: var(--important);
+      }
+
+      .active {
+        color: var(--important);
+        text-underline-offset: 10px;
+        text-decoration: underline 2px solid var(--important);
+      }
+    }
+  }
+}
