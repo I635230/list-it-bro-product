@@ -42,7 +42,7 @@ class AuthenticationsController < ApplicationController
 
     # render
     user_access_digest = @user.convert_digest
-    render status: :created, json: { user_id: @user.id, user_access_digest: user_access_digest }
+    render status: :created, json: { user_id: @user.id, user_access_digest: user_access_digest, user_name: @user.display_name }
   end
 
   # ログアウト

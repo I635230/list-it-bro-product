@@ -111,11 +111,11 @@ export async function fetchListData({ listId }) {
   }
 }
 
-// myListsDataを取得
-export async function fetchMyListsData() {
+// userIdからプレイリスト一覧を取得
+export async function fetchListsData({ userId }) {
   try {
     const response = await fetch(
-      `${process.env.API_BASE_URL}/playlists?target=creatorId&field=${cookies().get('userId')?.value}`,
+      `${process.env.API_BASE_URL}/playlists?target=creatorId&field=${userId}`,
       {
         method: 'GET',
       },
@@ -124,6 +124,28 @@ export async function fetchMyListsData() {
 
     return data
   } catch (error) {}
+}
+
+// お気に入りしたプレイリスト一覧を取得
+export async function fetchFavoritedListsData() {
+  try {
+    const response = await fetch(
+      `${process.env.API_BASE_URL}/playlists/favorited`,
+      {
+        method: 'GET',
+        headers: {
+          userId: cookies().get('userId')?.value,
+          userAccessDigest: cookies().get('userAccessDigest')?.value,
+        },
+      },
+    )
+    const data = await response.json()
+
+    console.log('お気に入りしたプレイリスト一覧の取得に成功しました')
+    return data
+  } catch (error) {
+    console.log('お気に入りしたプレイリスト一覧の取得に失敗しました')
+  }
 }
 
 // フォロー中の配信者を取得
@@ -145,6 +167,24 @@ export async function fetchFollowingBroadcasters() {
     return data
   } catch (error) {
     console.log('フォロー配信者の取得に失敗しました')
+  }
+}
+
+// userIdからユーザーデータを取得
+export async function fetchUserData({ userId }) {
+  try {
+    const response = await fetch(
+      `${process.env.API_BASE_URL}/users/${userId}`,
+      {
+        method: 'GET',
+      },
+    )
+    const data = await response.json()
+
+    console.log('ユーザーデータの取得に成功しました')
+    return data
+  } catch (error) {
+    console.log('ユーザーデータの取得に失敗しました')
   }
 }
 

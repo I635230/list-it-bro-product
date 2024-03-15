@@ -21,6 +21,10 @@ Rails.application.routes.draw do
         delete :destroy
       end
     end
-    get "/users/:id/following", to: "users#following"
+    resources :users, only: %i[show] do
+      member do
+        get "/following", to: "users#following"
+      end
+    end
   end
 end

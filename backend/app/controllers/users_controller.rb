@@ -1,6 +1,12 @@
 class UsersController < ApplicationController
-  before_action :certificated
-  before_action :authorized
+  before_action :certificated, only: %i[following]
+  before_action :authorized, only: %i[following]
+
+  # ユーザーデータ
+  def show
+    @user = User.find_by(id: params[:id])
+    render json: @user
+  end
 
   # フォロー配信者一覧
   def following
@@ -94,10 +100,11 @@ class UsersController < ApplicationController
         refresh_token: @current_user.refresh_token,
       }
       res = request_post(header, uri, body)
+
       user_access_token = "Bearer #{res["access_token"]}"
       refresh_token = res["refresh_token"]
 
       # トークンの更新
-      @curren_user.update(user_access_token: user_access_token, refresh_token: refresh_token)
+      @current_user.update(user_access_token: user_access_token, refresh_token: refresh_token)
     end
 end
