@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     post "/clips", to: "clips#create_many"
     resources :authentications, only: %i[create] do
       collection do
+        patch :update
         delete :destroy
       end
     end

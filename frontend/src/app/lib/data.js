@@ -48,9 +48,6 @@ export async function fetchResults(query) {
 
     const data = await response.json()
 
-    // TODO
-    console.log(data['clips'][0])
-
     // 出力
     if (data.meta.elementCount == 0) return null
     else return data
@@ -161,10 +158,21 @@ export async function fetchFollowingBroadcasters() {
         },
       },
     )
-    const data = await response.json()
 
-    console.log('フォロー配信者の取得に成功しました')
-    return data
+    // フォロー配信者の取得
+    if (response.status == 200) {
+      const data = await response.json()
+      console.log('フォロー配信者の取得に成功しました')
+      return data
+
+      // エラー
+    } else if (response.status == 401) {
+      const data = { status: 'Unauthorized' }
+      console.log('Unauthorizedのため、トークンの更新を行います')
+      return data
+    } else {
+      throw new Error('フォロー配信者の取得に失敗しました')
+    }
   } catch (error) {
     console.log('フォロー配信者の取得に失敗しました')
   }

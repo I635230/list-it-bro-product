@@ -1,0 +1,20 @@
+.select {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+
+  .label {
+    font-size: 15px;
+  }
+
+  .pulldown {
+    font-size: 19px;
+
+    &select {
+      appearance: none;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+    }
+  }
+}

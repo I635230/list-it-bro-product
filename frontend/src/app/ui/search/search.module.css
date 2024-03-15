@@ -1,0 +1,9 @@
+.selects {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-bottom: 20px;
+
+  .select {
+  }
+}

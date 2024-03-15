@@ -1,5 +1,5 @@
 import ClipsResult from '@/app/ui/search/result/clips-result'
-import PlaylistsResult from '@/app/ui/search/result/playlists-result'
+import PlaylistsResult from '@/app/ui/search/result/playlists/playlists-result'
 import Pagination from '@/app/ui/search/pagination'
 
 export default async function Result({ fetchResults, query }) {

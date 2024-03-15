@@ -1,0 +1,12 @@
+import Playlist from '@/app/ui/search/result/playlists/playlist'
+import styles from '@/app/ui/search/result/playlists/playlists.module.css'
+
+export default function PlaylistsResult({ results }) {
+  return (
+    <div className={styles.playlists}>
+      {results.playlists.map((result, index) => (
+        <Playlist result={result} key={index} />
+      ))}
+    </div>
+  )
+}

@@ -39,7 +39,7 @@ export default function OrderSelect({ type }) {
   return (
     <Select
       name={'order'}
-      label={'並び順'}
+      label={'順番'}
       options={options}
       queryLabel="order"
     />

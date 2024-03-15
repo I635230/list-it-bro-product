@@ -1,4 +1,5 @@
 import { useRouter, useSearchParams } from 'next/navigation'
+import styles from '@/app/ui/search/select/select.module.css'
 
 export default function Select({ label, options, name, queryLabel }) {
   const searchParams = useSearchParams()
@@ -48,23 +49,25 @@ export default function Select({ label, options, name, queryLabel }) {
   }
 
   return (
-    <div>
-      <label>
-        {label}
-        <select
-          name={name}
-          value={searchParams.get(queryLabel?.toString())}
-          onChange={(e) => {
-            changeQuery(e.target.value)
-          }}
-        >
-          {options?.map((option, index) => (
-            <option key={index} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-      </label>
-    </div>
+    <label>
+      <div className={styles.select}>
+        <div className={styles.label}>{label}:</div>
+        <div className={styles.pulldown}>
+          <select
+            name={name}
+            value={searchParams.get(queryLabel?.toString())}
+            onChange={(e) => {
+              changeQuery(e.target.value)
+            }}
+          >
+            {options?.map((option, index) => (
+              <option key={index} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+    </label>
   )
 }
