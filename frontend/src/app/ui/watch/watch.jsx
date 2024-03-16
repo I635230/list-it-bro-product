@@ -36,6 +36,7 @@ export default function Watch({ clipData, listData, myListsData }) {
               title={clipData.title}
               gameName={clipData.game_name}
               viewCount={clipData.view_count}
+              createdAt={clipData.clip_created_at}
             />
           </div>
           <div className={styles.operation}>
