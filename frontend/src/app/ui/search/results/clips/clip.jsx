@@ -1,4 +1,4 @@
-import styles from '@/app/ui/search/result/clip.module.css'
+import styles from '@/app/ui/search/results/clips/clip.module.css'
 import Link from 'next/link'
 
 export default function Clip({ result }) {

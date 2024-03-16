@@ -14,11 +14,14 @@
   --button2-hover: #d7d7da;
   --headline: #2b2c34;
   --paragraph: #2b2c34;
+  --paragraph-light: #fff;
   --line: #ddd;
   --color-border: 43, 44, 52;
   --shadow-background: #333;
   --shadow-border: #000;
   --overlay-background: 0, 0, 0;
+  --pagination: #eee;
+  --pagination-hover: #ddd;
 }
 
 @media (prefers-color-scheme: dark) {

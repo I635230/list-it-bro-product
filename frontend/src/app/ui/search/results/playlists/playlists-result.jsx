@@ -1,5 +1,5 @@
-import Playlist from '@/app/ui/search/result/playlists/playlist'
-import styles from '@/app/ui/search/result/playlists/playlists.module.css'
+import Playlist from '@/app/ui/search/results/playlists/playlist'
+import styles from '@/app/ui/search/results/playlists/playlists.module.css'
 
 export default function PlaylistsResult({ results }) {
   return (

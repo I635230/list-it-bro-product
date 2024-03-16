@@ -1,6 +1,8 @@
 'use client'
 
 import { useSearchParams, useRouter } from 'next/navigation'
+import clsx from 'clsx'
+import styles from '@/app/ui/search/results/pagination.module.css'
 
 export default function Pagination({
   currentPage,
@@ -40,16 +42,24 @@ export default function Pagination({
   }
 
   return (
-    <>
-      <button onClick={() => handleClick(1)}>1</button>
-      <span>...</span>
+    <div className={styles.pagination}>
+      <button className={styles.page} onClick={() => handleClick(1)}>
+        <span className={styles.edge}>&laquo;</span>
+      </button>
       {pageNumbers.map((page, index) => (
-        <button onClick={() => handleClick(page)} key={index}>
+        <button
+          className={clsx(styles.page, {
+            [styles.active]: currentPage == page,
+          })}
+          onClick={() => handleClick(page)}
+          key={index}
+        >
           {page}
         </button>
       ))}
-      <span>...</span>
-      <button onClick={() => handleClick(totalPages)}>{totalPages}</button>
-    </>
+      <button className={styles.page} onClick={() => handleClick(totalPages)}>
+        <span className={styles.edge}>&raquo;</span>
+      </button>
+    </div>
   )
 }
