@@ -1,6 +1,6 @@
 'use client'
 
-import Select from '@/app/ui/search/select/select'
+import Select from '@/app/ui/search/search/select/select'
 
 export default function OrderSelect({ type }) {
   let options
@@ -39,7 +39,7 @@ export default function OrderSelect({ type }) {
   return (
     <Select
       name={'order'}
-      label={'並び順'}
+      label={'順番'}
       options={options}
       queryLabel="order"
     />

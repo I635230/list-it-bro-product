@@ -12,11 +12,17 @@ export default function SearchBar() {
   // ページ遷移
   function movePage() {
     const params = new URLSearchParams(searchParams)
+    // 検索バーの内容を遷移先にqueryに保持
     if (field) {
       params.set('field', field)
     } else {
       params.delete('field')
     }
+
+    // queryからpageを削除
+    params.delete('page')
+
+    // ページ遷移
     router.push(`/search?${params.toString()}`)
   }
 

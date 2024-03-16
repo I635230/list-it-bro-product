@@ -1,4 +1,5 @@
 import { useRouter, useSearchParams } from 'next/navigation'
+import styles from '@/app/ui/search/search/select/select.module.css'
 
 export default function Select({ label, options, name, queryLabel }) {
   const searchParams = useSearchParams()
@@ -11,6 +12,9 @@ export default function Select({ label, options, name, queryLabel }) {
     } else {
       params.delete(queryLabel)
     }
+
+    // プルダウン変更時にpageを削除
+    params.delete('page')
 
     // typeの変更時に、可変プルダウンの値を初期化
     if (queryLabel == 'type') {
@@ -48,23 +52,29 @@ export default function Select({ label, options, name, queryLabel }) {
   }
 
   return (
-    <div>
-      <label>
-        {label}
-        <select
-          name={name}
-          value={searchParams.get(queryLabel?.toString())}
-          onChange={(e) => {
-            changeQuery(e.target.value)
-          }}
-        >
-          {options?.map((option, index) => (
-            <option key={index} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-      </label>
-    </div>
+    <>
+      <div className={styles.select}>
+        <label for={name}>
+          <div className={styles.label}>{label}:</div>
+        </label>
+
+        <div className={styles.pulldown}>
+          <select
+            id={name}
+            name={name}
+            value={searchParams.get(queryLabel?.toString())}
+            onChange={(e) => {
+              changeQuery(e.target.value)
+            }}
+          >
+            {options?.map((option, index) => (
+              <option key={index} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+    </>
   )
 }

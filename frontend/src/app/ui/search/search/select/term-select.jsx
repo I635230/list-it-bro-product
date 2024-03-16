@@ -1,6 +1,6 @@
 'use client'
 
-import Select from '@/app/ui/search/select/select'
+import Select from '@/app/ui/search/search/select/select'
 
 export default function TermSelect() {
   const options = [

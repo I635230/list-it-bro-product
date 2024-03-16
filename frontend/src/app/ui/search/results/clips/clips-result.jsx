@@ -1,5 +1,5 @@
-import Clip from '@/app/ui/search/result/clip'
-import styles from '@/app/ui/search/result/clip-result.module.css'
+import Clip from '@/app/ui/search/results/clips/clip'
+import styles from '@/app/ui/search/results/clips/clip-result.module.css'
 
 export default function ClipsResult({ results }) {
   return (

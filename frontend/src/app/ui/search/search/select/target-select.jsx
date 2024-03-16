@@ -1,6 +1,6 @@
 'use client'
 
-import Select from '@/app/ui/search/select/select'
+import Select from '@/app/ui/search/search/select/select'
 
 export default function TargetSelect({ type }) {
   let options
@@ -43,7 +43,7 @@ export default function TargetSelect({ type }) {
   return (
     <Select
       name={'target'}
-      label="検索対象"
+      label="対象"
       options={options}
       queryLabel="target"
     />

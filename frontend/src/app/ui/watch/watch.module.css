@@ -3,7 +3,6 @@
   flex-wrap: nowrap;
   flex-direction: row;
   gap: 10px;
-  padding: 20px;
 
   .left {
     width: 100%;
@@ -25,6 +24,8 @@
       .detail {
         display: flex;
         flex-direction: column;
+        gap: 10px;
+        padding-top: 10px;
       }
 
       .operation {

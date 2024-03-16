@@ -1,5 +1,8 @@
-import styles from '@/app/ui/search/result/clip.module.css'
+import styles from '@/app/ui/search/results/clips/clip.module.css'
 import Link from 'next/link'
+import DisplayDate from '@/app/lib/function/display-date'
+import DisplayDuration from '@/app/lib/function/display-duration'
+import DisplayViewCount from '@/app/lib/function/display-view-count'
 
 export default function Clip({ result }) {
   const game_image_url = result.game_image_url
@@ -13,15 +16,14 @@ export default function Clip({ result }) {
           <img src={result.thumbnail_url} alt={result.thumbnail_url} />
         </Link>
         <div className={`${styles.overlay} ${styles.duration}`}>
-          {Math.floor(result.duration) >= 60
-            ? `1:${('0' + (Math.floor(result.duration) - 60)).slice(-2)}`
-            : `0:${('0' + Math.floor(result.duration)).slice(-2)}`}
+          <DisplayDuration duration={result.duration} />
         </div>
         <div className={`${styles.overlay} ${styles.view}`}>
-          {result.view_count}回の視聴回数
+          <DisplayViewCount viewCount={result.view_count} />
+          回の視聴数
         </div>
         <div className={`${styles.overlay} ${styles.date}`}>
-          {result.clip_created_at.slice(0, 10)}
+          <DisplayDate date={result.clip_created_at} />
         </div>
       </div>
       <div className={styles.bottom}>

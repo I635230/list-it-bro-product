@@ -1,10 +1,24 @@
 import { NextResponse, NextRequest } from 'next/server'
-import { login, logout } from './app/lib/auth'
-import Router from 'next/router'
+import { renew, login, logout } from './app/lib/auth'
 
 export default async function middleware(request: NextRequest) {
   // 準備
   const { pathname } = request.nextUrl
+
+  // Renew時の処理(UserAccessTokenの更新)
+  if (pathname === '/renew') {
+    // 更新処理
+    const data = await renew()
+
+    // Cookieの設定
+    const response = await NextResponse.redirect(new URL('/', request.url))
+    response.cookies.set('userAccessDigest', data?.user_access_digest, {
+      maxAge: 60 * 60 * 24 * 7, // One week
+    })
+
+    // リダイレクト
+    return response
+  }
 
   // Login時の処理
   if (pathname === '/login') {
