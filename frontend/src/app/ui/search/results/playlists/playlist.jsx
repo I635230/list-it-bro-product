@@ -6,7 +6,7 @@ import styles from '@/app/ui/libraries/playlists/list.module.css'
 export default function Playlist({ result }) {
   return (
     <>
-      <Link href={`/playlists/${result.slug}`}>
+      <Link href={`/watch?clip=${result.first_clip_slug}&list=${result.slug}`}>
         <div className={styles.list}>
           <div className={styles.left}>
             {result.clips_count != 0 && (
