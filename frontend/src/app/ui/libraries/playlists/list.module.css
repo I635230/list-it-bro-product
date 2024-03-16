@@ -58,38 +58,56 @@
     width: 250px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding-top: 20px;
+    gap: 15px;
 
-    .title {
-      font-weight: bold;
-      font-size: 20px;
-      line-height: 22px;
-
-      /* 2行までしか表示しない */
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
-      overflow: hidden;
-    }
-
-    .favoritesCount {
+    .top {
       display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 5px;
-      font-size: 14px;
-      line-height: 14px;
+      flex-direction: column;
+      gap: 10px;
+      padding-top: 5px;
+
+      .title {
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 22px;
+
+        /* 2行までしか表示しない */
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+      }
+
+      .favoritesCount {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 5px;
+        font-size: 14px;
+        line-height: 14px;
+      }
+
+      .createdAt {
+        font-size: 14px;
+        line-height: 14px;
+      }
+
+      .creator {
+        font-size: 14px;
+        line-height: 14px;
+      }
     }
 
-    .createdAt {
-      font-size: 14px;
-      line-height: 14px;
-    }
-
-    .creator {
-      font-size: 14px;
-      line-height: 14px;
+    .bottom {
+      .moveClip {
+        height: 24px;
+        width: 120px;
+        padding: 0px 10px 0px 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: var(--button2);
+        font-size: 14px;
+      }
     }
   }
 }
