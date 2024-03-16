@@ -5,8 +5,8 @@ import Link from 'next/link'
 
 export default function Playlist({ list }) {
   return (
-    <Link href={`/playlists/${list.slug}`}>
-      <div className={styles.list}>
+    <div className={styles.list}>
+      <Link href={`/playlists/${list.slug}`}>
         <div className={styles.left}>
           {list.clips_count != 0 && (
             <img
@@ -31,19 +31,29 @@ export default function Playlist({ list }) {
             {list.clips_count}本のクリップ
           </div>
         </div>
-        <div className={styles.right}>
-          <div className={styles.title}>{list.title}</div>
-          <div className={styles.favoritesCount}>
-            <i className="fas fa-heart"></i>
-            <span>{list.favorites_count}</span>
+      </Link>
+
+      <div className={styles.right}>
+        <Link href={`/playlists/${list.slug}`}>
+          <div className={styles.top}>
+            <div className={styles.title}>{list.title}</div>
+            <div className={styles.favoritesCount}>
+              <i className="fas fa-heart"></i>
+              <span>{list.favorites_count}</span>
+            </div>
+            <div className={styles.createdAt}>
+              作成日：
+              <DisplayDate date={list.created_at} />
+            </div>
+            <div className={styles.creator}>作成者：{list.creator_name}</div>
           </div>
-          <div className={styles.createdAt}>
-            作成日：
-            <DisplayDate date={list.created_at} />
+        </Link>
+        <Link href={`/watch?clip=${list.first_clip_slug}&list=${list.slug}`}>
+          <div className={styles.bottom}>
+            <div className={styles.moveClip}>クリップを再生</div>
           </div>
-          <div className={styles.creator}>作成者：{list.creator_name}</div>
-        </div>
+        </Link>
       </div>
-    </Link>
+    </div>
   )
 }
