@@ -13,6 +13,9 @@ export default function Select({ label, options, name, queryLabel }) {
       params.delete(queryLabel)
     }
 
+    // プルダウン変更時にpageを削除
+    params.delete('page')
+
     // typeの変更時に、可変プルダウンの値を初期化
     if (queryLabel == 'type') {
       const typeValue = params.get(queryLabel)
