@@ -82,7 +82,7 @@ class ClipsController < ApplicationController
     def filter_clips
       # すべてを対象にソート
       if params[:target] == "all"
-        and_search(params[:field], "search_keywords", Clip)
+        clips = and_search(params[:field], "search_keywords", Clip)
 
       # broadcasterのdispaly_nameでソート
       elsif params[:target] == "broadcaster"
@@ -129,33 +129,24 @@ class ClipsController < ApplicationController
     def apply_order(clips)
       # 視聴数が多い順
       if params[:order] == "view_desc"
-        clips = clips.sort_by { |clip| clip.view_count }.reverse
-        ids = clips.map(&:id)
-        clips = Clip.in_order_of(:id, ids)
+        clips = clips.order(view_count: "DESC")
 
       # 視聴数が少ない順
       elsif params[:order] == "view_asc"
-        clips = clips.sort_by { |clip| clip.view_count }
-        ids = clips.map(&:id)
-        clips = Clip.in_order_of(:id, ids)
+        clips = clips.order(view_count: "ASC")
 
       # 日付の新しい順
       elsif params[:order] == "date_desc"
-        clips = clips.sort_by { |clip| clip.clip_created_at }.reverse
-        ids = clips.map(&:id)
-        clips = Clip.in_order_of(:id, ids)
+        clips = clips.order(clip_created_at: "DESC")
 
       # 日付の古い順
       elsif params[:order] == "date_asc"
-        clips = clips.sort_by { |clip| clip.clip_created_at }
-        ids = clips.map(&:id)
-        clips = Clip.in_order_of(:id, ids)
+        clips = clips.order(clip_created_at: "ASC")
 
       # 指定なし(視聴数が多い順)
       else
-        # clips = clips.sort_by { |clip| clip.view_count }.reverse
-        # ids = clips.map(&:id)
-        # clips = Clip.in_order_of(:id, ids)
+        clips = clips.order(view_count: "DESC")
+
       end
 
       @clips_all_page = clips

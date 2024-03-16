@@ -11,7 +11,7 @@ module Search
       if index == 0
         elements = model.where("#{target} LIKE ?", "%#{keyword}%")
       else
-        elements = elements & model.where("#{target} LIKE ?", "%#{keyword}%")
+        elements = elements.and(model.where("#{target} LIKE ?", "%#{keyword}%"))
       end
     end
     elements

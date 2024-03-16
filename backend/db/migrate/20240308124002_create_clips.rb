@@ -18,5 +18,6 @@ class CreateClips < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
+    # add_index(:clips, :created_at)
   end
 end

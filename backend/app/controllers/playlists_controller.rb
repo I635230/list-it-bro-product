@@ -140,15 +140,11 @@ class PlaylistsController < ApplicationController
 
       # 日付の新しい順
       elsif params[:order] == "date_desc"
-        playlists = playlists.sort_by { |playlist| playlist.created_at }.reverse
-        ids = playlists.map(&:id)
-        playlists = Playlist.in_order_of(:id, ids)
+       playlists = playlists.order(created_at: "DESC")
 
       # 日付の古い順
       elsif params[:order] == "date_asc"
-        playlists = playlists.sort_by { |playlist| playlist.created_at }
-        ids = playlists.map(&:id)
-        playlists = Playlist.in_order_of(:id, ids)
+       playlists = playlists.order(created_at: "ASC")
 
       # 指定なし(お気に入り登録が多い順)
       else
