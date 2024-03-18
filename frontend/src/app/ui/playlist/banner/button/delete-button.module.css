@@ -1,0 +1,30 @@
+.delete {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  height: 32px;
+  padding: 0px 10px 0px 10px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  white-space: nowrap;
+  color: #fff;
+  background-color: var(--danger);
+
+  .icon {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+  }
+
+  .char {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+  }
+}
+
+.delete:hover {
+  background-color: var(--danger-hover);
+}

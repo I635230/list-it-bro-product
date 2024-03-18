@@ -1,4 +1,5 @@
-import styles from '@/app/ui/playlist/clips/clips.module.css'
+import DeleteClipFromPlaylist from '@/app/ui/playlist/clips/button/delete-clip-from-playlist'
+import styles from '@/app/ui/playlist/clips/draggable.module.css'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import Link from 'next/link'
@@ -14,6 +15,8 @@ const Draggable = (props) => {
   } = useSortable({
     id: props.id,
   })
+
+  /* ドラッグ中のスタイル */
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
@@ -29,43 +32,36 @@ const Draggable = (props) => {
         {...attributes}
         key={props.id}
       >
-        <div className={styles.clipMain}>
+        <div className={styles.content}>
           <div className={styles.left}>
             <i className="fas fa-bars"></i>
           </div>
           <div className={styles.middle}>
-            <Link href={`/watch?clip=${props.clip.id}&list=${props.listId}`}>
-              <div className={styles.img}>
-                <img
-                  className={styles.radius}
-                  src={props.clip.thumbnail_url}
-                  height="100"
-                />
-              </div>
-            </Link>
+            <div className={styles.image}>
+              <img className={styles.radius} src={props.clip.thumbnail_url} />
+            </div>
           </div>
-          <div className={styles.right}>
-            <Link href={`/watch?clip=${props.clip.id}&list=${props.listId}`}>
+          <Link href={`/watch?clip=${props.clip.slug}&list=${props.listId}`}>
+            <div className={styles.right}>
               <p className={styles.title}>{props.clip.title}</p>
               <p className={styles.broadcaster}>
                 {props.clip.broadcaster_name}
               </p>
-            </Link>
-          </div>
+            </div>
+          </Link>
         </div>
-        <div className={styles.clipOperation}>
+        <div className={styles.operation}>
           <div className={styles.delete}>
-            削除
-            {/* <DeleteClipFromPlaylist
-              clipId={props.clip.id}
+            <DeleteClipFromPlaylist
+              clipId={props.clip.slug}
               listId={props.listId}
               setItems={props.setItems}
-              playlist={props.playlist}
-              userId={props.userId}
-            /> */}
+              items={props.items}
+              setNewItems={props.setNewItems}
+              creatorId={props.creatorId}
+            />
           </div>
         </div>
-        <div className="clear-left"></div>
       </div>
     </>
   )

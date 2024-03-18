@@ -1,0 +1,14 @@
+.title {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.titleIcon {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  opacity: 0.4;
+  cursor: pointer;
+}

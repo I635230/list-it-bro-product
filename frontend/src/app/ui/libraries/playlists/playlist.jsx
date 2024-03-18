@@ -38,7 +38,7 @@ export default function Playlist({ list }) {
           <div className={styles.top}>
             <div className={styles.title}>{list.title}</div>
             <div className={styles.favoritesCount}>
-              <i className="fas fa-heart"></i>
+              <i className="fa-solid fa-star"></i>
               <span>{list.favorites_count}</span>
             </div>
             <div className={styles.createdAt}>
@@ -48,11 +48,15 @@ export default function Playlist({ list }) {
             <div className={styles.creator}>作成者：{list.creator_name}</div>
           </div>
         </Link>
-        <Link href={`/watch?clip=${list.first_clip_slug}&list=${list.slug}`}>
-          <div className={styles.bottom}>
-            <div className={styles.moveClip}>クリップを再生</div>
-          </div>
-        </Link>
+        <div className={styles.bottom}>
+          <button className={styles.moveClip}>
+            <Link
+              href={`/watch?clip=${list.first_clip_slug}&list=${list.slug}`}
+            >
+              クリップを再生
+            </Link>
+          </button>
+        </div>
       </div>
     </div>
   )
