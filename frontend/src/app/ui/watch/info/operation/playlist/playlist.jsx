@@ -14,12 +14,6 @@ export default function Playlist({
     const status = await addClipToPlaylist({ clipId, listId })
 
     if (status) {
-      console.log('クリップの追加に成功しました')
-    } else {
-      console.log('クリップの追加に失敗しました')
-    }
-
-    if (status) {
       // 成功時のメッセージ
       severity.current = 'success'
       text.current = 'プレイリストへの追加に成功しました'

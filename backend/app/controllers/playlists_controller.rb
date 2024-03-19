@@ -24,7 +24,7 @@ class PlaylistsController < ApplicationController
   def create
     @playlist = @current_user.playlists.build(title: params[:title])
     if @playlist.save
-      render status: :created
+      render status: :created, json: {slug: @playlist.slug}
     else
       render status: :unprocessable_entity
     end

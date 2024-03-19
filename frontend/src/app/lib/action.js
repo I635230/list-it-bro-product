@@ -172,6 +172,37 @@ export async function orderClipInPlaylist({ clipIds, listId }) {
   }
 }
 
+// playlistを作成
+export async function createPlaylist({ title }) {
+  try {
+    const response = await fetch(`${process.env.API_BASE_URL}/playlists/`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        userId: cookies().get('userId')?.value,
+        userAccessDigest: cookies().get('userAccessDigest')?.value,
+      },
+      body: JSON.stringify({
+        title: title,
+      }),
+    })
+
+    if (!response.ok) {
+      throw new Error('playlistの作成に失敗しました')
+    }
+
+    // データ整形
+    const data = await response.json()
+
+    // 出力
+    console.log('playlistの作成に成功しました')
+    return data.slug
+  } catch (error) {
+    console.log('playlistの作成に失敗しました')
+    return false
+  }
+}
+
 // playlistを削除
 export async function deletePlaylist({ listId, currentUserId }) {
   // redirectするかの判定フラグ

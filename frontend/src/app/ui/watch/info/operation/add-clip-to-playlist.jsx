@@ -6,6 +6,7 @@ import styles from '@/app/ui/watch/info/operation/add-clip-to-playlist.module.cs
 import Playlist from '@/app/ui/watch/info/operation/playlist/playlist'
 import Snackbar from '@mui/material/Snackbar'
 import Alert from '@mui/material/Alert'
+import NewPlaylist from '@/app/ui/watch/info/operation/playlist/new-playlist'
 
 export default function AddClipToPlaylist({ clipData, myListsData }) {
   // 開閉状況
@@ -78,7 +79,14 @@ export default function AddClipToPlaylist({ clipData, myListsData }) {
               />
             ))}
           </div>
-          <div className={styles.newPlaylist}>新しくプレイリストを追加</div>
+          <div className={styles.newPlaylist}>
+            <NewPlaylist
+              clipData={clipData}
+              handleSnackBar={handleSnackBar}
+              severity={severity}
+              text={text}
+            />
+          </div>
         </div>
       </ReactModal>
       <Snackbar
