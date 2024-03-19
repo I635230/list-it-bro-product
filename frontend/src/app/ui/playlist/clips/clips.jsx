@@ -7,6 +7,8 @@ import { SortableContext } from '@dnd-kit/sortable'
 import { useState } from 'react'
 import { useSensor, useSensors } from '@dnd-kit/core'
 import { orderClipInPlaylist } from '@/app/lib/action'
+import Cookies from 'js-cookie'
+import Undraggable from '@/app/ui/playlist/clips/undraggable'
 
 export default function Clips({ listData }) {
   const playlist = []
@@ -62,28 +64,46 @@ export default function Clips({ listData }) {
 
   return (
     <>
-      <DndContext
-        onDragOver={handleDragOver}
-        onDragEnd={() => handleDragEnd({ listId: listData.slug })}
-        sensors={sensors}
-      >
+      {Cookies?.get('userId') == listData.creator_id && (
+        <DndContext
+          onDragOver={handleDragOver}
+          onDragEnd={() => handleDragEnd({ listId: listData.slug })}
+          sensors={sensors}
+        >
+          <div className={styles.clips}>
+            <SortableContext items={items}>
+              {items.map((item, index) => (
+                <Draggable
+                  key={index}
+                  id={item}
+                  clip={listData.clips.find((clip) => clip.slug == item)}
+                  listId={listData.slug}
+                  setItems={setItems}
+                  items={items}
+                  setNewItems={setNewItems}
+                  creatorId={listData.creator_id}
+                />
+              ))}
+            </SortableContext>
+          </div>
+        </DndContext>
+      )}
+      {Cookies?.get('userId') != listData.creator_id && (
         <div className={styles.clips}>
-          <SortableContext items={items}>
-            {items.map((item, index) => (
-              <Draggable
-                key={index}
-                id={item}
-                clip={listData.clips.find((clip) => clip.slug == item)}
-                listId={listData.slug}
-                setItems={setItems}
-                items={items}
-                setNewItems={setNewItems}
-                creatorId={listData.creator_id}
-              />
-            ))}
-          </SortableContext>
+          {items.map((item, index) => (
+            <Undraggable
+              key={index}
+              id={item}
+              clip={listData.clips.find((clip) => clip.slug == item)}
+              listId={listData.slug}
+              setItems={setItems}
+              items={items}
+              setNewItems={setNewItems}
+              creatorId={listData.creator_id}
+            />
+          ))}
         </div>
-      </DndContext>
+      )}
     </>
   )
 }
