@@ -54,7 +54,10 @@ export default function Banner({ listData }) {
         </div>
         {cookies()?.get('userId').value == listData.creator_id && (
           <div className={styles.deleteButton}>
-            <DeleteButton listId={listData.slug} />
+            <DeleteButton
+              listId={listData.slug}
+              currentUserId={cookies()?.get('userId').value}
+            />
           </div>
         )}
       </div>
