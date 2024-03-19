@@ -116,7 +116,7 @@ export async function addClipToPlaylist({ clipId, listId }) {
 }
 
 // clipをplaylistから削除
-export async function deleteClipFromPlaylist({ clipId, listId }) {
+export async function deleteClipFromPlaylist({ clipIds, listId }) {
   try {
     const response = await fetch(
       `${process.env.API_BASE_URL}/playlists/${listId}/clips/${clipId}`,
@@ -137,6 +137,36 @@ export async function deleteClipFromPlaylist({ clipId, listId }) {
     return true
   } catch (error) {
     console.log('playlistからのclipの削除に失敗しました')
+    return false
+  }
+}
+
+// clipのorder情報を保存
+export async function orderClipInPlaylist({ clipIds, listId }) {
+  try {
+    const response = await fetch(
+      `${process.env.API_BASE_URL}/playlists/${listId}/clips`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-type': 'application/json',
+          userId: cookies().get('userId')?.value,
+          userAccessDigest: cookies().get('userAccessDigest')?.value,
+        },
+        body: JSON.stringify({
+          clip_ids: clipIds,
+        }),
+      },
+    )
+
+    if (!response.ok) {
+      throw new Error('clipのorder情報の保存に失敗しました')
+    }
+
+    console.log('clipのorder情報の保存に成功しました')
+    return true
+  } catch (error) {
+    console.log('clipのorder情報の保存に失敗しました')
     return false
   }
 }

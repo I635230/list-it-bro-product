@@ -2,7 +2,9 @@ class PlaylistSerializer < ActiveModel::Serializer
   attributes %i[slug title creator_id creator_name first_clip_thumbnail_url first_clip_slug clips_count favorited favorites_count created_at search_keywords clips]
 
   # TODO: 使わないデータもかなり入っているので、Playlist内に追加するクリップ用のPlaylistClipSerializerを作成しても良い。
-  has_many :clips, serializer: ClipSerializer
+  has_many :clips, serializer: ClipSerializer do
+    object.clips.order(order: :asc)
+  end
 
   def initialize(object, options = {})
     super(object, options)
@@ -21,12 +23,16 @@ class PlaylistSerializer < ActiveModel::Serializer
     if object.clips.count == 0
       ""
     else
-      object.clips.first.thumbnail_url
+      object.clips.order(order: :asc).first.thumbnail_url
     end
   end
 
   def first_clip_slug
-    object.clips&.first&.slug
+    if object.clips.count == 0
+      ""
+    else
+      object.clips.order(order: :asc).first.slug
+    end
   end
 
   def clips_count

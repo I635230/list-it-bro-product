@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       member do
         post "/clips/:clip_id", to: "playlists#add_clip", as: "clip"
         delete "/clips/:clip_id", to: "playlists#remove_clip"
-        put "/clips", to: "playlists#order_clips", as: "clips"
+        patch "/clips", to: "playlists#order_clips", as: "clips"
         post :favorite, to: "playlists#favorite"
         delete :favorite, to: "playlists#unfavorite"
       end

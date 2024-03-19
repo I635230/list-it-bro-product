@@ -60,6 +60,11 @@ class PlaylistsController < ApplicationController
   end
 
   def order_clips
+    correct_user(@playlist) and return
+    params[:clip_ids].each.with_index(2) do |clip_id, index|
+      @clip = Clip.find_by(slug: clip_id)
+      @clip.update(order: index)
+    end
   end
 
   def favorite

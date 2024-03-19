@@ -8,7 +8,7 @@ export default async function DataFetcher({ searchParams }) {
   const clipData = await fetchClipData({ clipId })
   const listData = await fetchListData({ listId })
   const myListsData = await fetchListsData({
-    userId: cookies()?.get('userId').value,
+    userId: cookies().get('userId')?.value,
   })
 
   return (

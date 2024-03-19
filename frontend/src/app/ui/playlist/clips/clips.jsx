@@ -6,6 +6,7 @@ import { DndContext, MouseSensor, KeyboardSensor } from '@dnd-kit/core'
 import { SortableContext } from '@dnd-kit/sortable'
 import { useState } from 'react'
 import { useSensor, useSensors } from '@dnd-kit/core'
+import { orderClipInPlaylist } from '@/app/lib/action'
 
 export default function Clips({ listData }) {
   const playlist = []
@@ -54,15 +55,16 @@ export default function Clips({ listData }) {
   }
 
   // ドラッグ終了時に発火する処理
-  function handleDragEnd() {
-    setItems(newItems)
+  async function handleDragEnd({ listId }) {
+    await setItems(newItems)
+    await orderClipInPlaylist({ clipIds: newItems, listId })
   }
 
   return (
     <>
       <DndContext
         onDragOver={handleDragOver}
-        onDragEnd={handleDragEnd}
+        onDragEnd={() => handleDragEnd({ listId: listData.slug })}
         sensors={sensors}
       >
         <div className={styles.clips}>
