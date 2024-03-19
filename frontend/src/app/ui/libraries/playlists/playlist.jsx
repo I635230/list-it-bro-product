@@ -48,15 +48,17 @@ export default function Playlist({ list }) {
             <div className={styles.creator}>作成者：{list.creator_name}</div>
           </div>
         </Link>
-        <div className={styles.bottom}>
-          <button className={styles.moveClip}>
-            <Link
-              href={`/watch?clip=${list.first_clip_slug}&list=${list.slug}`}
-            >
-              クリップを再生
-            </Link>
-          </button>
-        </div>
+        {list.clips_count != 0 && (
+          <div className={styles.bottom}>
+            <button className={styles.moveClip}>
+              <Link
+                href={`/watch?clip=${list.first_clip_slug}&list=${list.slug}`}
+              >
+                クリップを再生
+              </Link>
+            </button>
+          </div>
+        )}
       </div>
     </div>
   )

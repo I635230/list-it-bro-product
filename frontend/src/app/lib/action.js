@@ -1,6 +1,7 @@
 'use server'
 
 import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 
 // clipIdからBroadcasterのclipsをDBに追加
 export async function addClipInfo(state, formData) {
@@ -172,7 +173,10 @@ export async function orderClipInPlaylist({ clipIds, listId }) {
 }
 
 // playlistを削除
-export async function deletePlaylist({ listId }) {
+export async function deletePlaylist({ listId, currentUserId }) {
+  // redirectするかの判定フラグ
+  let redirectRequested = false
+
   try {
     const response = await fetch(
       `${process.env.API_BASE_URL}/playlists/${listId}`,
@@ -190,8 +194,15 @@ export async function deletePlaylist({ listId }) {
     }
 
     console.log('playlistの削除に成功しました')
+    redirectRequested = true
   } catch (error) {
     console.log('playlistの削除に失敗しました')
+    redirectRequested = false
+  }
+
+  // redirect処理
+  if (redirectRequested) {
+    redirect(`/libraries/${currentUserId}`)
   }
 }
 
