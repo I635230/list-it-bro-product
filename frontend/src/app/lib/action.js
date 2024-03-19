@@ -117,7 +117,7 @@ export async function addClipToPlaylist({ clipId, listId }) {
 }
 
 // clipをplaylistから削除
-export async function deleteClipFromPlaylist({ clipIds, listId }) {
+export async function deleteClipFromPlaylist({ clipId, listId }) {
   try {
     const response = await fetch(
       `${process.env.API_BASE_URL}/playlists/${listId}/clips/${clipId}`,
