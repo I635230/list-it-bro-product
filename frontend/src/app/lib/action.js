@@ -235,3 +235,55 @@ export async function editPlaylistTitle({ listId, newListTitle }) {
     return false
   }
 }
+
+// favorite
+export async function favorite({ listId }) {
+  try {
+    const response = await fetch(
+      `${process.env.API_BASE_URL}/playlists/${listId}/favorite`,
+      {
+        method: 'POST',
+        headers: {
+          userId: cookies().get('userId')?.value,
+          userAccessDigest: cookies().get('userAccessDigest')?.value,
+        },
+      },
+    )
+
+    if (!response.ok) {
+      throw new Error('favoriteに失敗しました')
+    }
+
+    console.log('favoriteに成功しました')
+    return true
+  } catch (error) {
+    console.log('favoriteに失敗しました')
+    return false
+  }
+}
+
+// unfavorite
+export async function unfavorite({ listId }) {
+  try {
+    const response = await fetch(
+      `${process.env.API_BASE_URL}/playlists/${listId}/favorite`,
+      {
+        method: 'DELETE',
+        headers: {
+          userId: cookies().get('userId')?.value,
+          userAccessDigest: cookies().get('userAccessDigest')?.value,
+        },
+      },
+    )
+
+    if (!response.ok) {
+      throw new Error('unfavoriteに失敗しました')
+    }
+
+    console.log('unfavoriteに成功しました')
+    return true
+  } catch (error) {
+    console.log('unfavoriteに失敗しました')
+    return false
+  }
+}

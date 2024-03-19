@@ -24,6 +24,11 @@
   --pagination-hover: #ddd;
   --danger: #ee4943;
   --danger-hover: #de3933;
+  --object: #8f9faa;
+  --object-background: #edf2f7;
+  --object-background-hover: #dde2e7;
+  --star: #ffef6c;
+  --star-background: #fffbeb;
 }
 
 @media (prefers-color-scheme: dark) {
