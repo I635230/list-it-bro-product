@@ -1,0 +1,105 @@
+.banner {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  height: calc(100vh - 112px);
+  background-image: linear-gradient(
+    0deg,
+    rgba(233, 233, 233, 0.82),
+    rgba(128, 128, 128, 0.82) 56%,
+    rgba(114, 114, 114, 0.82)
+  );
+  color: white;
+
+  .image {
+    width: 100%;
+    position: relative;
+    cursor: pointer;
+
+    img {
+      border-radius: 10px;
+    }
+  }
+
+  .image::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    transition: all 0.3s;
+    border-radius: 10px;
+  }
+
+  .image:hover::before {
+    opacity: 1;
+  }
+
+  .image::after {
+    content: "▶ すべて再生";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: white;
+    font-size: 14px;
+    transition: all 0.3s;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+  }
+
+  .image:hover::after {
+    opacity: 1;
+  }
+
+  .titleWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+    padding: 5px;
+  }
+
+  .infoWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 7px;
+
+    .infoIcon {
+      width: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .info {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding-top: 20px;
+
+    .xShareButton {
+      display: flex;
+      justify-content: center;
+    }
+
+    .deleteButton {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}

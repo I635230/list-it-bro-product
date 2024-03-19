@@ -1,0 +1,73 @@
+.clip {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--content-background);
+
+  .content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+
+    .left {
+    }
+
+    .middle {
+      .image {
+        width: 170px;
+
+        img {
+          width: 100%;
+        }
+      }
+    }
+
+    .right {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+
+      .title {
+        font-weight: bold;
+        font-size: 17px;
+        line-height: 17px;
+
+        /* 2行までしか表示しない */
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+      }
+
+      .broadcaster {
+        font-size: 15px;
+        line-height: 15px;
+      }
+    }
+  }
+
+  .operation {
+    padding: 15px;
+  }
+}
+
+.isDragging {
+  z-index: 100;
+  position: relative;
+}
+
+.isDragging:hover {
+  z-index: 100;
+  position: relative;
+}
+
+.noDragging {
+  z-index: 1;
+}
+
+.radius {
+  border-radius: 10px;
+}

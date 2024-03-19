@@ -32,6 +32,10 @@ export default function RootLayout({ children }) {
             <div className={styles.content}>{children}</div>
           </div>
         </div>
+        <script
+          src="https://kit.fontawesome.com/8de743f310.js"
+          crossOrigin="anonymous"
+        ></script>
       </body>
     </html>
   )

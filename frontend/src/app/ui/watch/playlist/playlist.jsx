@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import Clip from '@/app/ui/watch/playlist/clip/clip'
 import styles from '@/app/ui/watch/playlist/playlist.module.css'
 
@@ -7,7 +8,9 @@ export default function Playlist({ listData, indexOfPlaylist, autoplay }) {
       {listData && (
         <>
           <div className={styles.top}>
-            <div className={styles.playlistName}>{listData.title}</div>
+            <div className={styles.playlistName}>
+              <Link href={`/playlists/${listData.slug}`}>{listData.title}</Link>
+            </div>
             <div className={styles.favorite}>☆</div>
           </div>
           <div className={styles.bottom}>

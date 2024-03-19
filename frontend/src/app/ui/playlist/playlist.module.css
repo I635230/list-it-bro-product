@@ -1,0 +1,12 @@
+.playlist {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+
+  .banner {
+    width: 400px;
+  }
+
+  .main {
+  }
+}

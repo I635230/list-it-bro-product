@@ -40,7 +40,7 @@ export async function fetchResults(query) {
     // TODO
     console.log(url)
 
-    const response = await fetch(`${url}`)
+    const response = await fetch(`${url}`, { method: 'GET', cache: 'no-store' })
 
     if (!response.ok) {
       throw new Error('検索結果の取得に失敗しました')

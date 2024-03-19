@@ -100,6 +100,8 @@
 
     .bottom {
       .moveClip {
+        display: flex;
+        justify-content: center;
         height: 24px;
         width: 120px;
         padding: 0px 10px 0px 10px;
@@ -107,6 +109,14 @@
         border-radius: 5px;
         background-color: var(--button2);
         font-size: 14px;
+      }
+
+      .moveClip:hover {
+        background-color: var(--button2-hover);
+
+        a {
+          color: var(--paragraph);
+        }
       }
     }
   }

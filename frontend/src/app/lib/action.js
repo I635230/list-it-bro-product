@@ -114,3 +114,113 @@ export async function addClipToPlaylist({ clipId, listId }) {
     return false
   }
 }
+
+// clipをplaylistから削除
+export async function deleteClipFromPlaylist({ clipIds, listId }) {
+  try {
+    const response = await fetch(
+      `${process.env.API_BASE_URL}/playlists/${listId}/clips/${clipId}`,
+      {
+        method: 'DELETE',
+        headers: {
+          userId: cookies().get('userId')?.value,
+          userAccessDigest: cookies().get('userAccessDigest')?.value,
+        },
+      },
+    )
+
+    if (!response.ok) {
+      throw new Error('playlistからのclipの削除に失敗しました')
+    }
+
+    console.log('playlistからのclipの削除に成功しました')
+    return true
+  } catch (error) {
+    console.log('playlistからのclipの削除に失敗しました')
+    return false
+  }
+}
+
+// clipのorder情報を保存
+export async function orderClipInPlaylist({ clipIds, listId }) {
+  try {
+    const response = await fetch(
+      `${process.env.API_BASE_URL}/playlists/${listId}/clips`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-type': 'application/json',
+          userId: cookies().get('userId')?.value,
+          userAccessDigest: cookies().get('userAccessDigest')?.value,
+        },
+        body: JSON.stringify({
+          clip_ids: clipIds,
+        }),
+      },
+    )
+
+    if (!response.ok) {
+      throw new Error('clipのorder情報の保存に失敗しました')
+    }
+
+    console.log('clipのorder情報の保存に成功しました')
+    return true
+  } catch (error) {
+    console.log('clipのorder情報の保存に失敗しました')
+    return false
+  }
+}
+
+// playlistを削除
+export async function deletePlaylist({ listId }) {
+  try {
+    const response = await fetch(
+      `${process.env.API_BASE_URL}/playlists/${listId}`,
+      {
+        method: 'DELETE',
+        headers: {
+          userId: cookies().get('userId')?.value,
+          userAccessDigest: cookies().get('userAccessDigest')?.value,
+        },
+      },
+    )
+
+    if (!response.ok) {
+      throw new Error('playlistの削除に失敗しました')
+    }
+
+    console.log('playlistの削除に成功しました')
+  } catch (error) {
+    console.log('playlistの削除に失敗しました')
+  }
+}
+
+// playlistのtitleを変更
+export async function editPlaylistTitle({ listId, newListTitle }) {
+  try {
+    const response = await fetch(
+      `${process.env.API_BASE_URL}/playlists/${listId}`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-type': 'application/json',
+          userId: cookies().get('userId')?.value,
+          userAccessDigest: cookies().get('userAccessDigest')?.value,
+        },
+        body: JSON.stringify({
+          title: newListTitle,
+        }),
+      },
+    )
+
+    if (!response.ok) {
+      throw new Error('playlist名の変更に失敗しました')
+    }
+
+    console.log('playlist名の変更に成功しました')
+    return true
+  } catch (error) {
+    console.log('playlist名の変更に失敗しました')
+    return false
+  }
+}

@@ -38,7 +38,7 @@ export default function Playlist({ list }) {
           <div className={styles.top}>
             <div className={styles.title}>{list.title}</div>
             <div className={styles.favoritesCount}>
-              <i className="fas fa-heart"></i>
+              <i className="fa-solid fa-star"></i>
               <span>{list.favorites_count}</span>
             </div>
             <div className={styles.createdAt}>

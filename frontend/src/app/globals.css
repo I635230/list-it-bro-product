@@ -22,6 +22,8 @@
   --overlay-background: 0, 0, 0;
   --pagination: #eee;
   --pagination-hover: #ddd;
+  --danger: #ee4943;
+  --danger-hover: #de3933;
 }
 
 @media (prefers-color-scheme: dark) {

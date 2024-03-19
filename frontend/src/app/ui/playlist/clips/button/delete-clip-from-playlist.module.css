@@ -1,0 +1,6 @@
+.delete {
+}
+
+.delete:hover {
+  color: var(--danger);
+}
