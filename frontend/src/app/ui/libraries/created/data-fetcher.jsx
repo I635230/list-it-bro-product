@@ -1,13 +1,13 @@
 import { fetchListsData, fetchUserData } from '@/app/lib/data'
-import OtherLibrary from '@/app/ui/libraries/other-library'
+import Library from '@/app/ui/libraries/library'
 
-export default async function OtherDataFetcher({ userId }) {
+export default async function DataFetcher({ userId }) {
   const listsData = await fetchListsData({ userId })
   const userData = await fetchUserData({ userId })
 
   return (
     <>
-      <OtherLibrary listsData={listsData} userData={userData} />
+      <Library listsData={listsData} userData={userData} />
     </>
   )
 }
