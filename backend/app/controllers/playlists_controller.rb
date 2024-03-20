@@ -109,25 +109,25 @@ class PlaylistsController < ApplicationController
     def apply_term(playlists)
       # 1日
       if params[:term] == "day"
-        playlists = playlists.where(created_at: Time.zone.today.beginning_of_day..Time.zone.today.end_of_day)
+        playlists = playlists.where(created_at: Time.zone.yesterday..Time.zone.now)
 
       # 1週間
       elsif params[:term] == "week"
-        playlists = playlists.where(created_at: 1.week.ago.beginning_of_day..Time.zone.today.end_of_day)
+        playlists = playlists.where(created_at: 1.week.ago..Time.zone.now)
 
       # 1カ月
       elsif params[:term] == "month"
-        playlists = playlists.where(created_at: 1.month.ago.beginning_of_day..Time.zone.today.end_of_day)
+        playlists = playlists.where(created_at: 1.month.ago..Time.zone.now)
 
       # 1年
       elsif params[:term] == "year"
-        playlists = playlists.where(created_at: 1.year.ago.beginning_of_day..Time.zone.today.end_of_day)
+        playlists = playlists.where(created_at: 1.year.ago..Time.zone.now)
 
       # 指定なし(全期間)
       else
-        # pass
+        playlists
+
       end
-      playlists
     end
 
     def apply_order(playlists)
