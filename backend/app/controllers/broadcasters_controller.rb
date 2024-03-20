@@ -14,8 +14,8 @@ class BroadcastersController < ApplicationController
     uri = "https://api.twitch.tv/helix/users?id=#{broadcaster_id}"
 
     # Broadcaster作成済みなら処理を中断
-    if Broadcaster.find_by(id: broadcaster_id)
-      render status: :unprocessable_entity
+    if @broadcaster = Broadcaster.find_by(id: broadcaster_id)
+      render status: :ok, json: @broadcaster
       return
     end
 
