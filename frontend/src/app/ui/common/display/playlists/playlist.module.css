@@ -113,10 +113,10 @@
 
       .moveClip:hover {
         background-color: var(--button2-hover);
+      }
 
-        a {
-          color: var(--paragraph);
-        }
+      a {
+        color: var(--paragraph);
       }
     }
   }
