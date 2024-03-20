@@ -8,8 +8,9 @@ Bundler.require(*Rails.groups)
 
 module Api
   class Application < Rails::Application
+    config.time_zone = 'Tokyo'
     config.middleware.delete ActionDispatch::HostAuthorization
-    
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 

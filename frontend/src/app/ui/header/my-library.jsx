@@ -3,7 +3,7 @@ import { cookies } from 'next/headers'
 
 export default function MyLibrary() {
   return (
-    <Link href={`/libraries/${cookies()?.get('userId').value}`}>
+    <Link href={`/libraries/${cookies()?.get('userId').value}/created`}>
       マイライブラリ
     </Link>
   )

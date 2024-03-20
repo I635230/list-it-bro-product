@@ -38,9 +38,12 @@
       }
 
       .active {
-        color: var(--important);
         text-underline-offset: 10px;
         text-decoration: underline 2px solid var(--important);
+
+        a {
+          color: var(--important);
+        }
       }
     }
   }

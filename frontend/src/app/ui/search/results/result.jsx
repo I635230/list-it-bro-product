@@ -1,7 +1,7 @@
-import ClipsResult from '@/app/ui/search/results/clips/clips-result'
-import PlaylistsResult from '@/app/ui/search/results/playlists/playlists-result'
 import Pagination from '@/app/ui/search/results/pagination'
 import styles from '@/app/ui/search/results/results.module.css'
+import Clips from '@/app/ui/common/display/clips/clips'
+import Playlists from '@/app/ui/common/display/playlists/playlists'
 
 export default async function Result({ fetchResults, query }) {
   const results = await fetchResults(query)
@@ -16,12 +16,12 @@ export default async function Result({ fetchResults, query }) {
       )}
       {results?.clips && (
         <div className={styles.main}>
-          <ClipsResult results={results} />
+          <Clips clips={results.clips} />
         </div>
       )}
       {results?.playlists && (
         <div className={styles.main}>
-          <PlaylistsResult results={results} />
+          <Playlists playlists={results.playlists} />
         </div>
       )}
       {results?.meta.elementsCount >= 1 && (

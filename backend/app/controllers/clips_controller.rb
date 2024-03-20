@@ -80,6 +80,11 @@ class ClipsController < ApplicationController
 
   private
     def filter_clips
+      # fieldが空のとき
+      if params[:field].empty?
+        return Clip.all
+      end
+
       # すべてを対象にソート
       if params[:target] == "all"
         clips = and_search(params[:field], "search_keywords", Clip)
@@ -96,34 +101,31 @@ class ClipsController < ApplicationController
       elsif params[:target] == "title"
         and_search(params[:field], "title", Clip)
 
-      # 指定なし(すべてのクリップ)
-      else
-        Clip.all
       end
     end
 
     def apply_term(clips)
       # 1日
       if params[:term] == "day"
-        clips = clips.where(clip_created_at: Time.zone.today.beginning_of_day..Time.zone.today.end_of_day)
+        clips = clips.where(clip_created_at: Time.zone.yesterday..Time.zone.now)
 
       # 1週間
       elsif params[:term] == "week"
-        clips = clips.where(clip_created_at: 1.week.ago.beginning_of_day..Time.zone.today.end_of_day)
+        clips = clips.where(clip_created_at: 1.week.ago..Time.zone.now)
 
       # 1カ月
       elsif params[:term] == "month"
-        clips = clips.where(clip_created_at: 1.month.ago.beginning_of_day..Time.zone.today.end_of_day)
+        clips = clips.where(clip_created_at: 1.month.ago..Time.zone.now)
 
       # 1年
       elsif params[:term] == "year"
-        clips = clips.where(clip_created_at: 1.year.ago.beginning_of_day..Time.zone.today.end_of_day)
+        clips = clips.where(clip_created_at: 1.year.ago..Time.zone.now)
 
       # 指定なし(全期間)
       else
-        # pass
+        clips
+
       end
-      clips
     end
 
     def apply_order(clips)
