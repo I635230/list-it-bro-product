@@ -10,3 +10,6 @@ end
 
 # GameにUndefinedを設定
 Game.create!(id: 0, name: "Undefined")
+
+# Botを作成
+User.create!(id: -1, login: "Ranking Bot", display_name: "Ranking Bot")
