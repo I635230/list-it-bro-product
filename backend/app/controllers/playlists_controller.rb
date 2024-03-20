@@ -83,6 +83,11 @@ class PlaylistsController < ApplicationController
     end
 
     def fileter_playlists
+      # fieldが空のとき
+      if params[:field].empty?
+        return Playlist.all
+      end
+
       # すべてを対象にソート
       if params[:target] == "all"
         and_search(params[:field], "search_keywords", Playlist)
@@ -100,9 +105,6 @@ class PlaylistsController < ApplicationController
       elsif params[:target] == "title"
         and_search(params[:field], "title", Playlist)
 
-      # 指定なし(すべてのプレイリスト)
-      else
-        Playlist.all
       end
     end
 

@@ -1,7 +1,7 @@
 import Image from 'next/image'
-import styles from '@/app/ui/libraries/playlists/list.module.css'
-import DisplayDate from '@/app/lib/function/display-date'
 import Link from 'next/link'
+import DisplayDate from '@/app/lib/function/display-date'
+import styles from '@/app/ui/common/display/playlists/playlist.module.css'
 
 export default function Playlist({ list }) {
   return (
@@ -48,17 +48,11 @@ export default function Playlist({ list }) {
             <div className={styles.creator}>作成者：{list.creator_name}</div>
           </div>
         </Link>
-        {list.clips_count != 0 && (
+        <Link href={`/watch?clip=${list.first_clip_slug}&list=${list.slug}`}>
           <div className={styles.bottom}>
-            <button className={styles.moveClip}>
-              <Link
-                href={`/watch?clip=${list.first_clip_slug}&list=${list.slug}`}
-              >
-                クリップを再生
-              </Link>
-            </button>
+            <div className={styles.moveClip}>クリップを再生</div>
           </div>
-        )}
+        </Link>
       </div>
     </div>
   )

@@ -80,6 +80,11 @@ class ClipsController < ApplicationController
 
   private
     def filter_clips
+      # fieldが空のとき
+      if params[:field].empty?
+        return Clip.all
+      end
+
       # すべてを対象にソート
       if params[:target] == "all"
         clips = and_search(params[:field], "search_keywords", Clip)
@@ -96,9 +101,6 @@ class ClipsController < ApplicationController
       elsif params[:target] == "title"
         and_search(params[:field], "title", Clip)
 
-      # 指定なし(すべてのクリップ)
-      else
-        Clip.all
       end
     end
 

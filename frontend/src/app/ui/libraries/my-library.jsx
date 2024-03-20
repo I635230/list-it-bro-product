@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import clsx from 'clsx'
-import Playlists from '@/app/ui/libraries/playlists/playlists'
+import Playlists from '@/app/ui/common/display/playlists/playlists'
 import styles from '@/app/ui/libraries/library.module.css'
 
 export default function MyLibrary({
@@ -40,9 +40,11 @@ export default function MyLibrary({
           </span>
         </div>
       </div>
-      {activeTab == 'myLists' && <Playlists listsData={myListsData} />}
+      {activeTab == 'myLists' && (
+        <Playlists playlists={myListsData.playlists} />
+      )}
       {activeTab == 'favoritedLists' && (
-        <Playlists listsData={favoritedListsData} />
+        <Playlists playlists={favoritedListsData.playlists} />
       )}
     </div>
   )

@@ -1,4 +1,4 @@
-import Playlists from '@/app/ui/libraries/playlists/playlists'
+import Playlists from '@/app/ui/common/display/playlists/playlists'
 import styles from '@/app/ui/libraries/library.module.css'
 
 export default function OtherLibrary({ listsData, userData }) {
@@ -12,7 +12,7 @@ export default function OtherLibrary({ listsData, userData }) {
           </h2>
         </div>
       </div>
-      <Playlists listsData={listsData} />
+      <Playlists playlists={listsData.playlists} />
     </div>
   )
 }

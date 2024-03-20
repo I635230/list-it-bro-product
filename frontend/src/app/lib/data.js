@@ -8,7 +8,7 @@ export async function fetchResults(query) {
     // 準備
     const type = query['type'] || 'clip'
     const term = query['term'] || 'all'
-    const order = query['order'] || 'fav_desc'
+    const order = query['order'] || 'view_desc'
     const target = query['target'] || 'all'
     const page = query['page'] || '1'
     const field = query['field'] || ''
@@ -226,5 +226,21 @@ export async function fetchGamesName() {
     return data
   } catch (error) {
     console.log('gameの名前の取得に失敗しました')
+  }
+}
+
+// Top Clipsを取得
+export async function fetchTopClips() {
+  try {
+    const response = await fetch(`${process.env.API_BASE_URL}/rankings`, {
+      method: 'GET',
+      cache: 'no-store',
+    })
+    const data = await response.json()
+
+    console.log('クリップランキングの取得に成功しました')
+    return data
+  } catch (error) {
+    console.log('クリップランキングの取得に失敗しました')
   }
 }

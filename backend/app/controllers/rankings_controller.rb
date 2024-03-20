@@ -9,9 +9,9 @@ class RankingsController < ApplicationController
     @bot = User.find(-1)
 
     render status: :ok, json: {
-      daily: ActiveModel::SerializableResource.new(@bot.playlists[0], serializer: PlaylistSerializer),
-      weekly: ActiveModel::SerializableResource.new(@bot.playlists[1], serializer: PlaylistSerializer),
-      monthly: ActiveModel::SerializableResource.new(@bot.playlists[2], serializer: PlaylistSerializer)
+      day: ActiveModel::SerializableResource.new(@bot.playlists[0], serializer: PlaylistSerializer),
+      week: ActiveModel::SerializableResource.new(@bot.playlists[1], serializer: PlaylistSerializer),
+      month: ActiveModel::SerializableResource.new(@bot.playlists[2], serializer: PlaylistSerializer)
     }
   end
 
