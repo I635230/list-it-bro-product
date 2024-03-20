@@ -9,6 +9,7 @@ import Broadcaster from '@/app/ui/watch/broadcaster/broadcaster'
 import Playlist from '@/app/ui/watch/playlist/playlist'
 import styles from '@/app//ui/watch/watch.module.css'
 import AddClipToPlaylist from '@/app/ui/watch/info/operation/add-clip-to-playlist'
+import XShareButton from '@/app/ui/common/x-share-button'
 
 export default function Watch({ clipData, listData, myListsData }) {
   const autoplay = useRef('false')
@@ -40,7 +41,6 @@ export default function Watch({ clipData, listData, myListsData }) {
             />
           </div>
           <div className={styles.operation}>
-            <AddClipToPlaylist clipData={clipData} myListsData={myListsData} />
             {listData && (
               <>
                 <MovePreviousButton
@@ -57,11 +57,28 @@ export default function Watch({ clipData, listData, myListsData }) {
             )}
           </div>
         </div>
-        <div className={styles.broadcaster}>
-          <Broadcaster
-            imageUrl={clipData.broadcaster_image_url}
-            name={clipData.broadcaster_name}
-          />
+        <div className={styles.info2}>
+          <div className={styles.broadcaster}>
+            <Broadcaster
+              imageUrl={clipData.broadcaster_image_url}
+              name={clipData.broadcaster_name}
+            />
+          </div>
+          <div className={styles.operation}>
+            <AddClipToPlaylist clipData={clipData} myListsData={myListsData} />
+            {listData && (
+              <XShareButton
+                url={`${process.env.BASE_URL}/watch?clip=${clipData.slug}&list=${listData.slug}`}
+                text={`${clipData.title}を共有`}
+              />
+            )}
+            {!listData && (
+              <XShareButton
+                url={`${process.env.BASE_URL}/watch?clip=${clipData.slug}`}
+                text={`${clipData.title}を共有`}
+              />
+            )}
+          </div>
         </div>
       </div>
       <div className={styles.right}>

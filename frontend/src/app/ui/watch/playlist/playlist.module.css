@@ -1,12 +1,14 @@
 .playlist {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   gap: 10px;
   padding-top: 15px;
   padding-bottom: 10px;
   background-color: var(--background);
   border: 1px solid #cccccc;
   border-radius: 5px;
+  min-height: 0;
 
   .top {
     display: flex;
@@ -16,6 +18,8 @@
     padding-right: 15px;
 
     .playlistName {
+      display: flex;
+      align-items: center;
       font-size: 18px;
       font-weight: 600;
     }

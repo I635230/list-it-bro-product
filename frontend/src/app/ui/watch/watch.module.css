@@ -35,17 +35,36 @@
       }
     }
 
-    .broadcaster {
+    .info2 {
       display: flex;
       flex-wrap: nowrap;
       flex-direction: row;
-      align-items: center;
-      gap: 10px;
-      padding: 10px;
+      justify-content: space-between;
+
+      .broadcaster {
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+      }
+
+      .operation {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        padding-top: 10px;
+      }
     }
   }
 
   .right {
     width: 550px;
+    .playlist {
+      /* スクロールバーの設定 */
+      height: calc(100vh - 112px);
+      overflow-y: auto;
+    }
   }
 }

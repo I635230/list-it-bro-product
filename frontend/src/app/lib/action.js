@@ -117,7 +117,7 @@ export async function addClipToPlaylist({ clipId, listId }) {
 }
 
 // clipをplaylistから削除
-export async function deleteClipFromPlaylist({ clipIds, listId }) {
+export async function deleteClipFromPlaylist({ clipId, listId }) {
   try {
     const response = await fetch(
       `${process.env.API_BASE_URL}/playlists/${listId}/clips/${clipId}`,
@@ -168,6 +168,37 @@ export async function orderClipInPlaylist({ clipIds, listId }) {
     return true
   } catch (error) {
     console.log('clipのorder情報の保存に失敗しました')
+    return false
+  }
+}
+
+// playlistを作成
+export async function createPlaylist({ title }) {
+  try {
+    const response = await fetch(`${process.env.API_BASE_URL}/playlists/`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        userId: cookies().get('userId')?.value,
+        userAccessDigest: cookies().get('userAccessDigest')?.value,
+      },
+      body: JSON.stringify({
+        title: title,
+      }),
+    })
+
+    if (!response.ok) {
+      throw new Error('playlistの作成に失敗しました')
+    }
+
+    // データ整形
+    const data = await response.json()
+
+    // 出力
+    console.log('playlistの作成に成功しました')
+    return data.slug
+  } catch (error) {
+    console.log('playlistの作成に失敗しました')
     return false
   }
 }
@@ -232,6 +263,58 @@ export async function editPlaylistTitle({ listId, newListTitle }) {
     return true
   } catch (error) {
     console.log('playlist名の変更に失敗しました')
+    return false
+  }
+}
+
+// favorite
+export async function favorite({ listId }) {
+  try {
+    const response = await fetch(
+      `${process.env.API_BASE_URL}/playlists/${listId}/favorite`,
+      {
+        method: 'POST',
+        headers: {
+          userId: cookies().get('userId')?.value,
+          userAccessDigest: cookies().get('userAccessDigest')?.value,
+        },
+      },
+    )
+
+    if (!response.ok) {
+      throw new Error('favoriteに失敗しました')
+    }
+
+    console.log('favoriteに成功しました')
+    return true
+  } catch (error) {
+    console.log('favoriteに失敗しました')
+    return false
+  }
+}
+
+// unfavorite
+export async function unfavorite({ listId }) {
+  try {
+    const response = await fetch(
+      `${process.env.API_BASE_URL}/playlists/${listId}/favorite`,
+      {
+        method: 'DELETE',
+        headers: {
+          userId: cookies().get('userId')?.value,
+          userAccessDigest: cookies().get('userAccessDigest')?.value,
+        },
+      },
+    )
+
+    if (!response.ok) {
+      throw new Error('unfavoriteに失敗しました')
+    }
+
+    console.log('unfavoriteに成功しました')
+    return true
+  } catch (error) {
+    console.log('unfavoriteに失敗しました')
     return false
   }
 }

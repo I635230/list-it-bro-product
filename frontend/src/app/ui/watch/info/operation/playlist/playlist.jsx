@@ -1,14 +1,28 @@
+'use client'
+
 import { addClipToPlaylist } from '@/app/lib/action'
 import styles from '@/app/ui/watch/info/operation/playlist/playlist.module.css'
 
-export default function Playlist({ listData, clipData }) {
+export default function Playlist({
+  listData,
+  clipData,
+  handleSnackBar,
+  severity,
+  text,
+}) {
   async function add(listId, clipId) {
     const status = await addClipToPlaylist({ clipId, listId })
 
     if (status) {
-      console.log('クリップの追加に成功しました')
+      // 成功時のメッセージ
+      severity.current = 'success'
+      text.current = 'プレイリストへの追加に成功しました'
+      handleSnackBar()
     } else {
-      console.log('クリップの追加に失敗しました')
+      // 失敗時のメッセージ
+      severity.current = 'error'
+      text.current = 'プレイリストへの追加に失敗しました'
+      handleSnackBar()
     }
   }
 
