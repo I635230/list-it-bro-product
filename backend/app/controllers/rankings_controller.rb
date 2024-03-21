@@ -22,25 +22,25 @@ class RankingsController < ApplicationController
     # Daily Top Clipsの作成
     @bot.playlists.create(title: @daily_title)
     @clips = get_top_clips("day")
-    @clips.each do |clip|
+    @clips.each.with_index(2) do |clip, index|
       @bot.playlists[0].clips << clip
-      # TODO order情報を変更する処理
+      @bot.playlists[0].playlist_clips.find_by(clip_id: clip.id).update(order: index)
     end
 
     # Weekly Top Clipsの作成
     @bot.playlists.create(title: @weekly_title)
     @clips = get_top_clips("week")
-    @clips.each do |clip|
+    @clips.each.with_index(2) do |clip, index|
       @bot.playlists[1].clips << clip
-      # TODO order情報を変更する処理
+      @bot.playlists[1].playlist_clips.find_by(clip_id: clip.id).update(order: index)
     end
 
     # Monthly Top Clipsの作成
     @bot.playlists.create(title: @monthly_title)
     @clips = get_top_clips("month")
-    @clips.each do |clip|
+    @clips.each.with_index(2) do |clip, index|
       @bot.playlists[2].clips << clip
-      # TODO order情報を変更する処理
+      @bot.playlists[2].playlist_clips.find_by(clip_id: clip.id).update(order: index)
     end
 
     render status: :created
