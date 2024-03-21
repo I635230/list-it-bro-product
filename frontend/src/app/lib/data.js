@@ -109,10 +109,12 @@ export async function fetchListData({ listId }) {
 }
 
 // userIdからプレイリスト一覧を取得
-export async function fetchListsData({ userId }) {
+export async function fetchListsData({ userId, query }) {
+  const page = query['page'] || '1'
+
   try {
     const response = await fetch(
-      `${process.env.API_BASE_URL}/playlists?target=creatorId&field=${userId}`,
+      `${process.env.API_BASE_URL}/playlists?target=creatorId&field=${userId}&page=${page}`,
       {
         method: 'GET',
       },
@@ -124,10 +126,12 @@ export async function fetchListsData({ userId }) {
 }
 
 // お気に入りしたプレイリスト一覧を取得
-export async function fetchFavoritedListsData() {
+export async function fetchFavoritedListsData({ query }) {
+  const page = query['page'] || '1'
+
   try {
     const response = await fetch(
-      `${process.env.API_BASE_URL}/playlists/favorited`,
+      `${process.env.API_BASE_URL}/playlists/favorited?page=${page}`,
       {
         method: 'GET',
         headers: {
