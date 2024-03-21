@@ -1,13 +1,12 @@
-import { fetchListsData, fetchUserData } from '@/app/lib/data'
-import Library from '@/app/ui/libraries/library'
+import { fetchListsData } from '@/app/lib/data'
+import Playlists from '@/app/ui/common/display/playlists/playlists'
 
 export default async function DataFetcher({ userId }) {
   const listsData = await fetchListsData({ userId })
-  const userData = await fetchUserData({ userId })
 
   return (
     <>
-      <Library listsData={listsData} userData={userData} />
+      <Playlists playlists={listsData.playlists} />
     </>
   )
 }
