@@ -2,7 +2,7 @@
 
 import { useSearchParams, useRouter } from 'next/navigation'
 import clsx from 'clsx'
-import styles from '@/app/ui/search/results/pagination.module.css'
+import styles from '@/app/ui/common/pagination.module.css'
 
 export default function Pagination({
   currentPage,
