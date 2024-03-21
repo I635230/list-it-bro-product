@@ -14,10 +14,9 @@ class CreateClips < ActiveRecord::Migration[7.0]
       t.float :duration
       t.integer :view_count, index: true
       t.string :search_keywords, index: true
-      t.integer :order, null: false, default: 1
+      # t.integer :old_order, null: false, default: 1 # TODO 削除
 
       t.timestamps
     end
-    # add_index(:clips, :created_at)
   end
 end

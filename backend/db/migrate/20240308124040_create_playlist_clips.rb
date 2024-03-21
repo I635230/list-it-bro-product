@@ -3,6 +3,7 @@ class CreatePlaylistClips < ActiveRecord::Migration[7.0]
     create_table :playlist_clips do |t|
       t.references :playlist, null: false, foreign_key: true
       t.references :clip, null: false, foreign_key: true
+      t.integer :order, null: false, default: 1
 
       t.timestamps
     end

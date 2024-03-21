@@ -62,10 +62,10 @@ export default function Top({ clips, playlists }) {
       </div>
       <div className={styles.display}>
         {type == 'clip' && (
-          <Clips clips={clips[term].clips} listId={clips[term].slug} />
+          <Clips clips={clips[term]?.clips} listId={clips[term]?.slug} />
         )}
         {type == 'playlist' && (
-          <Playlists playlists={playlists[term].playlists} />
+          <Playlists playlists={playlists[term]?.playlists} />
         )}
       </div>
     </div>

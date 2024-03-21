@@ -24,6 +24,7 @@ class RankingsController < ApplicationController
     @clips = get_top_clips("day")
     @clips.each do |clip|
       @bot.playlists[0].clips << clip
+      # TODO order情報を変更する処理
     end
 
     # Weekly Top Clipsの作成
@@ -31,6 +32,7 @@ class RankingsController < ApplicationController
     @clips = get_top_clips("week")
     @clips.each do |clip|
       @bot.playlists[1].clips << clip
+      # TODO order情報を変更する処理
     end
 
     # Monthly Top Clipsの作成
@@ -38,6 +40,7 @@ class RankingsController < ApplicationController
     @clips = get_top_clips("month")
     @clips.each do |clip|
       @bot.playlists[2].clips << clip
+      # TODO order情報を変更する処理
     end
 
     render status: :created

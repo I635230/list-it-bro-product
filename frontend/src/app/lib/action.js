@@ -155,7 +155,7 @@ export async function orderClipInPlaylist({ clipIds, listId }) {
           userAccessDigest: cookies().get('userAccessDigest')?.value,
         },
         body: JSON.stringify({
-          clip_ids: clipIds,
+          clip_slugs: clipIds,
         }),
       },
     )
