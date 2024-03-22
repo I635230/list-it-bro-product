@@ -12,6 +12,7 @@ export async function fetchResults(query) {
     const target = query['target'] || 'all'
     const page = query['page'] || '1'
     const field = query['field'] || ''
+    const limit = query['limit'] || '20'
 
     let url = process.env.API_BASE_URL
 
@@ -36,6 +37,9 @@ export async function fetchResults(query) {
 
     // page
     url += `&page=${page}`
+
+    // limit
+    url += `&limit=${limit}`
 
     // TODO
     console.log(url)
@@ -111,10 +115,11 @@ export async function fetchListData({ listId }) {
 // userIdからプレイリスト一覧を取得
 export async function fetchListsData({ userId, query }) {
   const page = query['page'] || '1'
+  const limit = query['limit'] || '20'
 
   try {
     const response = await fetch(
-      `${process.env.API_BASE_URL}/playlists?target=creatorId&field=${userId}&page=${page}`,
+      `${process.env.API_BASE_URL}/playlists?target=creatorId&field=${userId}&page=${page}&limit=${limit}`,
       {
         method: 'GET',
       },
@@ -128,10 +133,11 @@ export async function fetchListsData({ userId, query }) {
 // お気に入りしたプレイリスト一覧を取得
 export async function fetchFavoritedListsData({ query }) {
   const page = query['page'] || '1'
+  const limit = query['limit'] || '20'
 
   try {
     const response = await fetch(
-      `${process.env.API_BASE_URL}/playlists/favorited?page=${page}`,
+      `${process.env.API_BASE_URL}/playlists/favorited?page=${page}&limit=${limit}`,
       {
         method: 'GET',
         headers: {

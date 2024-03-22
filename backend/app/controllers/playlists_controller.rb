@@ -8,13 +8,13 @@ class PlaylistsController < ApplicationController
     playlists = fileter_playlists
     playlists = apply_term(playlists)
     apply_order(playlists)
-    render status: :ok, json: @playlists, each_serializer: PlaylistSerializer, meta: { elementsCount: @playlists_all_page.size, limit: 20 }, adapter: :json, current_user: @current_user
+    render status: :ok, json: @playlists, each_serializer: PlaylistSerializer, meta: { elementsCount: @playlists_all_page.size, limit: params[:limit] }, adapter: :json, current_user: @current_user
   end
 
   # お気に入りプレイリスト一覧
   def index_favorited
     apply_order(@current_user.fav_playlists)
-    render status: :ok, json: @playlists, each_serializer: PlaylistSerializer, meta: { elementsCount: @playlists_all_page.size, limit: 20 }, adapter: :json, current_user: @current_user
+    render status: :ok, json: @playlists, each_serializer: PlaylistSerializer, meta: { elementsCount: @playlists_all_page.size, limit: params[:limit] }, adapter: :json, current_user: @current_user
   end
 
   def show
@@ -164,7 +164,7 @@ class PlaylistsController < ApplicationController
       if playlists.empty?
         @playlists = playlists
       else
-        @playlists = playlists.paginate(page: params[:page], per_page: 20)
+        @playlists = playlists.paginate(page: params[:page], per_page: params[:limit])
       end
     end
 end

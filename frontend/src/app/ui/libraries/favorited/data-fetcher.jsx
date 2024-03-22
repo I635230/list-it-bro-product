@@ -11,7 +11,7 @@ export default async function DataFetcher({ userId, query }) {
       <Pagination
         currentPage={query['page'] || '1'}
         path={`/libraries/${userId}/favorited`}
-        limit={20}
+        limit={listsData.meta.limit}
         elementsCount={listsData.meta.elementsCount}
       />
     </>

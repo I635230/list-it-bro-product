@@ -29,7 +29,7 @@ export default async function Result({ fetchResults, query }) {
           <Pagination
             currentPage={query?.['page'] || '1'}
             path={'/search'}
-            limit={20}
+            limit={results.meta.limit}
             elementsCount={results.meta.elementsCount}
           />
         </div>

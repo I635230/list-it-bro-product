@@ -5,7 +5,7 @@ class ClipsController < ApplicationController
     clips = filter_clips
     clips = apply_term(clips)
     apply_order(clips)
-    render status: :ok, json: @clips, each_serializer: ClipSerializer, meta: { elementsCount: @clips_all_page.size, limit: 20 }, adapter: :json
+    render status: :ok, json: @clips, each_serializer: ClipSerializer, meta: { elementsCount: @clips_all_page.size, limit: params[:limit] }, adapter: :json
   end
 
   def show
@@ -155,7 +155,7 @@ class ClipsController < ApplicationController
       if clips.empty?
         @clips = clips
       else
-        @clips = clips.paginate(page: params[:page], per_page: 20)
+        @clips = clips.paginate(page: params[:page], per_page: params[:limit])
       end
     end
 
