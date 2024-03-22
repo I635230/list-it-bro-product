@@ -58,7 +58,6 @@ class RankingsController < ApplicationController
   end
 
   private
-
     def common_variable
       @daily_title = "Daily Top Clips"
       @weekly_title = "Weekly Top Clips"
@@ -69,25 +68,25 @@ class RankingsController < ApplicationController
       clips = Clip.all # すべてのクリップを取得
       clips = apply_term(clips, term) # 期間で絞り込み
       clips = clips.order(view_count: "DESC") # 視聴数順に並べ替え
-      clips = clips.paginate(page: 1, per_page: 100) # 最初の100件を取得
+      clips.paginate(page: 1, per_page: 100) # 最初の100件を取得
     end
 
     def apply_term(clips, term)
       # 1日
       if term == "day"
-        clips = clips.where(clip_created_at: Time.zone.yesterday..Time.zone.now)
+        clips.where(clip_created_at: Time.zone.yesterday..Time.zone.now)
 
       # 1週間
       elsif term == "week"
-        clips = clips.where(clip_created_at: 1.week.ago..Time.zone.now)
+        clips.where(clip_created_at: 1.week.ago..Time.zone.now)
 
       # 1カ月
       elsif term == "month"
-        clips = clips.where(clip_created_at: 1.month.ago..Time.zone.now)
+        clips.where(clip_created_at: 1.month.ago..Time.zone.now)
 
       # 1年
       elsif term == "year"
-        clips = clips.where(clip_created_at: 1.year.ago..Time.zone.now)
+        clips.where(clip_created_at: 1.year.ago..Time.zone.now)
       end
     end
 end

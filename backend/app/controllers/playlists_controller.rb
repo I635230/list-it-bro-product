@@ -24,7 +24,7 @@ class PlaylistsController < ApplicationController
   def create
     @playlist = @current_user.playlists.build(title: params[:title])
     if @playlist.save
-      render status: :created, json: {slug: @playlist.slug}
+      render status: :created, json: { slug: @playlist.slug }
     else
       render status: :unprocessable_entity
     end
@@ -99,7 +99,7 @@ class PlaylistsController < ApplicationController
       # creatorのloginNameでソート
       elsif params[:target] == "creatorId"
         Playlist.joins(:user).where(users: { id: params[:field] })
-        # User.find_by(id: params[:field]).playlists # TODO: 一致検索のとき、どっちの方が早いか確かめる
+      # User.find_by(id: params[:field]).playlists # TODO: 一致検索のとき、どっちの方が早いか確かめる
 
       # titleでソート
       elsif params[:target] == "title"
@@ -111,19 +111,19 @@ class PlaylistsController < ApplicationController
     def apply_term(playlists)
       # 1日
       if params[:term] == "day"
-        playlists = playlists.where(created_at: Time.zone.yesterday..Time.zone.now)
+        playlists.where(created_at: Time.zone.yesterday..Time.zone.now)
 
       # 1週間
       elsif params[:term] == "week"
-        playlists = playlists.where(created_at: 1.week.ago..Time.zone.now)
+        playlists.where(created_at: 1.week.ago..Time.zone.now)
 
       # 1カ月
       elsif params[:term] == "month"
-        playlists = playlists.where(created_at: 1.month.ago..Time.zone.now)
+        playlists.where(created_at: 1.month.ago..Time.zone.now)
 
       # 1年
       elsif params[:term] == "year"
-        playlists = playlists.where(created_at: 1.year.ago..Time.zone.now)
+        playlists.where(created_at: 1.year.ago..Time.zone.now)
 
       # 指定なし(全期間)
       else
@@ -147,11 +147,11 @@ class PlaylistsController < ApplicationController
 
       # 日付の新しい順
       elsif params[:order] == "date_desc"
-       playlists = playlists.order(created_at: "DESC")
+        playlists = playlists.order(created_at: "DESC")
 
       # 日付の古い順
       elsif params[:order] == "date_asc"
-       playlists = playlists.order(created_at: "ASC")
+        playlists = playlists.order(created_at: "ASC")
 
       # 指定なし(お気に入り登録が多い順)
       else

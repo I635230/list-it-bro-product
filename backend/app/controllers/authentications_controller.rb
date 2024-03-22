@@ -54,8 +54,8 @@ class AuthenticationsController < ApplicationController
     data = res["data"][0]
 
     if @user = User.find_by(id: data["id"])
-      # ユーザーが存在していたらトークンのアップデート
-      @user.update(user_access_token: user_access_token, refresh_token: refresh_token)
+      # ユーザーが存在していたらデータのアップデート
+      @user.update(login: data["login"], display_name: data["display_name"], user_access_token: user_access_token, refresh_token: refresh_token)
     else
       # ユーザーが存在しなければ、作成
       User.create(id: data["id"],

@@ -26,24 +26,24 @@ class UsersController < ApplicationController
     # Unauthorzedでデータの取得に失敗したとき
     elsif status == 401
       render status: :unauthorized
-      # # refresh_tokenを使って、user_access_tokenを更新する
-      # refresh
+    # # refresh_tokenを使って、user_access_tokenを更新する
+    # refresh
 
-      # # render
-      # user_access_digest = @current_user.convert_digest
-      # debugger
-      # render status: :created, json: { user_id: @current_user.id, user_access_digest: user_access_digest, user_name: @current_user.display_name }
+    # # render
+    # user_access_digest = @current_user.convert_digest
+    # debugger
+    # render status: :created, json: { user_id: @current_user.id, user_access_digest: user_access_digest, user_name: @current_user.display_name }
 
-      # # ステータス確認
-      # status = get_status(header, uri)
+    # # ステータス確認
+    # status = get_status(header, uri)
 
-      # if status == 200
-      #   res = request_get(header, uri)
-      #   get_broadcasters(res["data"])
-      #   render status: :ok, json: @broadcasters
-      # else
-      #   render status: :unprocessable_entity
-      # end
+    # if status == 200
+    #   res = request_get(header, uri)
+    #   get_broadcasters(res["data"])
+    #   render status: :ok, json: @broadcasters
+    # else
+    #   render status: :unprocessable_entity
+    # end
 
     # データの取得に失敗したとき
     else
@@ -92,7 +92,7 @@ class UsersController < ApplicationController
                                         display_name: data["display_name"],
                                         profile_image_url: data["profile_image_url"])
 
-      return @broadcaster
+      @broadcaster
     end
 
     # リフレッシュトークンを使用して、user_access_tokenを更新する

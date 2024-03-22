@@ -87,7 +87,7 @@ class ClipsController < ApplicationController
 
       # すべてを対象にソート
       if params[:target] == "all"
-        clips = and_search(params[:field], "search_keywords", Clip)
+        and_search(params[:field], "search_keywords", Clip)
 
       # broadcasterのdispaly_nameでソート
       elsif params[:target] == "broadcaster"
@@ -107,19 +107,19 @@ class ClipsController < ApplicationController
     def apply_term(clips)
       # 1日
       if params[:term] == "day"
-        clips = clips.where(clip_created_at: Time.zone.yesterday..Time.zone.now)
+        clips.where(clip_created_at: Time.zone.yesterday..Time.zone.now)
 
       # 1週間
       elsif params[:term] == "week"
-        clips = clips.where(clip_created_at: 1.week.ago..Time.zone.now)
+        clips.where(clip_created_at: 1.week.ago..Time.zone.now)
 
       # 1カ月
       elsif params[:term] == "month"
-        clips = clips.where(clip_created_at: 1.month.ago..Time.zone.now)
+        clips.where(clip_created_at: 1.month.ago..Time.zone.now)
 
       # 1年
       elsif params[:term] == "year"
-        clips = clips.where(clip_created_at: 1.year.ago..Time.zone.now)
+        clips.where(clip_created_at: 1.year.ago..Time.zone.now)
 
       # 指定なし(全期間)
       else
