@@ -7,7 +7,7 @@ export default async function DataFetcher({ userId, query }) {
 
   return (
     <>
-      <Playlists playlists={listsData.playlists} />
+      <Playlists playlists={listsData.playlists} hasCreateNewPlaylist={true} />
       <Pagination
         currentPage={query['page'] || '1'}
         path={`/libraries/${userId}/created`}
