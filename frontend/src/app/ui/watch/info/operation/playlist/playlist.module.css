@@ -1,14 +1,7 @@
 .playlist {
-  /* スクロールバーが出現 */
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-
-  /* 省略してくれるが、左の空白が変 */
-  /* display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
-  overflow: hidden; */
 }
 
 .playlist:hover {

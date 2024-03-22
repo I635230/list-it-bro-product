@@ -119,7 +119,7 @@ export async function fetchListsData({ userId, query }) {
 
   try {
     const response = await fetch(
-      `${process.env.API_BASE_URL}/playlists?target=creatorId&field=${userId}&page=${page}&limit=${limit}`,
+      `${process.env.API_BASE_URL}/playlists?target=creatorId&field=${userId}&order=date_desc&page=${page}&limit=${limit}`,
       {
         method: 'GET',
       },
@@ -137,7 +137,7 @@ export async function fetchFavoritedListsData({ query }) {
 
   try {
     const response = await fetch(
-      `${process.env.API_BASE_URL}/playlists/favorited?page=${page}&limit=${limit}`,
+      `${process.env.API_BASE_URL}/playlists/favorited?order=date_desc&page=${page}&limit=${limit}`,
       {
         method: 'GET',
         headers: {

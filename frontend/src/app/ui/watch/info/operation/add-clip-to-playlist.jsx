@@ -32,7 +32,7 @@ export default function AddClipToPlaylist({ clipData, myListsData }) {
       bottom: 'auto',
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
-      maxWidth: '300px',
+      maxWidth: '800px',
       borderRadius: '6px',
       padding: '12px 20px 12px 20px',
     },
