@@ -44,7 +44,10 @@ export async function fetchResults(query) {
     // TODO
     console.log(url)
 
-    const response = await fetch(`${url}`, { method: 'GET', cache: 'no-store' })
+    const response = await fetch(`${url}`, {
+      method: 'GET',
+      next: { revalidate: 3600 },
+    })
 
     if (!response.ok) {
       throw new Error('検索結果の取得に失敗しました')
@@ -259,7 +262,7 @@ export async function fetchTopClips() {
   try {
     const response = await fetch(`${process.env.API_BASE_URL}/rankings`, {
       method: 'GET',
-      cache: 'no-store',
+      next: { revalidate: 3600 },
     })
     const data = await response.json()
 

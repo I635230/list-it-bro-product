@@ -1,11 +1,10 @@
 import Link from 'next/link'
 import styles from '@/app/ui/header/styles.module.css'
 import Image from 'next/image'
-import Login from '@/app/ui/header/login'
-import Logout from '@/app/ui/header/logout'
 import MyLibrary from '@/app/ui/header/my-library'
 import SearchBar from '@/app/ui/header/search-bar'
 import { cookies } from 'next/headers'
+import Authentication from '@/app/ui/header/authentication/authentication'
 
 export default function Header() {
   const userId = cookies().get('userId')
@@ -25,8 +24,7 @@ export default function Header() {
       <div className={styles.right}>
         <div className={styles.element}>{userId && <MyLibrary />}</div>
         <div className={styles.element}>
-          {!userId && <Login />}
-          {userId && <Logout />}
+          <Authentication />
         </div>
       </div>
     </div>
