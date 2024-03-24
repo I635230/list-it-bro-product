@@ -46,7 +46,7 @@ export async function fetchResults(query) {
 
     const response = await fetch(`${url}`, {
       method: 'GET',
-      next: { revalidate: 3600 },
+      cache: 'no-store',
     })
 
     if (!response.ok) {
