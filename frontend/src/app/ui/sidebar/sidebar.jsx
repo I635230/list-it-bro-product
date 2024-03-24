@@ -8,9 +8,11 @@ export default function Sidebar() {
     <div className={styles.sidebar}>
       <div className={styles.title}>フォローしているチャンネル</div>
       <>
-        <Suspense fallback="loading...">
-          <DataFetcher />
-        </Suspense>
+        {cookies()?.get('userId') && (
+          <Suspense fallback="loading...">
+            <DataFetcher />
+          </Suspense>
+        )}
       </>
     </div>
   )
