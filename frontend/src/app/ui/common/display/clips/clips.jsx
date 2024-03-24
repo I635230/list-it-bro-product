@@ -6,9 +6,7 @@ export default function Clips({ clips, listId, limit }) {
     <>
       <div className={styles.clips}>
         {clips?.map((clip, index) => (
-          <>
-            <Clip key={index} clip={clip} listId={listId} limit={limit} />
-          </>
+          <Clip key={index} clip={clip} listId={listId} limit={limit} />
         ))}
       </div>
     </>
