@@ -46,7 +46,6 @@ export async function addClipInfo(state, formData) {
         },
         body: JSON.stringify({
           broadcaster_id: broadcasterId,
-          all: true,
         }),
       })
 
