@@ -16,7 +16,7 @@ export default function DeleteButton({ listId, currentUserId }) {
       <span className={styles.icon}>
         <i className="fa-regular fa-trash-can"></i>
       </span>
-      <span className={styles.char}>プレイリスト削除</span>
+      <span className={styles.char}>削除</span>
     </button>
   )
 }

@@ -5,6 +5,7 @@ import DeleteButton from '@/app/ui/playlist/banner/button/delete-button'
 import Link from 'next/link'
 import EditPlaylistTitle from '@/app/ui/playlist/banner/button/edit-playlist-title'
 import { cookies } from 'next/headers'
+import FavoriteButton from '@/app/ui/common/favorite-button-2'
 
 export default function Banner({ listData }) {
   return (
@@ -52,6 +53,11 @@ export default function Banner({ listData }) {
             text={`${listData.title}を共有`}
           />
         </div>
+        {cookies()?.get('userId').value == listData.creator_id && (
+          <div className={styles.favoriteButton}>
+            <FavoriteButton listData={listData} />
+          </div>
+        )}
         {cookies()?.get('userId').value == listData.creator_id && (
           <div className={styles.deleteButton}>
             <DeleteButton
