@@ -89,6 +89,32 @@ export async function addClipInfo(state, formData) {
   }
 }
 
+// clipのviewCountを更新
+export async function updateViewCount({ clipId }) {
+  try {
+    // clipsデータを取得
+    const response = await fetch(
+      `${process.env.API_BASE_URL}/clips/${clipId}`,
+      {
+        method: 'PATCH',
+      },
+    )
+
+    // viewCountの更新に成功したとき
+    if (!response.ok) {
+      throw new Error('viewCountの更新に失敗しました')
+    }
+
+    // output
+    console.log('viewCountの更新に成功しました')
+    const data = await response.json()
+    return data
+  } catch (error) {
+    console.log('viewCountの更新に失敗しました')
+    return false
+  }
+}
+
 // clipをplaylistに追加
 export async function addClipToPlaylist({ clipId, listId }) {
   try {

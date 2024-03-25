@@ -78,6 +78,34 @@ class ClipsController < ApplicationController
     render status: :created
   end
 
+  # Broadcaster全員のn時間以内に追加されたクリップをDBに登録
+  def update_all
+
+  end
+
+  # view_countの更新
+  def update
+    # 入力
+    clip_id = params[:id]
+    @clip = Clip.find_by(slug: clip_id)
+
+    # 準備
+    header = { "Authorization" => ENV["APP_ACCESS_TOKEN"],  "Client-id" => ENV["CLIENT_ID"] }
+    uri = "https://api.twitch.tv/helix/clips?id=#{clip_id}"
+
+    # データ取得
+    res = request_get(header, uri)
+    data = res["data"][0]
+
+    # view_countの更新
+    if @clip.update(view_count: data["view_count"])
+      view_count = @clip.reload.view_count
+      render status: :created, json: { view_count: view_count }
+    else
+      render status: :unprocessable_entity
+    end
+  end
+
   private
     def filter_clips
       # fieldが空のとき

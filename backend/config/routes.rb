@@ -14,7 +14,7 @@ Rails.application.routes.draw do
         delete :favorite, to: "playlists#unfavorite"
       end
     end
-    resources :clips, only: %i[index show]
+    resources :clips, only: %i[index show update]
     post "/clips", to: "clips#create_many"
     resources :rankings, only: %i[index create] do
       collection do
