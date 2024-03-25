@@ -23,7 +23,7 @@ export default function Banner({ listData }) {
       <div className={styles.titleWrapper}>
         <EditPlaylistTitle
           listData={listData}
-          currentUserId={cookies()?.get('userId').value}
+          currentUserId={cookies().get('userId')?.value}
         />
       </div>
       <div className={styles.infoWrapper}>
@@ -40,12 +40,14 @@ export default function Banner({ listData }) {
           <DisplayDate date={listData.created_at} />
         </div>
       </div>
-      <div className={styles.infoWrapper}>
-        <div className={styles.infoIcon}>
-          <i className="fa-solid fa-star"></i>
+      {cookies().get('userId')?.value != listData.creator_id && (
+        <div className={styles.infoWrapper}>
+          <div className={styles.infoIcon}>
+            <i className="fa-solid fa-star"></i>
+          </div>
+          <div className={styles.info}>{listData.favorites_count}</div>
         </div>
-        <div className={styles.info}>{listData.favorites_count}</div>
-      </div>
+      )}
       <div className={styles.buttons}>
         <div className={styles.xShareButton}>
           <XShareButton
@@ -53,12 +55,12 @@ export default function Banner({ listData }) {
             text={`${listData.title}を共有`}
           />
         </div>
-        {cookies()?.get('userId').value == listData.creator_id && (
+        {cookies().get('userId')?.value == listData.creator_id && (
           <div className={styles.favoriteButton}>
             <FavoriteButton listData={listData} />
           </div>
         )}
-        {cookies()?.get('userId').value == listData.creator_id && (
+        {cookies().get('userId')?.value == listData.creator_id && (
           <div className={styles.deleteButton}>
             <DeleteButton
               listId={listData.slug}

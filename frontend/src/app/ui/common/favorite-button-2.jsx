@@ -32,7 +32,7 @@ export default function FavoriteButton({ listData }) {
         <span className={styles.icon}>
           <i className="fa-regular fa-star"></i>
         </span>
-        <span className={styles.char}>お気に入り</span>
+        <span className={styles.char}>{favoritesCount}</span>
       </div>
     )
   } else {
@@ -44,7 +44,7 @@ export default function FavoriteButton({ listData }) {
         <span className={styles.icon}>
           <i className="fa-solid fa-star"></i>
         </span>
-        <span className={styles.char}>お気に入り</span>
+        <span className={styles.char}>{favoritesCount}</span>
       </button>
     )
   }
