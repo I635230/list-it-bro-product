@@ -12,6 +12,7 @@ export async function fetchResults(query) {
     const target = query['target'] || 'all'
     const page = query['page'] || '1'
     const field = query['field'] || ''
+    const limit = query['limit'] || '20'
 
     let url = process.env.API_BASE_URL
 
@@ -37,10 +38,16 @@ export async function fetchResults(query) {
     // page
     url += `&page=${page}`
 
+    // limit
+    url += `&limit=${limit}`
+
     // TODO
     console.log(url)
 
-    const response = await fetch(`${url}`, { method: 'GET', cache: 'no-store' })
+    const response = await fetch(`${url}`, {
+      method: 'GET',
+      next: { revalidate: 360 },
+    })
 
     if (!response.ok) {
       throw new Error('検索結果の取得に失敗しました')
@@ -63,6 +70,7 @@ export async function fetchClipData({ clipId }) {
       `${process.env.API_BASE_URL}/clips/${clipId}`,
       {
         method: 'GET',
+        next: { revalidate: 600 },
         headers: {
           userId: cookies().get('userId')?.value,
           userAccessDigest: cookies().get('userAccessDigest')?.value,
@@ -89,6 +97,7 @@ export async function fetchListData({ listId }) {
       `${process.env.API_BASE_URL}/playlists/${listId}`,
       {
         method: 'GET',
+        cache: 'no-store',
         headers: {
           userId: cookies().get('userId')?.value,
           userAccessDigest: cookies().get('userAccessDigest')?.value,
@@ -109,12 +118,16 @@ export async function fetchListData({ listId }) {
 }
 
 // userIdからプレイリスト一覧を取得
-export async function fetchListsData({ userId }) {
+export async function fetchListsData({ userId, query }) {
+  const page = query['page'] || '1'
+  const limit = query['limit'] || '20'
+
   try {
     const response = await fetch(
-      `${process.env.API_BASE_URL}/playlists?target=creatorId&field=${userId}`,
+      `${process.env.API_BASE_URL}/playlists?target=creatorId&field=${userId}&order=date_desc&page=${page}&limit=${limit}`,
       {
         method: 'GET',
+        cache: 'no-store',
       },
     )
     const data = await response.json()
@@ -124,12 +137,16 @@ export async function fetchListsData({ userId }) {
 }
 
 // お気に入りしたプレイリスト一覧を取得
-export async function fetchFavoritedListsData() {
+export async function fetchFavoritedListsData({ query }) {
+  const page = query['page'] || '1'
+  const limit = query['limit'] || '20'
+
   try {
     const response = await fetch(
-      `${process.env.API_BASE_URL}/playlists/favorited`,
+      `${process.env.API_BASE_URL}/playlists/favorited?order=date_desc&page=${page}&limit=${limit}`,
       {
         method: 'GET',
+        cache: 'no-store',
         headers: {
           userId: cookies().get('userId')?.value,
           userAccessDigest: cookies().get('userAccessDigest')?.value,
@@ -152,6 +169,7 @@ export async function fetchFollowingBroadcasters() {
       `${process.env.API_BASE_URL}/users/${cookies().get('userId')?.value}/following`,
       {
         method: 'GET',
+        next: { revalidate: 600 },
         headers: {
           userId: cookies().get('userId')?.value,
           userAccessDigest: cookies().get('userAccessDigest')?.value,
@@ -185,6 +203,7 @@ export async function fetchUserData({ userId }) {
       `${process.env.API_BASE_URL}/users/${userId}`,
       {
         method: 'GET',
+        next: { revalidate: 3600 },
       },
     )
     const data = await response.json()
@@ -199,7 +218,10 @@ export async function fetchUserData({ userId }) {
 // broadcasterのすべての名前を取得
 export async function fetchBroadcastersName() {
   try {
-    const response = await fetch(`${process.env.API_BASE_URL}/broadcasters`)
+    const response = await fetch(`${process.env.API_BASE_URL}/broadcasters`, {
+      method: 'GET',
+      next: { revalidate: 3600 },
+    })
     const data = await response.json()
     return data
   } catch (error) {
@@ -210,7 +232,10 @@ export async function fetchBroadcastersName() {
 // userのすべての名前を取得
 export async function fetchUsersName() {
   try {
-    const response = await fetch(`${process.env.API_BASE_URL}/users`)
+    const response = await fetch(`${process.env.API_BASE_URL}/users`, {
+      method: 'GET',
+      next: { revalidate: 3600 },
+    })
     const data = await response.json()
     return data
   } catch (error) {
@@ -221,7 +246,10 @@ export async function fetchUsersName() {
 // gameのすべての名前を取得
 export async function fetchGamesName() {
   try {
-    const response = await fetch(`${process.env.API_BASE_URL}/games`)
+    const response = await fetch(`${process.env.API_BASE_URL}/games`, {
+      method: 'GET',
+      next: { revalidate: 3600 },
+    })
     const data = await response.json()
     return data
   } catch (error) {
@@ -234,7 +262,7 @@ export async function fetchTopClips() {
   try {
     const response = await fetch(`${process.env.API_BASE_URL}/rankings`, {
       method: 'GET',
-      cache: 'no-store',
+      next: { revalidate: 3600 },
     })
     const data = await response.json()
 

@@ -22,22 +22,25 @@ class RankingsController < ApplicationController
     # Daily Top Clipsの作成
     @bot.playlists.create(title: @daily_title)
     @clips = get_top_clips("day")
-    @clips.each do |clip|
+    @clips.each.with_index(2) do |clip, index|
       @bot.playlists[0].clips << clip
+      @bot.playlists[0].playlist_clips.find_by(clip_id: clip.id).update(order: index)
     end
 
     # Weekly Top Clipsの作成
     @bot.playlists.create(title: @weekly_title)
     @clips = get_top_clips("week")
-    @clips.each do |clip|
+    @clips.each.with_index(2) do |clip, index|
       @bot.playlists[1].clips << clip
+      @bot.playlists[1].playlist_clips.find_by(clip_id: clip.id).update(order: index)
     end
 
     # Monthly Top Clipsの作成
     @bot.playlists.create(title: @monthly_title)
     @clips = get_top_clips("month")
-    @clips.each do |clip|
+    @clips.each.with_index(2) do |clip, index|
       @bot.playlists[2].clips << clip
+      @bot.playlists[2].playlist_clips.find_by(clip_id: clip.id).update(order: index)
     end
 
     render status: :created
@@ -55,7 +58,6 @@ class RankingsController < ApplicationController
   end
 
   private
-
     def common_variable
       @daily_title = "Daily Top Clips"
       @weekly_title = "Weekly Top Clips"
@@ -66,25 +68,25 @@ class RankingsController < ApplicationController
       clips = Clip.all # すべてのクリップを取得
       clips = apply_term(clips, term) # 期間で絞り込み
       clips = clips.order(view_count: "DESC") # 視聴数順に並べ替え
-      clips = clips.paginate(page: 1, per_page: 100) # 最初の100件を取得
+      clips.paginate(page: 1, per_page: 100) # 最初の100件を取得
     end
 
     def apply_term(clips, term)
       # 1日
       if term == "day"
-        clips = clips.where(clip_created_at: Time.zone.yesterday..Time.zone.now)
+        clips.where(clip_created_at: Time.zone.yesterday..Time.zone.now)
 
       # 1週間
       elsif term == "week"
-        clips = clips.where(clip_created_at: 1.week.ago..Time.zone.now)
+        clips.where(clip_created_at: 1.week.ago..Time.zone.now)
 
       # 1カ月
       elsif term == "month"
-        clips = clips.where(clip_created_at: 1.month.ago..Time.zone.now)
+        clips.where(clip_created_at: 1.month.ago..Time.zone.now)
 
       # 1年
       elsif term == "year"
-        clips = clips.where(clip_created_at: 1.year.ago..Time.zone.now)
+        clips.where(clip_created_at: 1.year.ago..Time.zone.now)
       end
     end
 end

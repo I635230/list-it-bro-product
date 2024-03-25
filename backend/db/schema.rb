@@ -34,12 +34,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_124059) do
     t.float "duration"
     t.integer "view_count"
     t.string "search_keywords"
-    t.integer "order", default: 1, null: false
+    t.integer "old_order", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["broadcaster_id"], name: "index_clips_on_broadcaster_id"
+    t.index ["clip_created_at"], name: "index_clips_on_clip_created_at"
     t.index ["game_id"], name: "index_clips_on_game_id"
+    t.index ["search_keywords"], name: "index_clips_on_search_keywords"
     t.index ["slug"], name: "index_clips_on_slug"
+    t.index ["title"], name: "index_clips_on_title"
+    t.index ["view_count"], name: "index_clips_on_view_count"
   end
 
   create_table "favorites", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -63,6 +67,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_124059) do
   create_table "playlist_clips", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "playlist_id", null: false
     t.bigint "clip_id", null: false
+    t.integer "order", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["clip_id"], name: "index_playlist_clips_on_clip_id"
@@ -75,8 +80,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_124059) do
     t.string "title"
     t.bigint "user_id", null: false
     t.string "search_keywords"
+    t.boolean "public", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["created_at"], name: "index_playlists_on_created_at"
     t.index ["search_keywords"], name: "index_playlists_on_search_keywords"
     t.index ["slug"], name: "index_playlists_on_slug"
     t.index ["title"], name: "index_playlists_on_title"

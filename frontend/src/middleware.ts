@@ -1,6 +1,5 @@
 import { NextResponse, NextRequest } from 'next/server'
 import { renew, login, logout } from './app/lib/auth'
-import { data } from 'autoprefixer'
 
 export default async function middleware(request: NextRequest) {
   // 準備

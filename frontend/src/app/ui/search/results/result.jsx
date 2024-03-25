@@ -1,4 +1,4 @@
-import Pagination from '@/app/ui/search/results/pagination'
+import Pagination from '@/app/ui/common/pagination'
 import styles from '@/app/ui/search/results/results.module.css'
 import Clips from '@/app/ui/common/display/clips/clips'
 import Playlists from '@/app/ui/common/display/playlists/playlists'
@@ -29,7 +29,7 @@ export default async function Result({ fetchResults, query }) {
           <Pagination
             currentPage={query?.['page'] || '1'}
             path={'/search'}
-            limit={20}
+            limit={results.meta.limit}
             elementsCount={results.meta.elementsCount}
           />
         </div>

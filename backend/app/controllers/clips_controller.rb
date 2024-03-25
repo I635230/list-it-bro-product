@@ -5,7 +5,7 @@ class ClipsController < ApplicationController
     clips = filter_clips
     clips = apply_term(clips)
     apply_order(clips)
-    render status: :ok, json: @clips, each_serializer: ClipSerializer, meta: { elementsCount: @clips_all_page.size, limit: 20 }, adapter: :json
+    render status: :ok, json: @clips, each_serializer: ClipSerializer, meta: { elementsCount: @clips_all_page.size, limit: params[:limit] }, adapter: :json
   end
 
   def show
@@ -25,23 +25,11 @@ class ClipsController < ApplicationController
     header = { "Authorization" => ENV["APP_ACCESS_TOKEN"],  "Client-id" => ENV["CLIENT_ID"] }
     base_uri = "https://api.twitch.tv/helix/clips?broadcaster_id=#{broadcaster_id}&first=100"
     after = nil
-    view_count = 10000
-
-    # 時間設定
-    n = 300 # 何時間前からの情報を取得するか
-    current_datetime = DateTime.now
-    current_rfc3339 = current_datetime.strftime("%Y-%m-%dT%H:%M:%SZ")
-    n_hour_ago_datetime = current_datetime - Rational(n, 24)
-    n_hour_ago_rfc3339 = n_hour_ago_datetime.strftime("%Y-%m-%dT%H:%M:%SZ")
+    view_count = 10000 # この初期値は適当
 
     # ループ
     loop do
-      # allの場合は全期間、そうでないときはn時間前までのクリップを取得
-      if params[:all] == true
-        uri = after ? "#{base_uri}&after=#{after}" : "#{base_uri}"
-      else
-        uri = after ? "#{base_uri}&after=#{after}&started_at=#{n_hour_ago_rfc3339}&ended_at=#{current_rfc3339}" : "#{base_uri}&started_at=#{n_hour_ago_rfc3339}&ended_at=#{current_rfc3339}"
-      end
+      uri = after ? "#{base_uri}&after=#{after}" : "#{base_uri}"
 
       # データ取得
       res = request_get(header, uri)
@@ -68,7 +56,7 @@ class ClipsController < ApplicationController
         if @clip.valid?
           @clip.save
         else
-          @clip = Clip.friendly.find(data["id"])
+          @clip = Clip.find_by(slug: data["id"])
           @clip.update(view_count: data["view_count"])
         end
         view_count = data["view_count"]
@@ -76,6 +64,91 @@ class ClipsController < ApplicationController
       break if after.nil? || after.empty? || view_count < 100
     end
     render status: :created
+  end
+
+  # Broadcaster全員のn時間以内に追加されたクリップをDBに登録
+  def update_all
+    # broadcasters
+    @broadcasters = Broadcaster.all
+
+    # 準備
+    header = { "Authorization" => ENV["APP_ACCESS_TOKEN"],  "Client-id" => ENV["CLIENT_ID"] }
+
+    # 時間設定
+    n = 12 # 何時間前からの情報を取得するか
+    current_datetime = DateTime.now
+    current_rfc3339 = current_datetime.strftime("%Y-%m-%dT%H:%M:%SZ")
+    n_hour_ago_datetime = current_datetime - Rational(n, 24)
+    n_hour_ago_rfc3339 = n_hour_ago_datetime.strftime("%Y-%m-%dT%H:%M:%SZ")
+
+    # すべてのBroadcasterで取得できるまでループ
+    @broadcasters.each do |broadcaster|
+      # 初期化
+      base_uri = "https://api.twitch.tv/helix/clips?broadcaster_id=#{broadcaster.id}&first=100"
+      after = nil
+
+      # データ取得が終わるまでループ
+      loop do
+        # n時間前までのクリップを取得
+        uri = after ? "#{base_uri}&after=#{after}&started_at=#{n_hour_ago_rfc3339}&ended_at=#{current_rfc3339}" : "#{base_uri}&started_at=#{n_hour_ago_rfc3339}&ended_at=#{current_rfc3339}"
+
+        # データ取得
+        res = request_get(header, uri)
+        after = res["pagination"]["cursor"]
+        res["data"].each do |data|
+          # game_idが空のときは、Undefinedに設定
+          data["game_id"] = 0 if data["game_id"] == ""
+
+          # gameが存在しなかったら作成
+          create_game(data["game_id"]) if !Game.find_by(id: data["game_id"])
+
+          # clipの主なデータをテーブルに保存
+          @clip = broadcaster.clips.build(slug: data["id"],
+                                           broadcaster_name: data["broadcaster_name"],
+                                           creator_id: data["creator_id"],
+                                           creator_name: data["creator_name"],
+                                           game_id: data["game_id"],
+                                           language: data["language"],
+                                           title: data["title"],
+                                           clip_created_at: data["created_at"],
+                                           thumbnail_url: data["thumbnail_url"],
+                                           duration: data["duration"],
+                                           view_count: data["view_count"])
+          if @clip.valid?
+            @clip.save
+          else
+            @clip = Clip.find_by(slug: data["id"])
+            @clip.update(view_count: data["view_count"])
+          end
+          view_count = data["view_count"]
+        end
+        break if after.nil? || after.empty?
+      end
+    end
+    render status: :created
+  end
+
+  # view_countの更新
+  def update
+    # 入力
+    clip_id = params[:id]
+    @clip = Clip.find_by(slug: clip_id)
+
+    # 準備
+    header = { "Authorization" => ENV["APP_ACCESS_TOKEN"],  "Client-id" => ENV["CLIENT_ID"] }
+    uri = "https://api.twitch.tv/helix/clips?id=#{clip_id}"
+
+    # データ取得
+    res = request_get(header, uri)
+    data = res["data"][0]
+
+    # view_countの更新
+    if @clip.update(view_count: data["view_count"])
+      view_count = @clip.reload.view_count
+      render status: :created, json: { view_count: view_count }
+    else
+      render status: :unprocessable_entity
+    end
   end
 
   private
@@ -87,7 +160,7 @@ class ClipsController < ApplicationController
 
       # すべてを対象にソート
       if params[:target] == "all"
-        clips = and_search(params[:field], "search_keywords", Clip)
+        and_search(params[:field], "search_keywords", Clip)
 
       # broadcasterのdispaly_nameでソート
       elsif params[:target] == "broadcaster"
@@ -107,19 +180,19 @@ class ClipsController < ApplicationController
     def apply_term(clips)
       # 1日
       if params[:term] == "day"
-        clips = clips.where(clip_created_at: Time.zone.yesterday..Time.zone.now)
+        clips.where(clip_created_at: Time.zone.yesterday..Time.zone.now)
 
       # 1週間
       elsif params[:term] == "week"
-        clips = clips.where(clip_created_at: 1.week.ago..Time.zone.now)
+        clips.where(clip_created_at: 1.week.ago..Time.zone.now)
 
       # 1カ月
       elsif params[:term] == "month"
-        clips = clips.where(clip_created_at: 1.month.ago..Time.zone.now)
+        clips.where(clip_created_at: 1.month.ago..Time.zone.now)
 
       # 1年
       elsif params[:term] == "year"
-        clips = clips.where(clip_created_at: 1.year.ago..Time.zone.now)
+        clips.where(clip_created_at: 1.year.ago..Time.zone.now)
 
       # 指定なし(全期間)
       else
@@ -155,7 +228,7 @@ class ClipsController < ApplicationController
       if clips.empty?
         @clips = clips
       else
-        @clips = clips.paginate(page: params[:page], per_page: 20)
+        @clips = clips.paginate(page: params[:page], per_page: params[:limit])
       end
     end
 

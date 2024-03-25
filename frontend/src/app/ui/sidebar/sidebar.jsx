@@ -7,13 +7,13 @@ export default function Sidebar() {
   return (
     <div className={styles.sidebar}>
       <div className={styles.title}>フォローしているチャンネル</div>
-      {cookies().get('userId') && (
-        <>
+      <>
+        {cookies()?.get('userId') && (
           <Suspense fallback="loading...">
             <DataFetcher />
           </Suspense>
-        </>
-      )}
+        )}
+      </>
     </div>
   )
 }

@@ -5,9 +5,10 @@ class CreatePlaylists < ActiveRecord::Migration[7.0]
       t.string :title, index: true
       t.references :user, null: false, foreign_key: true
       t.string :search_keywords, index: true
+      t.boolean :public, null: false, default: true
 
       t.timestamps
     end
-    # add_index(:playlists, :created_at)
+    add_index(:playlists, :created_at)
   end
 end

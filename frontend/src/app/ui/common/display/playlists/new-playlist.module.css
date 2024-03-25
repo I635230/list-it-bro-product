@@ -1,0 +1,71 @@
+.list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 20px;
+
+  .left {
+    width: 251px;
+    height: 150px;
+    position: relative;
+    cursor: pointer;
+
+    .plusBackground {
+      position: absolute;
+      top: 50px;
+      left: 90px;
+      width: 60px;
+      height: 60px;
+      background-color: white;
+      border-radius: 100%;
+      z-index: 51;
+
+      .plus {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 32px;
+        width: 60px;
+        height: 60px;
+      }
+    }
+
+    .shadow0 {
+      width: 231px;
+      height: 130px;
+      position: absolute;
+      top: 20px;
+      height: 130px;
+      background-color: var(--shadow-background);
+      border: 1px solid var(--shadow-border);
+      z-index: 50;
+    }
+
+    .shadow1 {
+      width: 231px;
+      height: 130px;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: var(--shadow-background);
+      border: 1px solid var(--shadow-border);
+      z-index: 49;
+    }
+
+    .shadow2 {
+      width: 231px;
+      height: 130px;
+      position: absolute;
+      top: 0px;
+      left: 20px;
+      background-color: var(--shadow-background);
+      border: 1px solid var(--shadow-border);
+      z-index: 48;
+    }
+  }
+
+  .right {
+    width: 250px;
+    height: 150px;
+  }
+}

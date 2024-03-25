@@ -1,10 +1,19 @@
+'use client'
+
 import Link from 'next/link'
-import { cookies } from 'next/headers'
+import Cookies from 'js-cookie'
+import { useAtomValue } from 'jotai'
+import { loginState } from '@/app/state/login'
 
 export default function MyLibrary() {
+  const isLogin = useAtomValue(loginState)
   return (
-    <Link href={`/libraries/${cookies()?.get('userId').value}/created`}>
-      マイライブラリ
-    </Link>
+    <>
+      {isLogin && (
+        <Link href={`/libraries/${Cookies?.get('userId')}/created`}>
+          マイライブラリ
+        </Link>
+      )}
+    </>
   )
 }

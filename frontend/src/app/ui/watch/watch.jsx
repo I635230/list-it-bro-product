@@ -10,10 +10,14 @@ import Playlist from '@/app/ui/watch/playlist/playlist'
 import styles from '@/app//ui/watch/watch.module.css'
 import AddClipToPlaylist from '@/app/ui/watch/info/operation/add-clip-to-playlist'
 import XShareButton from '@/app/ui/common/x-share-button'
+import { updateViewCount } from '@/app/lib/action'
 
 export default function Watch({ clipData, listData, myListsData }) {
   const autoplay = useRef('false')
   const index = getIndex(listData, clipData)
+
+  // 視聴数の更新
+  updateViewCount({ clipId: clipData.slug })
 
   function getIndex(listData, clipData) {
     return listData?.clips.findIndex(
@@ -81,15 +85,17 @@ export default function Watch({ clipData, listData, myListsData }) {
           </div>
         </div>
       </div>
-      <div className={styles.right}>
-        <div className={styles.playlist}>
-          <Playlist
-            listData={listData}
-            indexOfPlaylist={index}
-            autoplay={autoplay}
-          />
+      {listData && (
+        <div className={styles.right}>
+          <div className={styles.playlist}>
+            <Playlist
+              listData={listData}
+              indexOfPlaylist={index}
+              autoplay={autoplay}
+            />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }

@@ -3,7 +3,7 @@ class PlaylistSerializer < ActiveModel::Serializer
 
   # TODO: 使わないデータもかなり入っているので、Playlist内に追加するクリップ用のPlaylistClipSerializerを作成しても良い。
   has_many :clips, serializer: ClipSerializer do
-    object.clips.order(order: :asc)
+    object.clips.includes(:playlist_clips).order(order: :asc)
   end
 
   def initialize(object, options = {})

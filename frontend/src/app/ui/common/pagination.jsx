@@ -2,7 +2,7 @@
 
 import { useSearchParams, useRouter } from 'next/navigation'
 import clsx from 'clsx'
-import styles from '@/app/ui/search/results/pagination.module.css'
+import styles from '@/app/ui/common/pagination.module.css'
 
 export default function Pagination({
   currentPage,
@@ -10,9 +10,8 @@ export default function Pagination({
   limit,
   elementsCount,
 }) {
-  //
   const searchParams = useSearchParams()
-  const { replace } = useRouter()
+  const router = useRouter()
 
   // page設定
   currentPage = Number(currentPage)
@@ -38,7 +37,7 @@ export default function Pagination({
     } else {
       params.delete('page')
     }
-    replace(`/search?${params.toString()}`)
+    router.push(`${path}?${params.toString()}`)
   }
 
   return (
