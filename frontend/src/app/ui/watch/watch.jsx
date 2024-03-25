@@ -85,15 +85,17 @@ export default function Watch({ clipData, listData, myListsData }) {
           </div>
         </div>
       </div>
-      <div className={styles.right}>
-        <div className={styles.playlist}>
-          <Playlist
-            listData={listData}
-            indexOfPlaylist={index}
-            autoplay={autoplay}
-          />
+      {listData && (
+        <div className={styles.right}>
+          <div className={styles.playlist}>
+            <Playlist
+              listData={listData}
+              indexOfPlaylist={index}
+              autoplay={autoplay}
+            />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }
