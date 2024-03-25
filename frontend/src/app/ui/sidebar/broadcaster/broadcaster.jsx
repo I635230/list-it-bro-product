@@ -4,7 +4,7 @@ import styles from '@/app/ui/sidebar/broadcaster/broadcaster.module.css'
 export default function Broadcaster({ broadcaster }) {
   return (
     <Link
-      href={`/search?type=clip&target=broadcaster&field=${broadcaster.display_name}`}
+      href={`/search?type=clip&term=all&order=view_desc&target=broadcaster&field=${broadcaster.display_name}`}
     >
       <div className={styles.broadcaster}>
         <div className={styles.left}>
