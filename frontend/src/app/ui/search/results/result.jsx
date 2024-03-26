@@ -3,9 +3,7 @@ import styles from '@/app/ui/search/results/results.module.css'
 import Clips from '@/app/ui/common/display/clips/clips'
 import Playlists from '@/app/ui/common/display/playlists/playlists'
 
-export default async function Result({ fetchResults, query }) {
-  const results = await fetchResults(query)
-
+export default async function Result({ results, query }) {
   return (
     <div className={styles.results}>
       {results && (
