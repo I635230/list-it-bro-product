@@ -59,7 +59,7 @@ export async function fetchResults(query) {
     if (data.meta.elementCount == 0) return null
     else return data
   } catch (error) {
-    throw new Error(error)
+    console.log('検索結果の取得に失敗しました')
   }
 }
 
