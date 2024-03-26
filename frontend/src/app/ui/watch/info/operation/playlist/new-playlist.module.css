@@ -1,0 +1,22 @@
+.createPlaylist {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+
+  .modalIcon {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+  }
+  .text {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .text:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}

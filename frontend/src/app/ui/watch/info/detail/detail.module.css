@@ -1,0 +1,27 @@
+.top {
+  .title {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 600;
+  }
+}
+
+.bottom {
+  font-size: 15px;
+
+  .gameName {
+    color: var(--link);
+    cursor: pointer;
+  }
+  .gameName:hover {
+    text-decoration: underline;
+  }
+
+  .viewCount {
+    color: #555;
+  }
+
+  .date {
+    color: #555;
+  }
+}

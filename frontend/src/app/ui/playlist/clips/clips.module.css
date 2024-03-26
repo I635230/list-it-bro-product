@@ -1,0 +1,4 @@
+.clips {
+  display: flex;
+  flex-direction: column;
+}

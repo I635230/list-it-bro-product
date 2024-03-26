@@ -1,0 +1,70 @@
+.clip {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  gap: 10px;
+
+  .left {
+    width: 100%;
+
+    .play {
+      width: 100%;
+      aspect-ratio: 40 / 19;
+    }
+
+    .info {
+      display: flex;
+      flex-wrap: nowrap;
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 10px;
+      border-bottom: 1px solid var(--line);
+
+      .detail {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding-top: 10px;
+      }
+
+      .operation {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+      }
+    }
+
+    .info2 {
+      display: flex;
+      flex-wrap: nowrap;
+      flex-direction: row;
+      justify-content: space-between;
+
+      .broadcaster {
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+      }
+
+      .operation {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        padding-top: 10px;
+      }
+    }
+  }
+
+  .right {
+    width: 550px;
+    .playlist {
+      /* スクロールバーの設定 */
+      height: calc(100vh - 112px);
+      overflow-y: auto;
+    }
+  }
+}

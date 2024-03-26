@@ -3,31 +3,91 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --header-background: #fffffe;
+  --sidebar-background: #efeff1;
+  --content-background: #f7f7f8;
+  --clip-background: lightgrey;
+  --link: #6246ea;
+  --important: #6246ea;
+  --important-hover: #5236da;
+  --button2: #e7e7ea;
+  --button2-hover: #d7d7da;
+  --headline: #2b2c34;
+  --paragraph: #2b2c34;
+  --paragraph-light: #fff;
+  --line: #ddd;
+  --color-border: 43, 44, 52;
+  --shadow-background: #333;
+  --shadow-border: #000;
+  --overlay-background: 0, 0, 0;
+  --pagination: #eee;
+  --pagination-hover: #ddd;
+  --danger: #ee4943;
+  --danger-hover: #de3933;
+  --object: #8f9faa;
+  --object-background: #edf2f7;
+  --object-background-hover: #dde2e7;
+  --star: #f7d000;
+  --star-background: #fffbeb;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    /* ダークモード用の設定 */
+    --header-backgroud: #000;
   }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+/* リセット */
+body {
+  margin: 0;
+}
+
+img,
+i {
+  vertical-align: middle;
+}
+
+/* 共通 */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-y: hidden; /* 全体のスクロールバーは常に非表示 */
+}
+
+body {
+  color: var(--paragraph);
+}
+
+h1,
+h2,
+h3 {
+  color: var(--headline);
+}
+
+a {
+  text-decoration: none;
+  color: var(--paragraph);
+}
+
+a:hover {
+  color: var(--link);
+}
+
+/* clear */
+.clear-left {
+  clear: left;
+}
+
+.clear-right {
+  clear: right;
 }

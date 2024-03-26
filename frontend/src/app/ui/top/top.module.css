@@ -1,0 +1,35 @@
+.top {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .h2 {
+    font-size: 32px;
+    line-height: 32px;
+    font-weight: bold;
+  }
+
+  .tab {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+
+    .button {
+      border: none;
+      background-color: #f7f7f8;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .button:hover {
+      color: var(--important);
+    }
+
+    .active {
+      color: var(--important);
+      text-underline-offset: 10px;
+      text-decoration: underline 2px solid var(--important);
+    }
+  }
+}

@@ -1,0 +1,40 @@
+.search {
+  display: flex;
+  width: 70%;
+  max-width: 400px;
+  height: 35px;
+
+  .bar {
+    height: 100%;
+    width: 92%;
+
+    input {
+      height: 100%;
+      width: 100%;
+      padding-left: 6px;
+      border: 1px solid var(--paragraph);
+      border-radius: 8px 0 0 8px;
+      font-size: 14px;
+    }
+
+    input:focus {
+      outline: 0;
+      border: 2px solid var(--important);
+    }
+  }
+
+  .button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 30px;
+    border-radius: 0 8px 8px 0;
+    background-color: var(--important);
+    font-size: 15px;
+
+    button {
+      color: #fff;
+    }
+  }
+}

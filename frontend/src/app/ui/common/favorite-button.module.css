@@ -1,0 +1,36 @@
+.unfavorited {
+  .starBackground {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    cursor: pointer;
+    background-color: var(--object-background);
+    color: var(--object);
+    .star {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .starBackground:hover {
+    background-color: var(--object-background-hover);
+  }
+}
+
+.favorited {
+  .starBackground {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    cursor: pointer;
+    background-color: var(--star-background);
+    color: var(--star);
+    .star {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

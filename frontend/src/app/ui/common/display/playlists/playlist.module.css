@@ -1,0 +1,123 @@
+.list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 20px;
+
+  .left {
+    width: 251px;
+    height: 150px;
+    position: relative;
+
+    .image {
+      position: absolute;
+      top: 20px;
+      height: 130px;
+      z-index: 50;
+    }
+
+    .shadow1 {
+      width: 231px;
+      height: 130px;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: var(--shadow-background);
+      border: 1px solid var(--shadow-border);
+      z-index: 49;
+    }
+
+    .shadow2 {
+      width: 231px;
+      height: 130px;
+      position: absolute;
+      top: 0px;
+      left: 20px;
+      background-color: var(--shadow-background);
+      border: 1px solid var(--shadow-border);
+      z-index: 48;
+    }
+
+    .overlay {
+      border-radius: 4px;
+      background-color: rgba(var(--overlay-background), 0.6);
+      color: white;
+      padding: 2px 5px 2px 5px;
+      z-index: 51;
+    }
+
+    .clipCount {
+      position: absolute;
+      bottom: 10px;
+      right: 30px;
+      font-size: 13px;
+    }
+  }
+
+  .right {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    .top {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding-top: 5px;
+
+      .title {
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 22px;
+
+        /* 2行までしか表示しない */
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+      }
+
+      .favoritesCount {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 5px;
+        font-size: 14px;
+        line-height: 14px;
+      }
+
+      .createdAt {
+        font-size: 14px;
+        line-height: 14px;
+      }
+
+      .creator {
+        font-size: 14px;
+        line-height: 14px;
+      }
+    }
+
+    .bottom {
+      .moveClip {
+        display: flex;
+        justify-content: center;
+        height: 24px;
+        width: 120px;
+        padding: 0px 10px 0px 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: var(--button2);
+        font-size: 14px;
+      }
+
+      .moveClip:hover {
+        background-color: var(--button2-hover);
+      }
+
+      a {
+        color: var(--paragraph);
+      }
+    }
+  }
+}

@@ -1,0 +1,80 @@
+.clip {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  gap: 10px;
+
+  .top {
+    position: relative;
+
+    img {
+      height: 170px;
+    }
+
+    .overlay {
+      border-radius: 4px;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: white;
+      padding: 2px 5px 2px 5px;
+      z-index: 2;
+    }
+
+    .duration {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 13px;
+    }
+
+    .view {
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+      font-size: 13px;
+    }
+
+    .date {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      font-size: 13px;
+    }
+  }
+
+  .bottom {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    gap: 10px;
+    .left {
+      img {
+        height: 60px;
+        width: 40px;
+      }
+    }
+    .right {
+      width: 250px;
+      display: flex;
+      flex-wrap: nowrap;
+      flex-direction: column;
+      gap: 9px;
+      .title {
+        font-weight: bold;
+        font-size: 15px;
+        line-height: 15px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .broadcaster {
+        font-size: 14px;
+        line-height: 12px;
+      }
+
+      .creator {
+        font-size: 12px;
+        line-height: 12px;
+      }
+    }
+  }
+}

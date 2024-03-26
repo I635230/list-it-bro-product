@@ -1,0 +1,39 @@
+.wrapper {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  min-height: 100vh;
+
+  .header {
+    position: sticky;
+    z-index: 100;
+    top: 0;
+    width: 100%;
+  }
+
+  .main {
+    display: flex;
+    flex-grow: 1;
+    width: 100%;
+
+    .sidebar {
+      align-items: flex-start;
+      width: 260px;
+      background-color: var(--sidebar-background);
+
+      /* スクロールバーの設定 */
+      height: calc(100vh - 52px);
+      overflow-y: auto;
+    }
+
+    .content {
+      width: 100%;
+      padding: 30px;
+      background-color: var(--content-background);
+
+      /* スクロールバーの設定 */
+      height: calc(100vh - 52px);
+      overflow-y: auto;
+    }
+  }
+}
