@@ -18,9 +18,9 @@ export async function addClipInfo(state, formData) {
         }),
       })
 
-      // broadcaster作成に失敗したとき
+      // broadcaster作成/取得に失敗したとき
       if (!response.ok) {
-        throw new Error('broadcasterの作成に失敗しました')
+        throw new Error('broadcasterの作成/取得に失敗しました')
       }
 
       // データ整形
@@ -28,10 +28,10 @@ export async function addClipInfo(state, formData) {
       const broadcasterId = data['id']
 
       // output
-      console.log('broadcasterの作成に成功しました')
+      console.log('broadcasterの作成/取得に成功しました')
       return broadcasterId
     } catch (error) {
-      console.log('broadcasterの作成に失敗しました')
+      console.log('broadcasterの作成/取得に失敗しました')
       return false
     }
   }
@@ -68,23 +68,23 @@ export async function addClipInfo(state, formData) {
   try {
     clipId = formData.get('clipId')
   } catch (error) {
-    throw new Error('clipIdの取得に失敗しました')
+    return { msg: 'clipIdの取得に失敗しました' }
   }
 
   // ClipIdからBroadcasterを生成
   let broadcasterId = await createBroadcaster(clipId)
   if (!broadcasterId) {
-    throw new Error('broadcasterの生成に失敗しました')
+    return { msg: 'broadcasterの作成/取得に失敗しました' }
   }
 
   // BroadcasterIdからclipsデータを取得
   const isValid = await addClips(broadcasterId)
   if (isValid) {
     console.log('clipsデータの取得に成功しました')
-    return true
+    return false
   } else {
     console.log('clipsデータの取得に失敗しました')
-    return false
+    return { msg: 'clipsデータの取得に失敗しました' }
   }
 }
 

@@ -1,7 +1,13 @@
 class BroadcastersController < ApplicationController
+  include BroadcasterDealer
+
   def index
     # 出力
     render status: :ok, json: Broadcaster.all.map(&:display_name)
+  end
+
+  def index_ids
+    render statuts: :ok, json: Broadcaster.all.map(&:id)
   end
 
   def create
@@ -29,6 +35,9 @@ class BroadcastersController < ApplicationController
                                        display_name: data["display_name"],
                                        profile_image_url: data["profile_image_url"])
 
+    # language
+    # update_language(@broadcaster) # TODO productionのbroadcaster_id一覧を取得したら追加
+
     # 出力
     render status: :created, json: @broadcaster
   end
@@ -42,9 +51,6 @@ class BroadcastersController < ApplicationController
       # データ取得
       res = request_get(header, uri)
       data = res["data"][0]
-
-      # languageがjaでなければ処理を中断
-      return false if data["language"] != "ja"
 
       # 出力
       data["broadcaster_id"]

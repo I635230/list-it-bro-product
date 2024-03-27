@@ -5,13 +5,13 @@ import { useFormState } from 'react-dom'
 import { addClipInfo } from '@/app/lib/action'
 
 export default function Page() {
-  const [bool, formAction] = useFormState(addClipInfo, '')
+  const [msg, formAction] = useFormState(addClipInfo, '')
 
   return (
     <>
       <h2 className={styles.h2}>配信者登録</h2>
       <p className={styles.description}>
-        適当なクリップIDを入力してください。その配信者のすべてのクリップをDBに追加します。
+        適当なクリップIDを入力してください。その配信者の視聴数100以上のすべてのクリップをDBに追加します(日本語の配信者のみ)。
       </p>
       <form action={formAction}>
         <input
@@ -24,7 +24,8 @@ export default function Page() {
           クリップIDを送信
         </button>
       </form>
-      {bool && <>クリップの追加に成功しました</>}
+      {!msg && <>クリップの追加に成功しました</>}
+      {msg?.msg && <>{msg.msg}</>}
     </>
   )
 }

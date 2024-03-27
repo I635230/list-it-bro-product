@@ -15,6 +15,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_124059) do
     t.string "login"
     t.string "display_name"
     t.string "profile_image_url"
+    t.string "language"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["display_name"], name: "index_broadcasters_on_display_name"
@@ -34,7 +35,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_124059) do
     t.float "duration"
     t.integer "view_count"
     t.string "search_keywords"
-    t.integer "old_order", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["broadcaster_id"], name: "index_clips_on_broadcaster_id"
