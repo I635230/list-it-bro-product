@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  include BroadcasterDealer
   before_action :certificated, only: %i[following]
   before_action :authorized, only: %i[following]
 
@@ -26,24 +27,6 @@ class UsersController < ApplicationController
     # Unauthorzedでデータの取得に失敗したとき
     elsif status == 401
       render status: :unauthorized
-    # # refresh_tokenを使って、user_access_tokenを更新する
-    # refresh
-
-    # # render
-    # user_access_digest = @current_user.convert_digest
-    # debugger
-    # render status: :created, json: { user_id: @current_user.id, user_access_digest: user_access_digest, user_name: @current_user.display_name }
-
-    # # ステータス確認
-    # status = get_status(header, uri)
-
-    # if status == 200
-    #   res = request_get(header, uri)
-    #   get_broadcasters(res["data"])
-    #   render status: :ok, json: @broadcasters
-    # else
-    #   render status: :unprocessable_entity
-    # end
 
     # データの取得に失敗したとき
     else
@@ -66,6 +49,7 @@ class UsersController < ApplicationController
 
         # broadcasterを作成して追加
         @broadcaster = create_broadcaster(broadcaster_id)
+        # update_language(@broadcaster) # TODO productionのbroadcaster_id一覧を取得したら追加
         @broadcasters << @broadcaster
       end
     end
@@ -88,9 +72,9 @@ class UsersController < ApplicationController
 
       # Broadcaster作成
       @broadcaster = Broadcaster.create!(id: data["id"],
-                                        login: data["login"],
-                                        display_name: data["display_name"],
-                                        profile_image_url: data["profile_image_url"])
+                                         login: data["login"],
+                                         display_name: data["display_name"],
+                                         profile_image_url: data["profile_image_url"])
 
       @broadcaster
     end

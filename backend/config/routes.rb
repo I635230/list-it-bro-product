@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   scope :api do
     # broadcasters
-    resources :broadcasters, only: %i[index create]
+    resources :broadcasters, only: %i[index create] do
+      collection do
+        get "/ids", to: "broadcasters#index_ids"
+      end
+    end
 
     # games
     resources :games, only: %i[index]
