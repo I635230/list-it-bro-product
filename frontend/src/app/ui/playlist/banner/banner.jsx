@@ -51,7 +51,7 @@ export default function Banner({ listData }) {
       <div className={styles.buttons}>
         <div className={styles.xShareButton}>
           <XShareButton
-            url={`${process.env.BASE_URL}/playlists/${listData.slug}`}
+            url={`${process.env.NEXT_PUBLIC_BASE_URL}/playlists/${listData.slug}`}
             text={`${listData.title}を共有`}
           />
         </div>

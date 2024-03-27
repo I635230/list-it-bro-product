@@ -72,13 +72,13 @@ export default function Watch({ clipData, listData, myListsData }) {
             <AddClipToPlaylist clipData={clipData} myListsData={myListsData} />
             {listData && (
               <XShareButton
-                url={`${process.env.BASE_URL}/watch?clip=${clipData.slug}&list=${listData.slug}`}
+                url={`${process.env.NEXT_PUBLIC_BASE_URL}/watch?clip=${clipData.slug}&list=${listData.slug}`}
                 text={`${clipData.title}を共有`}
               />
             )}
             {!listData && (
               <XShareButton
-                url={`${process.env.BASE_URL}/watch?clip=${clipData.slug}`}
+                url={`${process.env.NEXT_PUBLIC_BASE_URL}/watch?clip=${clipData.slug}`}
                 text={`${clipData.title}を共有`}
               />
             )}
