@@ -7,7 +7,10 @@ export default function Play({ twitchId, title, autoplay }) {
       id="twitchIframe"
       title={title}
       src={
-        baseUrl + twitchId + '&parent=localhost&autoplay=' + autoplay.current
+        baseUrl +
+        twitchId +
+        '&parent=localhost&parent=www.list-it-bro.com&parent=list-it-bro.com&autoplay=' +
+        autoplay.current
       }
       allowFullScreen
       width="100%"

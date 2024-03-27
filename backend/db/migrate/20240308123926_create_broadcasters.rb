@@ -5,6 +5,7 @@ class CreateBroadcasters < ActiveRecord::Migration[7.0]
       t.string :login
       t.string :display_name, index: true
       t.string :profile_image_url
+      t.string :language
 
       t.timestamps
     end

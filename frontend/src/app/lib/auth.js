@@ -50,6 +50,10 @@ export async function login(code) {
 
     const data = await response.json()
     console.log('ログインに成功しました')
+
+    // TODO
+    console.log(data)
+
     return data
   } catch (error) {
     console.log(error)
