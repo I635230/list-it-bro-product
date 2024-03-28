@@ -27,7 +27,7 @@ export default async function middleware(request: NextRequest) {
   // Login時の処理
   if (pathname === '/login') {
     // 認可コードの取得
-    const code = request.nextUrl.searchParams
+    const code = await request.nextUrl.searchParams
       .toString()
       .split('&')[0]
       .split('=')[1]

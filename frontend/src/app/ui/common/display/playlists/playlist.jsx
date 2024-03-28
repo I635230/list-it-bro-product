@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import DisplayDate from '@/app/lib/function/display-date'
 import styles from '@/app/ui/common/display/playlists/playlist.module.css'
+import Img from '@/app/ui/common/display/img/img'
 
 export default function Playlist({ list }) {
   return (
@@ -9,11 +10,9 @@ export default function Playlist({ list }) {
       <Link href={`/playlists/${list.slug}`}>
         <div className={styles.left}>
           {list.clips_count != 0 && (
-            <img
-              src={list.first_clip_thumbnail_url}
-              alt={list.first_clip_thumbnail_url}
-              className={styles.image}
-            />
+            <div className={styles.image}>
+              <Img src={list.first_clip_thumbnail_url} />
+            </div>
           )}
           {list.clips_count == 0 && (
             <div className={styles.image}>

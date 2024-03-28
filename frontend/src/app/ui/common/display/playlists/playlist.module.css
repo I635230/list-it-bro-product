@@ -10,10 +10,12 @@
     position: relative;
 
     .image {
-      position: absolute;
-      top: 20px;
-      height: 130px;
-      z-index: 50;
+      img {
+        position: absolute;
+        top: 20px;
+        height: 130px;
+        z-index: 50;
+      }
     }
 
     .shadow1 {
