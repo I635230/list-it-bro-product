@@ -6,6 +6,7 @@ import Link from 'next/link'
 import EditPlaylistTitle from '@/app/ui/playlist/banner/button/edit-playlist-title'
 import { cookies } from 'next/headers'
 import FavoriteButton from '@/app/ui/common/favorite-button-2'
+import Img from '@/app/ui/common/display/img/img'
 
 export default function Banner({ listData }) {
   return (
@@ -14,10 +15,7 @@ export default function Banner({ listData }) {
         href={`/watch?clip=${listData.first_clip_slug}&list=${listData.slug}`}
       >
         <div className={styles.image}>
-          <img
-            src={listData.first_clip_thumbnail_url}
-            alt={listData.first_clip_thumbnail_url}
-          />
+          <Img src={listData.first_clip_thumbnail_url} />
         </div>
       </Link>
       <div className={styles.titleWrapper}>
