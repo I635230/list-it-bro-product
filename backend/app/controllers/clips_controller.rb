@@ -21,8 +21,12 @@ class ClipsController < ApplicationController
     broadcaster_id = params[:broadcaster_id]
     broadcaster = Broadcaster.find_by(id: broadcaster_id)
 
-    create_all(broadcaster)
-    render status: :created
+    if broadcaster.language == "ja"
+      create_all(broadcaster)
+      render status: :created
+    else
+      render status: :unprocessable_entity
+    end
   end
 
   # 日本のBroadcaster全員のn時間以内に追加されたクリップをDBに登録
