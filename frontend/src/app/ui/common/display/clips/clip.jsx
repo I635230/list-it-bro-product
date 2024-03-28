@@ -14,12 +14,24 @@ export default function Clip({ clip, listId }) {
       <div className={styles.top}>
         {listId && (
           <Link href={`/watch?clip=${clip.slug}&list=${listId}`}>
-            <img src={clip.thumbnail_url} alt={clip.thumbnail_url} />
+            <img
+              src={clip.thumbnail_url}
+              onError={(e) => {
+                e.target.src = '/no-image.png'
+              }}
+              alt=""
+            />
           </Link>
         )}
         {!listId && (
           <Link href={`/watch?clip=${clip.slug}`}>
-            <img src={clip.thumbnail_url} alt={clip.thumbnail_url} />
+            <img
+              src={clip.thumbnail_url}
+              onError={(e) => {
+                e.target.src = '/no-image.png'
+              }}
+              alt=""
+            />
           </Link>
         )}
         <div className={`${styles.overlay} ${styles.duration}`}>

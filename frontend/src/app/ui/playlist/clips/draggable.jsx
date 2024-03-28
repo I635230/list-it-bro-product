@@ -38,7 +38,14 @@ const Draggable = (props) => {
           </div>
           <div className={styles.middle}>
             <div className={styles.image}>
-              <img className={styles.radius} src={props.clip.thumbnail_url} />
+              <img
+                className={styles.radius}
+                src={props.clip.thumbnail_url}
+                onError={(e) => {
+                  e.target.src = '/no-image.png'
+                }}
+                alt=""
+              />
             </div>
           </div>
           <Link href={`/watch?clip=${props.clip.slug}&list=${props.listId}`}>
