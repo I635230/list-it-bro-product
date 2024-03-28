@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     if status == 200
       res = request_get(header, uri)
       get_broadcasters(res["data"])
-      render status: :ok, json: @broadcasters
+      render status: :ok, json: @broadcasters.filter { |broadcaster| broadcaster["language"] == "ja" }
 
     # Unauthorzedでデータの取得に失敗したとき
     elsif status == 401
@@ -49,7 +49,7 @@ class UsersController < ApplicationController
 
         # broadcasterを作成して追加
         @broadcaster = create_broadcaster(broadcaster_id)
-        # update_language(@broadcaster) # TODO productionのbroadcaster_id一覧を取得したら追加
+        update_language(@broadcaster)
         @broadcasters << @broadcaster
       end
     end

@@ -1,15 +1,17 @@
 class BroadcastersController < ApplicationController
   include BroadcasterDealer
 
+  # languageがjaのBroadcasterの一覧を表示
   def index
-    # 出力
-    render status: :ok, json: Broadcaster.all.map(&:display_name)
+    render status: :ok, json: Broadcaster.where(language: "ja").map(&:display_name)
   end
 
+  # languageがjaのBroadcasterのid一覧を表示
   def index_ids
-    render statuts: :ok, json: Broadcaster.all.map(&:id)
+    render status: :ok, json: Broadcaster.where(language: "ja").map(&:id)
   end
 
+  # clip_idまたはbroadcaster_idから、broadcasterを作成
   def create
     # 入力
     clip_id = params[:clip_id]
@@ -36,7 +38,7 @@ class BroadcastersController < ApplicationController
                                        profile_image_url: data["profile_image_url"])
 
     # language
-    # update_language(@broadcaster) # TODO productionのbroadcaster_id一覧を取得したら追加
+    update_language(@broadcaster)
 
     # 出力
     render status: :created, json: @broadcaster
