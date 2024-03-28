@@ -3,6 +3,7 @@ import Link from 'next/link'
 import DisplayDate from '@/app/lib/function/display-date'
 import DisplayDuration from '@/app/lib/function/display-duration'
 import DisplayViewCount from '@/app/lib/function/display-view-count'
+import Img from '@/app/ui/common/display/img/img'
 
 export default function Clip({ clip, listId }) {
   const game_image_url = clip.game_image_url
@@ -14,12 +15,12 @@ export default function Clip({ clip, listId }) {
       <div className={styles.top}>
         {listId && (
           <Link href={`/watch?clip=${clip.slug}&list=${listId}`}>
-            <img src={clip.thumbnail_url} alt={clip.thumbnail_url} />
+            <Img src={clip.thumbnail_url} />
           </Link>
         )}
         {!listId && (
           <Link href={`/watch?clip=${clip.slug}`}>
-            <img src={clip.thumbnail_url} alt={clip.thumbnail_url} />
+            <Img src={clip.thumbnail_url} />
           </Link>
         )}
         <div className={`${styles.overlay} ${styles.duration}`}>

@@ -19,57 +19,16 @@ class ClipsController < ApplicationController
   def create_many
     # 入力
     broadcaster_id = params[:broadcaster_id]
-    @broadcaster = Broadcaster.find_by(id: broadcaster_id)
+    broadcaster = Broadcaster.find_by(id: broadcaster_id)
 
-    # 準備
-    header = { "Authorization" => ENV["APP_ACCESS_TOKEN"],  "Client-id" => ENV["CLIENT_ID"] }
-    base_uri = "https://api.twitch.tv/helix/clips?broadcaster_id=#{broadcaster_id}&first=100"
-    after = nil
-    view_count = 10000 # この初期値は適当
-
-    # ループ
-    loop do
-      uri = after ? "#{base_uri}&after=#{after}" : "#{base_uri}"
-
-      # データ取得
-      res = request_get(header, uri)
-      after = res["pagination"]["cursor"]
-      res["data"].each do |data|
-        # game_idが空のときは、Undefinedに設定
-        data["game_id"] = 0 if data["game_id"] == ""
-
-        # gameが存在しなかったら作成
-        create_game(data["game_id"]) if !Game.find_by(id: data["game_id"])
-
-        # clipの主なデータをテーブルに保存
-        @clip = @broadcaster.clips.build(slug: data["id"],
-                                         broadcaster_name: data["broadcaster_name"],
-                                         creator_id: data["creator_id"],
-                                         creator_name: data["creator_name"],
-                                         game_id: data["game_id"],
-                                         language: data["language"],
-                                         title: data["title"],
-                                         clip_created_at: data["created_at"],
-                                         thumbnail_url: data["thumbnail_url"],
-                                         duration: data["duration"],
-                                         view_count: data["view_count"])
-        if @clip.valid?
-          @clip.save
-        else
-          @clip = Clip.find_by(slug: data["id"])
-          @clip.update(view_count: data["view_count"])
-        end
-        view_count = data["view_count"]
-      end
-      break if after.nil? || after.empty? || view_count < 100
-    end
+    create_all(broadcaster)
     render status: :created
   end
 
-  # Broadcaster全員のn時間以内に追加されたクリップをDBに登録
+  # 日本のBroadcaster全員のn時間以内に追加されたクリップをDBに登録
   def update_all
     # broadcasters
-    @broadcasters = Broadcaster.all
+    @broadcasters = Broadcaster.where("language": "ja")
 
     # 準備
     header = { "Authorization" => ENV["APP_ACCESS_TOKEN"],  "Client-id" => ENV["CLIENT_ID"] }
@@ -83,6 +42,11 @@ class ClipsController < ApplicationController
 
     # すべてのBroadcasterで取得できるまでループ
     @broadcasters.each do |broadcaster|
+      # broadcasterにまだクリップが1つもなかったら、全期間からのクリップ登録も行う
+      if broadcaster.clips.count == 0
+        create_all(broadcaster)
+      end
+
       # 初期化
       base_uri = "https://api.twitch.tv/helix/clips?broadcaster_id=#{broadcaster.id}&first=100"
       after = nil
@@ -120,7 +84,7 @@ class ClipsController < ApplicationController
             @clip = Clip.find_by(slug: data["id"])
             @clip.update(view_count: data["view_count"])
           end
-          view_count = data["view_count"]
+          data["view_count"]
         end
         break if after.nil? || after.empty?
       end
@@ -152,6 +116,7 @@ class ClipsController < ApplicationController
   end
 
   private
+    # フィルター系統
     def filter_clips
       # fieldが空のとき
       if params[:field].empty?
@@ -230,6 +195,54 @@ class ClipsController < ApplicationController
       else
         @clips = clips.paginate(page: params[:page], per_page: params[:limit])
       end
+    end
+
+    # それ以外
+
+    def create_all(broadcaster)
+      # 準備
+      header = { "Authorization" => ENV["APP_ACCESS_TOKEN"],  "Client-id" => ENV["CLIENT_ID"] }
+      base_uri = "https://api.twitch.tv/helix/clips?broadcaster_id=#{broadcaster.id}&first=100"
+      after = nil
+      view_count = 10000 # この初期値は適当
+
+      # ループ
+      loop do
+        uri = after ? "#{base_uri}&after=#{after}" : "#{base_uri}"
+
+        # データ取得
+        res = request_get(header, uri)
+        after = res["pagination"]["cursor"]
+        res["data"].each do |data|
+          # game_idが空のときは、Undefinedに設定
+          data["game_id"] = 0 if data["game_id"] == ""
+
+          # gameが存在しなかったら作成
+          create_game(data["game_id"]) if !Game.find_by(id: data["game_id"])
+
+          # clipの主なデータをテーブルに保存
+          @clip = broadcaster.clips.build(slug: data["id"],
+                                          broadcaster_name: data["broadcaster_name"],
+                                          creator_id: data["creator_id"],
+                                          creator_name: data["creator_name"],
+                                          game_id: data["game_id"],
+                                          language: data["language"],
+                                          title: data["title"],
+                                          clip_created_at: data["created_at"],
+                                          thumbnail_url: data["thumbnail_url"],
+                                          duration: data["duration"],
+                                          view_count: data["view_count"])
+          if @clip.valid?
+            @clip.save
+          else
+            @clip = Clip.find_by(slug: data["id"])
+            @clip.update(view_count: data["view_count"])
+          end
+          view_count = data["view_count"]
+        end
+        break if after.nil? || after.empty? || view_count < 100
+      end
+      true
     end
 
     def create_game(game_id)

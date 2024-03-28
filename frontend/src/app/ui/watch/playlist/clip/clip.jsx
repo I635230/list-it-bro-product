@@ -28,7 +28,10 @@ export default function Clip({
       <div className={styles.left}>
         <img
           src={clip.thumbnail_url}
-          alt={clip.thumbnail_url}
+          onError={(e) => {
+            e.target.src = '/no-image.png'
+          }}
+          alt=""
           className={styles.image}
         />
       </div>
