@@ -33,7 +33,3 @@ group :development do
   gem "solargraph", require: false
   gem "overcommit", require: false
 end
-
-group :production do
-  gem "pg"
-end
