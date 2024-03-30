@@ -4,11 +4,11 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   password: password
-  host: db
 
 development:
   <<: *default
   database: api_development
+  host: db
 
 test:
   <<: *default
@@ -16,6 +16,6 @@ test:
 
 production:
   <<: *default
-  database: アプリ名_production
+  database: list-it-bro_production
   username: <%= Rails.application.credentials.db[:user_name] %>
   password: <%= Rails.application.credentials.db[:password] %>
