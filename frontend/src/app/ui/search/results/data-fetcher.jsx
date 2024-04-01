@@ -6,7 +6,12 @@ export default async function DataFetcher({ searchParams }) {
 
   return (
     <>
-      <Result results={results} query={searchParams} />
+      {!results && <>検索結果の取得に失敗しました</>}
+      {results && (
+        <>
+          <Result results={results} query={searchParams} />
+        </>
+      )}
     </>
   )
 }
