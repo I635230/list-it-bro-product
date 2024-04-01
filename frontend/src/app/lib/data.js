@@ -60,6 +60,7 @@ export async function fetchResults(query) {
     else return data
   } catch (error) {
     console.log('検索結果の取得に失敗しました')
+    return false
   }
 }
 
