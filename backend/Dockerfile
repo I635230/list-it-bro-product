@@ -17,6 +17,13 @@ ARG RUBYGEMS_VERSION=3.4.6
 RUN gem update --system ${RUBYGEMS_VERSION} && \
     bundle install
 
+## cronをinstall
+RUN apt update && \
+    apt install -y cron
+
+## cronの起動
+RUN service cron start
+
 ## ホストのDockerFileと同じ階層のファイルをコンテナ内のapiディレクトリにコピー。マウント後なら変化なし。
 COPY . /api
 # -----------------------------------------------------------------------------------------------------
