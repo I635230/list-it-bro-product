@@ -70,6 +70,24 @@ class Batch::Clips
       JSON.parse(res.to_s)
     end
 
+    def self.create_game(game_id)
+      # 準備
+      header = { "Authorization" => ENV["APP_ACCESS_TOKEN"],  "Client-id" => ENV["CLIENT_ID"] }
+      uri = "https://api.twitch.tv/helix/games?id=#{game_id}"
+
+      # Game作成済みなら処理を中断
+      return if Game.find_by(id: game_id)
+
+      # データ取得
+      res = request_get(header, uri)
+      data = res["data"][0]
+
+      # Game作成
+      Game.create!(id: data["id"],
+                   name: data["name"],
+                   box_art_url: data["box_art_url"])
+    end
+
     def self.create_all(broadcaster)
     # 準備
     header = { "Authorization" => ENV["APP_ACCESS_TOKEN"],  "Client-id" => ENV["CLIENT_ID"] }
