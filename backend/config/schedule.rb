@@ -20,21 +20,18 @@ every 3.hours do
   begin
     runner "Batch::Clips.update_all"
   rescue
-    Rails.logger.error("clipsの登録に失敗しました")
     raise e
   end
 
   begin
     runner "Batch::Rankings.destroy"
   rescue
-    Rails.logger.error("rakingsの削除に失敗しました")
     raise e
   end
 
   begin
     runner "Batch::Rankings.create"
   rescue
-    Rails.logger.error("rakingsの作成に失敗しました")
     raise e
   end
 end
