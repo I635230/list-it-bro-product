@@ -28,6 +28,7 @@ class Batch::Rankings
       @bot.playlists[2].playlist_clips.find_by(clip_id: clip.id).update(order: index)
     end
 
+    puts DateTime.now
     puts "Rankingsの作成に成功しました"
   end
 
@@ -35,6 +36,8 @@ class Batch::Rankings
   def self.destroy
     @bot = User.find(-1)
     @bot.playlists.destroy_all
+
+    puts DateTime.now
     puts "Rankingsの削除に成功しました"
   end
 
