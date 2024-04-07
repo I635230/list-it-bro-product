@@ -71,7 +71,7 @@ export async function fetchClipData({ clipId }) {
       `${process.env.API_BASE_URL}/clips/${clipId}`,
       {
         method: 'GET',
-        next: { revalidate: 600 },
+        cache: 'no-store',
         headers: {
           userId: cookies().get('userId')?.value,
           userAccessDigest: cookies().get('userAccessDigest')?.value,
@@ -170,7 +170,7 @@ export async function fetchFollowingBroadcasters() {
       `${process.env.API_BASE_URL}/users/${cookies().get('userId')?.value}/following`,
       {
         method: 'GET',
-        next: { revalidate: 600 },
+        cache: 'no-store',
         headers: {
           userId: cookies().get('userId')?.value,
           userAccessDigest: cookies().get('userAccessDigest')?.value,
@@ -204,7 +204,7 @@ export async function fetchUserData({ userId }) {
       `${process.env.API_BASE_URL}/users/${userId}`,
       {
         method: 'GET',
-        next: { revalidate: 3600 },
+        cache: 'no-store',
       },
     )
     const data = await response.json()
@@ -221,7 +221,7 @@ export async function fetchBroadcastersName() {
   try {
     const response = await fetch(`${process.env.API_BASE_URL}/broadcasters`, {
       method: 'GET',
-      next: { revalidate: 3600 },
+      cache: 'no-store',
     })
     const data = await response.json()
     return data
@@ -235,7 +235,7 @@ export async function fetchUsersName() {
   try {
     const response = await fetch(`${process.env.API_BASE_URL}/users`, {
       method: 'GET',
-      next: { revalidate: 3600 },
+      cache: 'no-store',
     })
     const data = await response.json()
     return data
@@ -249,7 +249,7 @@ export async function fetchGamesName() {
   try {
     const response = await fetch(`${process.env.API_BASE_URL}/games`, {
       method: 'GET',
-      next: { revalidate: 3600 },
+      cache: 'no-store',
     })
     const data = await response.json()
     return data
@@ -263,7 +263,7 @@ export async function fetchTopClips() {
   try {
     const response = await fetch(`${process.env.API_BASE_URL}/rankings`, {
       method: 'GET',
-      next: { revalidate: 3600 },
+      cache: 'no-store',
     })
     const data = await response.json()
 
