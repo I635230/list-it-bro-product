@@ -4,6 +4,7 @@ import styles from '@/app/ui/header/menu.module.css'
 import { useState, useRef } from 'react'
 import { useClickAway } from 'react-use'
 import clsx from 'clsx'
+import Link from 'next/link'
 
 export default function Menu(params) {
   const [isOpen, setIsOpen] = useState(false)
@@ -32,7 +33,9 @@ export default function Menu(params) {
         })}
       >
         <ul>
-          <li>このサイトについて</li>
+          <li>
+            <Link href="/info/about">当サイトについて</Link>
+          </li>
           <li>アップデート情報</li>
         </ul>
       </div>
