@@ -4,6 +4,7 @@ import Image from 'next/image'
 import MyLibrary from '@/app/ui/header/my-library'
 import SearchBar from '@/app/ui/header/search-bar'
 import Authentication from '@/app/ui/header/authentication/authentication'
+import Menu from '@/app/ui/header/menu'
 
 export default function Header() {
   return (
@@ -24,6 +25,9 @@ export default function Header() {
         </div>
         <div className={styles.element}>
           <Authentication />
+        </div>
+        <div className={styles.element}>
+          <Menu />
         </div>
       </div>
     </div>
