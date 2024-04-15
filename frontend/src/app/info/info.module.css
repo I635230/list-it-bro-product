@@ -1,0 +1,48 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .box {
+    .h2 {
+      font-size: 32px;
+      line-height: 32px;
+      font-weight: bold;
+    }
+
+    .heading {
+      margin: 30px 0 10px 0;
+
+      .h3 {
+        font-size: 20px;
+        line-height: 20px;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.letter {
+  p {
+    margin-bottom: 10px;
+  }
+
+  ul {
+    /* 点が左にはみ出ないようにする */
+    padding-inline-start: 0;
+    list-style-position: inside;
+
+    li {
+      margin-bottom: 5px;
+      list-style-type: disc;
+    }
+  }
+
+  a {
+    color: var(--link);
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+}
