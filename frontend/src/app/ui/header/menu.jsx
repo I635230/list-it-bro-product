@@ -36,7 +36,9 @@ export default function Menu(params) {
           <li>
             <Link href="/info/about">当サイトについて</Link>
           </li>
-          <li>アップデート情報</li>
+          <li>
+            <Link href="/info/update">アップデート情報</Link>
+          </li>
         </ul>
       </div>
     </>
