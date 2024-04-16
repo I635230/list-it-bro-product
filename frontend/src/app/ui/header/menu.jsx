@@ -5,6 +5,7 @@ import { useState, useRef } from 'react'
 import { useClickAway } from 'react-use'
 import clsx from 'clsx'
 import Link from 'next/link'
+import CustomTooltip from '@/app/ui/common/custom-tooltip'
 
 export default function Menu(params) {
   const [isOpen, setIsOpen] = useState(false)
@@ -22,9 +23,15 @@ export default function Menu(params) {
 
   return (
     <>
-      <button className={styles.button} onClick={() => handleOpen()}>
+      <button
+        className={styles.button}
+        onClick={() => handleOpen()}
+        id="detail-anchor"
+      >
         <i className="fa-solid fa-ellipsis-vertical"></i>
       </button>
+
+      <CustomTooltip anchor="detail" content="さらに表示" />
 
       <div
         ref={ref}

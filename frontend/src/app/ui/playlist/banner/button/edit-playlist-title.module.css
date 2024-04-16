@@ -5,10 +5,12 @@
   font-weight: bold;
 }
 
-.titleIcon {
-  display: flex;
-  align-items: center;
-  font-size: 20px;
-  opacity: 0.4;
-  cursor: pointer;
+.titleIconWrapper {
+  .titleIcon {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    opacity: 0.4;
+    cursor: pointer;
+  }
 }
