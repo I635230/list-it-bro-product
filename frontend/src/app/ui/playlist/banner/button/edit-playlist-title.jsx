@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { editPlaylistTitle } from '@/app/lib/action'
 import styles from '@/app/ui/playlist/banner/button/edit-playlist-title.module.css'
+import CustomTooltip from '@/app/ui/common/custom-tooltip'
 
 export default function EditPlaylistTitle({ listData, currentUserId }) {
   const previousListTitle = listData.title
@@ -25,11 +26,15 @@ export default function EditPlaylistTitle({ listData, currentUserId }) {
     <>
       <div className={styles.title}>{listTitle}</div>
       {currentUserId == listData.creator_id && (
-        <div className={styles.titleIcon}>
-          <i
-            className="far fa-edit"
-            onClick={() => handleClick({ listId: listData.slug })}
-          ></i>
+        <div className={styles.titleIconWrapper}>
+          <div className={styles.titleIcon}>
+            <i
+              className="far fa-edit"
+              onClick={() => handleClick({ listId: listData.slug })}
+              id="edit-anchor"
+            ></i>
+          </div>
+          <CustomTooltip anchor="edit" content="名前の変更" />
         </div>
       )}
     </>
