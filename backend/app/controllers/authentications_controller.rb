@@ -58,12 +58,12 @@ class AuthenticationsController < ApplicationController
       @user.update(login: data["login"], display_name: data["display_name"], user_access_token: user_access_token, refresh_token: refresh_token)
     else
       # ユーザーが存在しなければ、作成
-      User.create(id: data["id"],
-                  login: data["login"],
-                  display_name: data["display_name"],
-                  profile_image_url: data["profile_image_url"],
-                  user_access_token: user_access_token,
-                  refresh_token: refresh_token)
+      @user = User.create(id: data["id"],
+                          login: data["login"],
+                          display_name: data["display_name"],
+                          profile_image_url: data["profile_image_url"],
+                          user_access_token: user_access_token,
+                          refresh_token: refresh_token)
     end
 
     # render
