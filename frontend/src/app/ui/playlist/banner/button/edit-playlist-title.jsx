@@ -11,12 +11,20 @@ export default function EditPlaylistTitle({ listData, currentUserId }) {
 
   async function handleClick({ listId }) {
     const newListTitle = prompt('新しいプレイリスト名', '')
+
+    // newListTitleが空だったら、変更しない
+    if (!newListTitle) {
+      return
+    }
+
+    // newListTitleに変更
     setListTitle(newListTitle)
     const isOk = await editPlaylistTitle({
       listId,
       newListTitle,
     })
 
+    // 変更に失敗したら、元のタイトルに戻す
     if (!isOk) {
       setListTitle(previousListTitle)
     }
