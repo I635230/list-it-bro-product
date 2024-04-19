@@ -13,7 +13,6 @@ export default function Page() {
             <li>サイドバーの開閉</li>
             <li>スマホでの使い勝手向上</li>
             <li>BroadcasterとGameの予測変換</li>
-            <li>ツールチップの追加</li>
             <li>プレイリスト名の指定時に、キャンセルできないバグの修正</li>
           </ul>
         </div>
@@ -41,6 +40,26 @@ export default function Page() {
 
       <div className={styles.box}>
         <h2 className={styles.h2}>アップデート履歴</h2>
+
+        <div className={styles.heading}>
+          <h3 className={styles.h3}>2024/04/19</h3>
+        </div>
+        <div className={styles.letter}>
+          <ul>
+            <li>プレイリスト削除のエラー修正</li>
+            <li>初回ログイン時のエラー修正</li>
+          </ul>
+        </div>
+
+        <div className={styles.heading}>
+          <h3 className={styles.h3}>2024/04/17</h3>
+        </div>
+        <div className={styles.letter}>
+          <ul>
+            <li>ツールチップの追加</li>
+          </ul>
+        </div>
+
         <div className={styles.heading}>
           <h3 className={styles.h3}>2024/04/15</h3>
         </div>
