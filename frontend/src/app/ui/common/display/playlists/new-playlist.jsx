@@ -8,7 +8,16 @@ export default function NewPlaylist() {
   const router = useRouter()
   async function handleClick() {
     const title = prompt('プレイリスト名', '')
+
+    // titleが空だったら変更しない
+    if (!title) {
+      return
+    }
+
+    // titleを使用してプレイリストを作成
     await createPlaylist({ title })
+
+    // ページのリロード
     router.refresh()
   }
 
