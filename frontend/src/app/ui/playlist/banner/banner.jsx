@@ -11,13 +11,20 @@ import Img from '@/app/ui/common/display/img/img'
 export default function Banner({ listData }) {
   return (
     <div className={styles.banner}>
-      <Link
-        href={`/watch?clip=${listData.first_clip_slug}&list=${listData.slug}`}
-      >
-        <div className={styles.image}>
-          <Img src={listData.first_clip_thumbnail_url} />
+      {listData.first_clip_slug && (
+        <Link
+          href={`/watch?clip=${listData.first_clip_slug}&list=${listData.slug}`}
+        >
+          <div className={styles.image}>
+            <Img src={listData.first_clip_thumbnail_url} />
+          </div>
+        </Link>
+      )}
+      {!listData.first_clip_slug && (
+        <div className={styles.noImage}>
+          <Img src="/no-image.png" />
         </div>
-      </Link>
+      )}
       <div className={styles.titleWrapper}>
         <EditPlaylistTitle
           listData={listData}

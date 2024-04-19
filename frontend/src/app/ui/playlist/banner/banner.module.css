@@ -24,6 +24,15 @@
     }
   }
 
+  .noImage {
+    width: 100%;
+    position: relative;
+
+    img {
+      border-radius: 10px;
+    }
+  }
+
   .image::before {
     content: "";
     position: absolute;
