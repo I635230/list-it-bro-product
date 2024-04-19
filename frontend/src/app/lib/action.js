@@ -258,7 +258,7 @@ export async function deletePlaylist({ listId, currentUserId }) {
 
   // redirect処理
   if (redirectRequested) {
-    redirect(`/libraries/${currentUserId}`)
+    redirect(`/libraries/${currentUserId}/created`)
   }
 }
 

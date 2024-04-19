@@ -7,7 +7,7 @@ class Batch::Clips
     header = { "Authorization" => ENV["APP_ACCESS_TOKEN"],  "Client-id" => ENV["CLIENT_ID"] }
 
     # 時間設定
-    n = 12 # 何時間前からの情報を取得するか
+    n = 24 # 何時間前からの情報を取得するか
     current_datetime = DateTime.now
     current_rfc3339 = current_datetime.strftime("%Y-%m-%dT%H:%M:%SZ")
     n_hour_ago_datetime = current_datetime - Rational(n, 24)
