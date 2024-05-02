@@ -1,10 +1,12 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
 import Header from '@/app/ui/header/header'
-import Sidebar from '@/app/ui/sidebar/sidebar'
 import styles from '@/app/styles.module.css'
 import { AppProvider } from '@/app/provider'
 import { Suspense } from 'react'
+import { SidebarClient } from '@/app/ui/sidebar/sidebar-client'
+import OpenedSidebar from '@/app/ui/sidebar/opened-sidebar'
+import ClosedSidebar from '@/app/ui/sidebar/closed-sidebar'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -31,7 +33,10 @@ export default function RootLayout({ children }) {
               </div>
               <div className={styles.main}>
                 <div className={styles.sidebar}>
-                  <Sidebar />
+                  <SidebarClient>
+                    <OpenedSidebar />
+                    <ClosedSidebar />
+                  </SidebarClient>
                 </div>
                 <div className={styles.content}>{children}</div>
               </div>
