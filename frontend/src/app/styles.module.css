@@ -16,16 +16,6 @@
     flex-grow: 1;
     width: 100%;
 
-    .sidebar {
-      align-items: flex-start;
-      width: 260px;
-      background-color: var(--sidebar-background);
-
-      /* スクロールバーの設定 */
-      height: calc(100vh - 52px);
-      overflow-y: auto;
-    }
-
     .content {
       width: 100%;
       padding: 30px;

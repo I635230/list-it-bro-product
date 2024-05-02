@@ -1,0 +1,65 @@
+.closedSidebar {
+  align-items: flex-start;
+  width: 50px;
+  padding-top: 10px;
+  background-color: var(--sidebar-background);
+
+  /* スクロールバーの設定 */
+  height: calc(100vh - 52px);
+  overflow-y: auto;
+}
+
+.openedSidebar {
+  align-items: flex-start;
+  width: 240px;
+  padding-top: 10px;
+  padding-bottom: 30px;
+  background-color: var(--sidebar-background);
+
+  /* スクロールバーの設定 */
+  height: calc(100vh - 52px);
+  overflow-y: auto;
+
+  .title {
+    padding: 10px;
+    font-size: 13px;
+    font-weight: bold;
+  }
+}
+
+.transformSidebar {
+  width: 50px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .arrow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 30px;
+    height: 30px;
+
+    cursor: pointer;
+  }
+
+  .arrow:hover {
+    border-radius: 4px;
+    background-color: lightgray;
+  }
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  .headline {
+    padding: 0 10px 0 10px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+}
