@@ -36,7 +36,11 @@ export default function FavoriteButton({ listData, fontSize, height, width }) {
             <i className="fa-regular fa-star"></i>
           </div>
         </div>
-        <CustomTooltip anchor="favorite" content="お気に入り登録" />
+        <CustomTooltip
+          anchor="favorite"
+          content="お気に入り登録"
+          place="bottom"
+        />
       </div>
     )
   } else {

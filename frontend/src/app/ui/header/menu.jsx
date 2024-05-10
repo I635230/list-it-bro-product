@@ -31,7 +31,7 @@ export default function Menu(params) {
         <i className="fa-solid fa-ellipsis-vertical"></i>
       </button>
 
-      <CustomTooltip anchor="detail" content="さらに表示" />
+      <CustomTooltip anchor="detail" content="さらに表示" place="bottom" />
 
       <div
         ref={ref}
