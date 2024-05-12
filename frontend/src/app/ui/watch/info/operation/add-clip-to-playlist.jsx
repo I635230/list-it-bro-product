@@ -1,12 +1,12 @@
 'use client'
 
-import { useState, useRef } from 'react'
-import ReactModal from 'react-modal'
 import styles from '@/app/ui/watch/info/operation/add-clip-to-playlist.module.css'
-import Playlist from '@/app/ui/watch/info/operation/playlist/playlist'
-import Snackbar from '@mui/material/Snackbar'
-import Alert from '@mui/material/Alert'
 import NewPlaylist from '@/app/ui/watch/info/operation/playlist/new-playlist'
+import Playlist from '@/app/ui/watch/info/operation/playlist/playlist'
+import Alert from '@mui/material/Alert'
+import Snackbar from '@mui/material/Snackbar'
+import { useRef, useState } from 'react'
+import ReactModal from 'react-modal'
 
 export default function AddClipToPlaylist({ clipData, myListsData }) {
   // 開閉状況

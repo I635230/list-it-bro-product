@@ -1,9 +1,9 @@
 'use client'
 
-import { useState } from 'react'
 import { editPlaylistTitle } from '@/app/lib/action'
-import styles from '@/app/ui/playlist/banner/button/edit-playlist-title.module.css'
 import CustomTooltip from '@/app/ui/common/custom-tooltip'
+import styles from '@/app/ui/playlist/banner/button/edit-playlist-title.module.css'
+import { useState } from 'react'
 
 export default function EditPlaylistTitle({ listData, currentUserId }) {
   const previousListTitle = listData.title

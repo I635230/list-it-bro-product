@@ -1,8 +1,8 @@
 'use client'
 
-import { useSearchParams, useRouter } from 'next/navigation'
-import clsx from 'clsx'
 import styles from '@/app/ui/common/pagination.module.css'
+import clsx from 'clsx'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 export default function Pagination({
   currentPage,

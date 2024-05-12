@@ -1,6 +1,6 @@
-import { cookies } from 'next/headers'
 import { fetchClipData, fetchListData, fetchListsData } from '@/app/lib/data'
 import Watch from '@/app/ui/watch/watch'
+import { cookies } from 'next/headers'
 
 export default async function DataFetcher({ searchParams }) {
   const clipId = searchParams['clip']

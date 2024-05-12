@@ -1,11 +1,11 @@
 'use client'
 
+import CustomTooltip from '@/app/ui/common/custom-tooltip'
 import styles from '@/app/ui/header/menu.module.css'
-import { useState, useRef } from 'react'
-import { useClickAway } from 'react-use'
 import clsx from 'clsx'
 import Link from 'next/link'
-import CustomTooltip from '@/app/ui/common/custom-tooltip'
+import { useRef, useState } from 'react'
+import { useClickAway } from 'react-use'
 
 export default function Menu(params) {
   const [isOpen, setIsOpen] = useState(false)

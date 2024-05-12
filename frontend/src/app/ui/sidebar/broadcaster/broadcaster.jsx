@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import styles from '@/app/ui/sidebar/broadcaster/broadcaster.module.css'
+import Link from 'next/link'
 
 export default function Broadcaster({ broadcaster }) {
   return (

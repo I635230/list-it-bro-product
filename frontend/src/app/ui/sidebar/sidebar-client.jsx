@@ -1,7 +1,7 @@
 'use client'
 
-import { useAtom } from 'jotai'
 import { openState } from '@/app/state/open'
+import { useAtom } from 'jotai'
 import React from 'react'
 
 export const SidebarClient = ({ children }) => {

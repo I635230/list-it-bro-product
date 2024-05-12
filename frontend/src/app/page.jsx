@@ -1,11 +1,11 @@
 // import DataFetcher from '@/app/ui/top/data-fetcher'
-import TopHeader from '@/app/ui/top/top-header'
-import { Suspense } from 'react'
+import styles from '@/app/page.module.css'
 import ClipsFetcher from '@/app/ui/top/clips-fetcher'
 import DayPlaylistsFetcher from '@/app/ui/top/day-playlists-fetcher'
-import WeekPlaylistsFetcher from '@/app/ui/top/week-playlists-fetcher'
 import MonthPlaylistsFetcher from '@/app/ui/top/month-playlists-fetcher'
-import styles from '@/app/page.module.css'
+import TopHeader from '@/app/ui/top/top-header'
+import WeekPlaylistsFetcher from '@/app/ui/top/week-playlists-fetcher'
+import { Suspense } from 'react'
 
 export default function Page() {
   return (

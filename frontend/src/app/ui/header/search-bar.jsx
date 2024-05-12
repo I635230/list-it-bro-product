@@ -1,8 +1,8 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
 import styles from '@/app/ui/header/search-bar.module.css'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useState } from 'react'
 
 export default function SearchBar() {
   const [field, setField] = useState('')

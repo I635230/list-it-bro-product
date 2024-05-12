@@ -1,9 +1,9 @@
 'use client'
 
-import styles from '@/app/ui/sidebar/sidebar.module.css'
-import { useAtom } from 'jotai'
 import { openState } from '@/app/state/open'
 import CustomTooltip from '@/app/ui/common/custom-tooltip'
+import styles from '@/app/ui/sidebar/sidebar.module.css'
+import { useAtom } from 'jotai'
 
 export default function CloseArrow() {
   const [isOpen, setIsOpen] = useAtom(openState)

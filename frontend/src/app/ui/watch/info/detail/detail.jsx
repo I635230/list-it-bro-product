@@ -1,6 +1,6 @@
-import styles from '@/app/ui/watch/info/detail/detail.module.css'
 import DisplayDate from '@/app/lib/function/display-date'
 import DisplayViewCount from '@/app/lib/function/display-view-count'
+import styles from '@/app/ui/watch/info/detail/detail.module.css'
 
 export default function Detail({ title, gameName, viewCount, createdAt }) {
   return (

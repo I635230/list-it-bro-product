@@ -1,16 +1,16 @@
 'use client'
 
-import { useRef } from 'react'
-import Play from '@/app/ui/watch/play/play'
-import Detail from '@/app/ui/watch/info/detail/detail'
-import MovePreviousButton from '@/app/ui/watch/info/operation/move-previous-button'
-import MoveNextButton from '@/app/ui/watch/info/operation/move-next-button'
-import Broadcaster from '@/app/ui/watch/broadcaster/broadcaster'
-import Playlist from '@/app/ui/watch/playlist/playlist'
 import styles from '@/app//ui/watch/watch.module.css'
-import AddClipToPlaylist from '@/app/ui/watch/info/operation/add-clip-to-playlist'
-import XShareButton from '@/app/ui/common/x-share-button'
 import { updateViewCount } from '@/app/lib/action'
+import XShareButton from '@/app/ui/common/x-share-button'
+import Broadcaster from '@/app/ui/watch/broadcaster/broadcaster'
+import Detail from '@/app/ui/watch/info/detail/detail'
+import AddClipToPlaylist from '@/app/ui/watch/info/operation/add-clip-to-playlist'
+import MoveNextButton from '@/app/ui/watch/info/operation/move-next-button'
+import MovePreviousButton from '@/app/ui/watch/info/operation/move-previous-button'
+import Play from '@/app/ui/watch/play/play'
+import Playlist from '@/app/ui/watch/playlist/playlist'
+import { useRef } from 'react'
 
 export default function Watch({ clipData, listData, myListsData }) {
   const autoplay = useRef('false')

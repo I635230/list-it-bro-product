@@ -1,7 +1,7 @@
-import Pagination from '@/app/ui/common/pagination'
-import styles from '@/app/ui/search/results/results.module.css'
 import Clips from '@/app/ui/common/display/clips/clips'
 import Playlists from '@/app/ui/common/display/playlists/playlists'
+import Pagination from '@/app/ui/common/pagination'
+import styles from '@/app/ui/search/results/results.module.css'
 
 export default async function Result({ results, query }) {
   return (

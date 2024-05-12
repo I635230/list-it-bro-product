@@ -1,9 +1,9 @@
 'use client'
 
-import { useAtom } from 'jotai'
-import { typeState, termState } from '@/app/state/top'
+import { termState, typeState } from '@/app/state/top'
 import styles from '@/app/ui/top/top.module.css'
 import clsx from 'clsx'
+import { useAtom } from 'jotai'
 
 export default function TopHeader() {
   const [type, setType] = useAtom(typeState)
