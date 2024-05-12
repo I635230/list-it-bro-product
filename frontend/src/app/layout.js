@@ -1,12 +1,12 @@
-import { Inter } from 'next/font/google'
-import './globals.css'
-import Header from '@/app/ui/header/header'
-import styles from '@/app/styles.module.css'
 import { AppProvider } from '@/app/provider'
-import { Suspense } from 'react'
-import { SidebarClient } from '@/app/ui/sidebar/sidebar-client'
-import OpenedSidebar from '@/app/ui/sidebar/opened-sidebar'
+import styles from '@/app/styles.module.css'
+import Header from '@/app/ui/header/header'
 import ClosedSidebar from '@/app/ui/sidebar/closed-sidebar'
+import OpenedSidebar from '@/app/ui/sidebar/opened-sidebar'
+import { SidebarClient } from '@/app/ui/sidebar/sidebar-client'
+import { Inter } from 'next/font/google'
+import { Suspense } from 'react'
+import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 

@@ -1,7 +1,7 @@
 'use client'
 
-import styles from '@/app/ui/playlist/banner/button/delete-button.module.css'
 import { deletePlaylist } from '@/app/lib/action'
+import styles from '@/app/ui/playlist/banner/button/delete-button.module.css'
 
 export default function DeleteButton({ listId, currentUserId }) {
   async function handleClick({ listId, currentUserId }) {

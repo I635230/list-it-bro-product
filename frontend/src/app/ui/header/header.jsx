@@ -1,10 +1,10 @@
-import Link from 'next/link'
-import styles from '@/app/ui/header/styles.module.css'
-import Image from 'next/image'
-import MyLibrary from '@/app/ui/header/my-library'
-import SearchBar from '@/app/ui/header/search-bar'
 import Authentication from '@/app/ui/header/authentication/authentication'
 import Menu from '@/app/ui/header/menu'
+import MyLibrary from '@/app/ui/header/my-library'
+import SearchBar from '@/app/ui/header/search-bar'
+import styles from '@/app/ui/header/styles.module.css'
+import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Header() {
   return (

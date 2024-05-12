@@ -1,7 +1,7 @@
 'use client'
 
-import styles from '@/app/ui/common/display/playlists/new-playlist.module.css'
 import { createPlaylist } from '@/app/lib/action'
+import styles from '@/app/ui/common/display/playlists/new-playlist.module.css'
 import { useRouter } from 'next/navigation'
 
 export default function NewPlaylist() {

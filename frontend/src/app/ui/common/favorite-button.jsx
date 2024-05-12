@@ -1,9 +1,9 @@
 'use client'
 
-import styles from '@/app/ui/common/favorite-button.module.css'
 import { favorite, unfavorite } from '@/app/lib/action'
-import { useState } from 'react'
 import CustomTooltip from '@/app/ui/common/custom-tooltip'
+import styles from '@/app/ui/common/favorite-button.module.css'
+import { useState } from 'react'
 
 export default function FavoriteButton({ listData, fontSize, height, width }) {
   const [favoritesCount, setFavoritesCount] = useState(listData.favorites_count)
@@ -36,7 +36,11 @@ export default function FavoriteButton({ listData, fontSize, height, width }) {
             <i className="fa-regular fa-star"></i>
           </div>
         </div>
-        <CustomTooltip anchor="favorite" content="お気に入り登録" />
+        <CustomTooltip
+          anchor="favorite"
+          content="お気に入り登録"
+          place="bottom"
+        />
       </div>
     )
   } else {

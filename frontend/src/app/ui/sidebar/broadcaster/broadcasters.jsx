@@ -1,8 +1,8 @@
 'use client'
 
+import { loginState } from '@/app/state/login'
 import Broadcaster from '@/app/ui/sidebar/broadcaster/broadcaster'
 import { useAtom } from 'jotai'
-import { loginState } from '@/app/state/login'
 import { useRouter } from 'next/navigation'
 
 export default function Broadcasters({ broadcasters }) {

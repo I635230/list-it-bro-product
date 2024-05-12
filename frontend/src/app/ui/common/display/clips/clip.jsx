@@ -1,9 +1,9 @@
-import styles from '@/app/ui/common/display/clips/clip.module.css'
-import Link from 'next/link'
 import DisplayDate from '@/app/lib/function/display-date'
 import DisplayDuration from '@/app/lib/function/display-duration'
 import DisplayViewCount from '@/app/lib/function/display-view-count'
+import styles from '@/app/ui/common/display/clips/clip.module.css'
 import Img from '@/app/ui/common/display/img/img'
+import Link from 'next/link'
 
 export default function Clip({ clip, listId }) {
   const game_image_url = clip.game_image_url

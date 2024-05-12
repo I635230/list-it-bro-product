@@ -1,7 +1,7 @@
-import Link from 'next/link'
+import FavoriteButton from '@/app/ui/common/favorite-button'
 import Clip from '@/app/ui/watch/playlist/clip/clip'
 import styles from '@/app/ui/watch/playlist/playlist.module.css'
-import FavoriteButton from '@/app/ui/common/favorite-button'
+import Link from 'next/link'
 
 export default function Playlist({ listData, indexOfPlaylist, autoplay }) {
   return (

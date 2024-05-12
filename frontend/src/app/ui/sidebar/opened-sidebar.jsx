@@ -1,8 +1,8 @@
-import { Suspense } from 'react'
-import { cookies } from 'next/headers'
 import CloseArrow from '@/app/ui/sidebar/close-arrow'
 import DataFetcher from '@/app/ui/sidebar/data-fetcher'
 import styles from '@/app/ui/sidebar/sidebar.module.css'
+import { cookies } from 'next/headers'
+import { Suspense } from 'react'
 
 export default function OpenedSidebar() {
   return (
