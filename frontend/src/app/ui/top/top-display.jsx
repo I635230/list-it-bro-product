@@ -1,9 +1,9 @@
 'use client'
 
-import { useAtomValue } from 'jotai'
-import { typeState, termState } from '@/app/state/top'
+import { termState, typeState } from '@/app/state/top'
 import Clips from '@/app/ui/common/display/clips/clips'
 import Playlists from '@/app/ui/common/display/playlists/playlists'
+import { useAtomValue } from 'jotai'
 
 export default function TopDisplay({
   clips,

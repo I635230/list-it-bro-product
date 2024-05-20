@@ -1,7 +1,7 @@
 'use client'
 
-import styles from '@/app/ui/common/favorite-button-2.module.css'
 import { favorite, unfavorite } from '@/app/lib/action'
+import styles from '@/app/ui/common/favorite-button-2.module.css'
 import { useState } from 'react'
 
 export default function FavoriteButton({ listData }) {

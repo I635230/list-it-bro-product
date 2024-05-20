@@ -1,8 +1,8 @@
+import DisplayDate from '@/app/lib/function/display-date'
+import Img from '@/app/ui/common/display/img/img'
+import styles from '@/app/ui/common/display/playlists/playlist.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
-import DisplayDate from '@/app/lib/function/display-date'
-import styles from '@/app/ui/common/display/playlists/playlist.module.css'
-import Img from '@/app/ui/common/display/img/img'
 
 export default function Playlist({ list }) {
   return (

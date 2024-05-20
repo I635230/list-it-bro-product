@@ -1,5 +1,5 @@
-import { useRouter, useSearchParams } from 'next/navigation'
 import styles from '@/app/ui/search/search/select/select.module.css'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 export default function Select({ label, options, name, queryLabel }) {
   const searchParams = useSearchParams()

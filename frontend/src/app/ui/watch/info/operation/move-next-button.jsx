@@ -1,5 +1,5 @@
-import { useRouter } from 'next/navigation'
 import styles from '@/app/ui/watch/info/operation/moveButton.module.css'
+import { useRouter } from 'next/navigation'
 
 export default function MoveNextButton({ listData, index, autoplay }) {
   const router = useRouter()

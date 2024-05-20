@@ -8,5 +8,10 @@
   }
 
   .main {
+    padding-right: 50px;
+
+    /* スクロールバーの設定 */
+    height: calc(100vh - 112px);
+    overflow-y: auto;
   }
 }

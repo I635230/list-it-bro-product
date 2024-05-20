@@ -1,11 +1,11 @@
 'use client'
 
-import { useSearchParams } from 'next/navigation'
-import TypeSelect from '@/app/ui/search/search/select/type-select'
-import TermSelect from '@/app/ui/search/search/select/term-select'
+import styles from '@/app/ui/search/search/search.module.css'
 import OrderSelect from '@/app/ui/search/search/select/order-select'
 import TargetSelect from '@/app/ui/search/search/select/target-select'
-import styles from '@/app/ui/search/search/search.module.css'
+import TermSelect from '@/app/ui/search/search/select/term-select'
+import TypeSelect from '@/app/ui/search/search/select/type-select'
+import { useSearchParams } from 'next/navigation'
 
 export default function Search() {
   const searchParams = useSearchParams()

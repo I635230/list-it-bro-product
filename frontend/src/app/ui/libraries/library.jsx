@@ -1,7 +1,7 @@
 import styles from '@/app/ui/libraries/library.module.css'
 import UserName from '@/app/ui/libraries/user-name'
-import { cookies } from 'next/headers'
 import clsx from 'clsx'
+import { cookies } from 'next/headers'
 import Link from 'next/link'
 
 export default function Library({ userId, activeTab }) {

@@ -1,8 +1,8 @@
 'use client'
 
+import { loginState } from '@/app/state/login'
 import Login from '@/app/ui/header/authentication/login'
 import Logout from '@/app/ui/header/authentication/logout'
-import { loginState } from '@/app/state/login'
 import { useAtom } from 'jotai'
 
 export default function Authentication({ userId }) {

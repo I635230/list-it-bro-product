@@ -8,6 +8,7 @@
   "arrowParens": "always",
   "printWidth": 80,
   "bracketSpacing": true,
+  "plugins": ["prettier-plugin-organize-imports"],
   "overrides": [
     {
       "files": "*.html",
