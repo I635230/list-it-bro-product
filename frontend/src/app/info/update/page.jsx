@@ -40,6 +40,26 @@ export default function Page() {
         <h2 className={styles.h2}>アップデート履歴</h2>
 
         <div className={styles.heading}>
+          <h3 className={styles.h3}>2024/05/24</h3>
+        </div>
+        <div className={styles.letter}>
+          <ul>
+            <li>検索結果の表示数を60ずつに変更</li>
+            <li>検索結果の期間に1日を追加</li>
+            <li>プレイリストからお気に入り登録できないバグの修正</li>
+          </ul>
+        </div>
+
+        <div className={styles.heading}>
+          <h3 className={styles.h3}>2024/05/21</h3>
+        </div>
+        <div className={styles.letter}>
+          <ul>
+            <li>サイドバーのアイコンにツールチップを適用</li>
+          </ul>
+        </div>
+
+        <div className={styles.heading}>
           <h3 className={styles.h3}>2024/05/07</h3>
         </div>
         <div className={styles.letter}>
