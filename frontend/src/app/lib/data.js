@@ -12,7 +12,7 @@ export async function fetchResults(query) {
     const target = query['target'] || 'all'
     const page = query['page'] || '1'
     const field = query['field'] || ''
-    const limit = query['limit'] || '20'
+    const limit = query['limit'] || '60'
 
     let url = process.env.API_BASE_URL
 
