@@ -9,6 +9,10 @@ export default function TermSelect() {
       label: '全期間',
     },
     {
+      value: 'day',
+      label: '1日',
+    },
+    {
       value: 'week',
       label: '1週間',
     },
